@@ -1,0 +1,556 @@
+<title>Breadsheet Mockups</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+/* Layout: a baker's bench. Header + idea switcher, one full-width stage per idea, a recipe drawer that slides in from the right. */
+:root {
+  --bg: #f3f2ee;          /* bench: flour-dusted, cool */
+  --panel: #ffffff;
+  --ink: #241a14;         /* pumpernickel */
+  --ink-2: #6a5d54;
+  --rule: #dcd6cc;
+  --accent: #b5652a;      /* crust */
+  --accent-ink: #ffffff;
+  --hull: rgba(36, 26, 20, 0.045);
+
+  --f-flour: #dcc796; --f-grain: #8c5b3d; --f-gf: #c9a83c; --f-starter: #3f8a68;
+  --f-liquid: #4f86b0; --f-dairy: #9fc3cc; --f-egg: #e7894f; --f-fat: #e5c04f;
+  --f-sweet: #b7443a; --f-salt: #8f8c95; --f-seed: #4e3d31; --f-flavor: #c8789f;
+  --f-leaven: #7479b5; --f-binder: #6e8b3d;
+
+  --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", sans-serif;
+  --body: "Bricolage Grotesque", "Avenir Next", "Segoe UI", sans-serif;
+  --voice: "Newsreader", Georgia, "Times New Roman", serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #17120f; --panel: #211a16; --ink: #f1e9df; --ink-2: #b3a597; --rule: #3a302a;
+    --accent: #e08a46; --accent-ink: #17120f; --hull: rgba(241, 233, 223, 0.05);
+    --f-flour: #eadcb8; --f-grain: #b98563; --f-gf: #d9bd5c; --f-starter: #64b88f;
+    --f-liquid: #6fa6d1; --f-dairy: #b4d6de; --f-egg: #f09a64; --f-fat: #ecca62;
+    --f-sweet: #e06a5a; --f-salt: #aeabb5; --f-seed: #a3907e; --f-flavor: #de96ba;
+    --f-leaven: #9da2d6; --f-binder: #96b35f;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #17120f; --panel: #211a16; --ink: #f1e9df; --ink-2: #b3a597; --rule: #3a302a;
+  --accent: #e08a46; --accent-ink: #17120f; --hull: rgba(241, 233, 223, 0.05);
+  --f-flour: #eadcb8; --f-grain: #b98563; --f-gf: #d9bd5c; --f-starter: #64b88f;
+  --f-liquid: #6fa6d1; --f-dairy: #b4d6de; --f-egg: #f09a64; --f-fat: #ecca62;
+  --f-sweet: #e06a5a; --f-salt: #aeabb5; --f-seed: #a3907e; --f-flavor: #de96ba;
+  --f-leaven: #9da2d6; --f-binder: #96b35f;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+[hidden] { display: none !important; }
+body {
+  background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 15px; line-height: 1.5;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 0 48px;
+}
+.wrap { max-width: 1240px; margin: 0 auto; }
+a { color: var(--accent); }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+header.top { padding-block: 36px 20px; display: grid; gap: 10px; }
+.eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); }
+h1 { font-family: var(--display); font-weight: 800; font-size: clamp(44px, 8vw, 96px); line-height: 0.9; letter-spacing: -0.035em; margin: 0; text-wrap: balance; }
+h1 .pct { color: var(--accent); font-weight: 400; font-family: var(--mono); font-size: 0.42em; letter-spacing: 0; vertical-align: 0.9em; margin-left: 0.15em; }
+.lede { max-width: 62ch; color: var(--ink-2); margin: 0; font-size: 16px; }
+
+nav.ideas { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin-block: 8px 24px; }
+nav.ideas a {
+  display: grid; gap: 2px; padding: 12px 14px; border: 1px solid var(--rule); border-radius: 4px;
+  text-decoration: none; color: var(--ink); background: var(--panel); min-width: 0;
+}
+nav.ideas a b { font-family: var(--display); font-size: 17px; font-weight: 600; }
+nav.ideas a span { font-size: 12.5px; color: var(--ink-2); line-height: 1.35; }
+nav.ideas a small { font-family: var(--mono); font-size: 10.5px; color: var(--accent); letter-spacing: 0.06em; }
+nav.ideas a[aria-current="page"] { border-color: var(--ink); box-shadow: inset 0 -3px 0 var(--accent); }
+@media (max-width: 760px) { nav.ideas { grid-template-columns: repeat(2, minmax(0, 1fr)); } nav.ideas a span { display: none; } }
+
+section.stage { display: grid; gap: 18px; }
+.stage-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 12px 24px; }
+.stage-head h2 { font-family: var(--display); font-weight: 600; font-size: clamp(24px, 3.2vw, 34px); letter-spacing: -0.02em; margin: 0; line-height: 1.1; text-wrap: balance; }
+.stage-head p { margin: 4px 0 0; color: var(--ink-2); max-width: 64ch; }
+.controls { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.controls .lbl { font-family: var(--mono); font-size: 11px; color: var(--ink-2); text-transform: uppercase; letter-spacing: 0.06em; margin-right: 4px; }
+.chip { border: 1px solid var(--rule); background: var(--panel); border-radius: 999px; padding: 4px 11px; font-size: 13px; cursor: pointer; }
+.chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+.legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 12.5px; color: var(--ink-2); }
+.legend i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 5px; vertical-align: -1px; }
+
+.svgbox { background: var(--panel); border: 1px solid var(--rule); border-radius: 6px; overflow-x: auto; }
+.svgbox svg { display: block; }
+svg text { fill: var(--ink); font-family: var(--body); }
+svg .muted { fill: var(--ink-2); }
+svg .mono { font-family: var(--mono); }
+
+/* Idea A: portraits */
+.grid-portraits { display: grid; grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)); gap: 4px; }
+.portrait { background: var(--panel); border: 1px solid transparent; border-radius: 6px; padding: 10px 10px 12px; cursor: pointer; display: grid; justify-items: center; gap: 4px; text-align: center; view-transition-name: var(--vt); }
+.portrait:hover { border-color: var(--rule); }
+.portrait svg { width: 148px; height: 148px; overflow: visible; }
+.portrait h3 { font-family: var(--display); font-weight: 600; font-size: 15px; margin: 0; line-height: 1.2; }
+.portrait .stats { font-family: var(--mono); font-size: 11px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.portrait .tags { font-size: 11.5px; color: var(--ink-2); }
+.ring { stroke: var(--panel); stroke-width: 1; }
+
+/* Idea B: map */
+.hull { fill: var(--hull); stroke: var(--rule); stroke-dasharray: 3 4; }
+.hull-label { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; fill: var(--ink-2); }
+.axis line, .axis path { stroke: var(--rule); }
+.axis text { fill: var(--ink-2); font-family: var(--mono); font-size: 10.5px; }
+.near { fill: none; stroke: var(--ink-2); stroke-width: 1; opacity: 0.35; }
+.near.on { opacity: 1; stroke: var(--accent); stroke-width: 1.6; }
+.node { cursor: pointer; }
+.node text { font-size: 12px; font-weight: 600; paint-order: stroke; stroke: var(--panel); stroke-width: 3px; }
+.dim { opacity: 0.18; transition: opacity 0.2s; }
+
+/* Idea C: web */
+.web-layout { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: 16px; align-items: start; }
+@media (max-width: 900px) { .web-layout { grid-template-columns: minmax(0, 1fr); } }
+.web-side { display: grid; gap: 14px; font-size: 13.5px; }
+.web-side h4 { margin: 0 0 4px; font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--ink-2); font-weight: 400; }
+.web-side ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 3px; }
+.web-side li { display: flex; justify-content: space-between; gap: 8px; }
+.web-side li span:last-child { font-family: var(--mono); color: var(--ink-2); font-size: 12px; }
+.link { fill: none; stroke-width: 1.2; opacity: 0.4; transition: opacity 0.15s; }
+.link.on { opacity: 0.95; stroke-width: 2; }
+.link.off { opacity: 0.05; }
+.inode, .rnode { cursor: pointer; }
+.rnode text, .inode text { font-size: 11.5px; transition: opacity 0.15s; }
+.inode text { font-size: 11px; }
+
+/* Idea D: lineage */
+.eras { position: relative; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; }
+.eras > svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: visible; }
+.era { display: grid; align-content: start; gap: 10px; min-width: 0; position: relative; z-index: 1; }
+.era-head { border-bottom: 2px solid var(--ink); padding-bottom: 6px; }
+.era-head b { font-family: var(--display); font-size: 18px; font-weight: 600; display: block; }
+.era-head span { font-family: var(--mono); font-size: 10.5px; color: var(--ink-2); }
+.card { background: var(--panel); border: 1px solid var(--rule); border-radius: 6px; padding: 10px; display: grid; gap: 6px; cursor: pointer; min-width: 0; }
+.card:hover { border-color: var(--ink-2); }
+.card .row { display: flex; gap: 8px; align-items: center; }
+.card svg { flex: none; width: 40px; height: 40px; overflow: visible; }
+.card h3 { margin: 0; font-family: var(--display); font-size: 14.5px; font-weight: 600; line-height: 1.15; }
+.card .place { font-family: var(--mono); font-size: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em; }
+.card p { margin: 0; font-size: 12.5px; color: var(--ink-2); line-height: 1.4; }
+.card blockquote { margin: 0; font-family: var(--voice); font-style: italic; font-size: 13.5px; line-height: 1.35; border-left: 2px solid var(--accent); padding-left: 8px; }
+.lineage-link { fill: none; stroke: var(--accent); stroke-width: 1.4; opacity: 0.45; }
+@media (max-width: 1000px) { .eras { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 620px) { .eras { grid-template-columns: minmax(0, 1fr); } .eras > svg { display: none; } }
+.note { font-size: 12.5px; color: var(--ink-2); margin: 0; }
+
+/* Drawer */
+.drawer {
+  position: fixed; top: 0; right: 0; bottom: 0; width: min(440px, 100%); background: var(--panel); border-left: 1px solid var(--rule);
+  box-shadow: -18px 0 40px rgba(0,0,0,0.12); z-index: 20; overflow-y: auto; transform: translateX(105%); transition: transform 0.28s ease;
+  padding: calc(22px + env(safe-area-inset-top, 0px)) max(22px, env(safe-area-inset-right, 0px)) calc(28px + env(safe-area-inset-bottom, 0px)) 22px;
+  display: grid; align-content: start; gap: 16px;
+}
+.drawer.open { transform: none; }
+.drawer .close { justify-self: end; border: 1px solid var(--rule); background: var(--bg); border-radius: 999px; padding: 4px 12px; cursor: pointer; font-size: 13px; }
+.drawer-top { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 14px; align-items: center; }
+.drawer-top svg { width: 96px; height: 96px; overflow: visible; }
+.drawer h2 { font-family: var(--display); font-size: 28px; line-height: 1.05; margin: 0; letter-spacing: -0.02em; }
+.drawer .meta { font-family: var(--mono); font-size: 11.5px; color: var(--ink-2); }
+.drawer blockquote { margin: 0; font-family: var(--voice); font-style: italic; font-size: 16px; line-height: 1.45; }
+table.formula { width: 100%; border-collapse: collapse; font-size: 13.5px; font-variant-numeric: tabular-nums; }
+table.formula td { padding: 5px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+table.formula td.n { text-align: right; font-family: var(--mono); font-size: 12.5px; white-space: nowrap; padding-left: 10px; }
+table.formula .stage { font-family: var(--mono); font-size: 10px; color: var(--ink-2); text-transform: uppercase; margin-left: 6px; }
+table.formula .sub { display: block; font-size: 12px; color: var(--ink-2); }
+.bar { height: 6px; border-radius: 3px; display: block; margin-top: 4px; }
+.drawer h4 { margin: 0 0 6px; font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--ink-2); font-weight: 400; }
+.drawer .neighbors { display: flex; gap: 6px; flex-wrap: wrap; }
+.scrim { position: fixed; inset: 0; background: rgba(0,0,0,0.2); z-index: 19; }
+
+footer { margin-top: 36px; padding-top: 14px; border-top: 1px solid var(--rule); font-size: 12.5px; color: var(--ink-2); display: flex; flex-wrap: wrap; gap: 6px 20px; justify-content: space-between; }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div class="eyebrow">Four mockups · 24 recipes from underlay.org/gabestein/breadsheet</div>
+    <h1>Breadsheet<span class="pct">100%</span></h1>
+    <p class="lede">The recipes are already written as baker's percentages: everything measured against the flour. That makes them comparable, so each mockup below treats the collection as one body of work rather than 24 separate cards. Click any bread to open its formula.</p>
+  </header>
+
+  <nav class="ideas" aria-label="Mockup ideas">
+    <a href="#portraits"><small>IDEA A</small><b>Crumb portraits</b><span>Each formula drawn as a loaf cross-section, ring by ring.</span></a>
+    <a href="#map"><small>IDEA B</small><b>Dough map</b><span>Where each bread sits between lean and rich, stiff and wet.</span></a>
+    <a href="#web"><small>IDEA C</small><b>Pantry web</b><span>Which ingredients tie recipes together, and which stand alone.</span></a>
+    <a href="#lineage"><small>IDEA D</small><b>Bread lineage</b><span>The breads placed in history, with Gabe's own notes.</span></a>
+  </nav>
+
+  <section class="stage" id="v-portraits" hidden>
+    <div class="stage-head">
+      <div>
+        <h2>Crumb portraits</h2>
+        <p>Flour sits at the center. Each ring outward adds the next ingredient, with area matching its share of the dough, so a lean baguette stays small and pound cake grows to more than twice its size.</p>
+      </div>
+      <div class="controls" id="sort-controls">
+        <span class="lbl">Sort</span>
+        <button class="chip" data-sort="none" aria-pressed="true">Collection order</button>
+        <button class="chip" data-sort="hyd" aria-pressed="false">Hydration</button>
+        <button class="chip" data-sort="enrich" aria-pressed="false">Richness</button>
+        <button class="chip" data-sort="starter" aria-pressed="false">Starter</button>
+      </div>
+    </div>
+    <div class="legend" id="legend-a"></div>
+    <div class="grid-portraits" id="portraits"></div>
+  </section>
+
+  <section class="stage" id="v-map" hidden>
+    <div class="stage-head">
+      <div>
+        <h2>Dough map</h2>
+        <p>Across: effective hydration, counting the water in starter, milk, and eggs. Up: richness, the fat, sugar, and egg added per 100 of flour. Shading marks the richness bands. Lines join each bread to its closest relative by overall formula.</p>
+      </div>
+    </div>
+    <div class="svgbox"><svg id="map"></svg></div>
+  </section>
+
+  <section class="stage" id="v-web" hidden>
+    <div class="stage-head">
+      <div>
+        <h2>Pantry web</h2>
+        <p>Flour, water, salt, and starter are in almost all of them, so they sit in the middle unlinked. The threads show what is left: the ingredients that give each bread its character. Hover an ingredient or a bread.</p>
+      </div>
+    </div>
+    <div class="web-layout">
+      <div class="svgbox"><svg id="web"></svg></div>
+      <aside class="web-side" id="web-side"></aside>
+    </div>
+  </section>
+
+  <section class="stage" id="v-lineage" hidden>
+    <div class="stage-head">
+      <div>
+        <h2>Bread lineage</h2>
+        <p>The same 24 recipes placed in the history of their breads, from hearth loaves to this decade's gluten-free and discard recipes. Quotes are Gabe's headnotes; lines trace one bread growing out of another.</p>
+      </div>
+    </div>
+    <div class="eras" id="eras"></div>
+    <p class="note">History notes and lineage lines are context written for this mockup. They are not part of the collection and would need Gabe's review.</p>
+  </section>
+
+  <footer>
+    <span>Data: gabestein/breadsheet v1.3.0 on Underlay, read Nov 18, 2026. Mockups only.</span>
+    <span>Hydration and richness are approximations computed from the formulas.</span>
+  </footer>
+</div>
+
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" aria-hidden="true"></aside>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script src="data/breads.js"></script>
+<script>
+const B = window.BREADS;
+const byId = Object.fromEntries(B.map(b => [b.id, b]));
+const FAMS = [
+  ["flour", "White flour"], ["gf", "Gluten-free flours"], ["grain", "Rye, wheat, buckwheat"], ["starter", "Starter"],
+  ["liquid", "Water"], ["dairy", "Dairy"], ["egg", "Eggs"], ["fat", "Fat"], ["sweet", "Sweetener"],
+  ["salt", "Salt"], ["seed", "Seeds"], ["flavor", "Flavor"], ["leaven", "Soda, lye"], ["binder", "Binder"],
+];
+const famOrder = Object.fromEntries(FAMS.map(([f], i) => [f, i]));
+const famColor = f => `var(--f-${f})`;
+
+/* ---------- shared glyph: concentric rings, area proportional to percent ---------- */
+function rings(b) {
+  const parts = b.ings.filter(i => i.pct && i.stage !== "bath" && !i.opt)
+    .slice().sort((a, c) => famOrder[a.fam] - famOrder[c.fam]);
+  let s = 0;
+  return parts.map(i => { const r0 = s; s += i.pct; return { ...i, s0: r0, s1: s }; });
+}
+function glyph(svg, b, rMax, maxTotal = 600) {
+  const k = rMax / Math.sqrt(maxTotal);
+  const g = d3.select(svg).append("g");
+  const rs = rings(b).reverse();
+  g.selectAll("circle").data(rs).join("circle")
+    .attr("class", "ring").attr("r", d => k * Math.sqrt(d.s1)).attr("fill", d => famColor(d.fam));
+  if (rMax >= 40 && b.hyd > 0) {
+    // crumb: wetter doughs get more and bigger holes, drawn inside the flour core
+    const core = k * Math.sqrt(rs[rs.length - 1].s1);
+    let seed = [...b.id].reduce((a, c) => (a * 31 + c.charCodeAt(0)) >>> 0, 7);
+    const rnd = () => (seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296;
+    const h = Math.min(b.hyd, 130), n = Math.round(10 + h / 4), big = 0.4 + (h - 50) / 40;
+    const holes = d3.range(n).map(() => { const a = rnd() * 2 * Math.PI, d = Math.sqrt(rnd()) * core * 0.82; return [d * Math.cos(a), d * Math.sin(a), Math.max(0.5, big * (0.4 + rnd() * rnd() * 2.2))]; });
+    g.append("g").selectAll("ellipse").data(holes).join("ellipse")
+      .attr("cx", d => d[0]).attr("cy", d => d[1]).attr("rx", d => d[2] * 1.25).attr("ry", d => d[2] * 0.8)
+      .attr("transform", d => `rotate(${(d[0] * 37) % 60 - 30} ${d[0]} ${d[1]})`)
+      .attr("fill", "var(--panel)").attr("opacity", 0.55);
+  }
+  return g;
+}
+
+/* ---------- routing ---------- */
+const VIEWS = ["portraits", "map", "web", "lineage"];
+const drawn = {};
+function route() {
+  let v = location.hash.slice(1);
+  if (!VIEWS.includes(v)) v = "portraits";
+  VIEWS.forEach(x => { document.getElementById("v-" + x).hidden = x !== v; });
+  document.querySelectorAll("nav.ideas a").forEach(a => a.setAttribute("aria-current", a.getAttribute("href") === "#" + v ? "page" : "false"));
+  if (!drawn[v]) { drawn[v] = true; ({ portraits: drawPortraits, map: drawMap, web: drawWeb, lineage: drawLineage })[v](); }
+  if (v === "lineage") requestAnimationFrame(linkLineage);
+}
+window.addEventListener("hashchange", route);
+
+/* ---------- drawer ---------- */
+const drawer = document.getElementById("drawer"), scrim = document.getElementById("scrim");
+function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]); }
+function openRecipe(id) {
+  const b = byId[id];
+  const maxPct = Math.max(...b.ings.map(i => i.pct || 0));
+  const rows = b.ings.map(i => {
+    const g = i.pct != null && b.base ? Math.round(i.pct / 100 * b.base) : null;
+    return `<tr><td>${esc(i.name)}${i.stage ? `<span class="stage">${esc(i.stage)}</span>` : ""}${i.opt ? `<span class="stage">optional</span>` : ""}
+      ${i.note ? `<span class="sub">${esc(i.note)}</span>` : ""}
+      ${i.pct ? `<span class="bar" style="width:${Math.max(2, 100 * i.pct / maxPct)}%;background:${famColor(i.fam)}"></span>` : ""}</td>
+      <td class="n">${i.pct != null ? i.pct + "%" : "to taste"}</td><td class="n">${g != null ? g + " g" : ""}</td></tr>`;
+  }).join("");
+  drawer.innerHTML = `
+    <button class="close" id="close">Close</button>
+    <div class="drawer-top"><svg viewBox="-50 -50 100 100" id="dglyph"></svg>
+      <div><h2>${esc(b.title)}</h2><div class="meta">${b.tags.map(esc).join(" · ")}<br>${b.hyd}% hydration · ${b.enrich}% richness · ${b.steps} steps</div></div></div>
+    ${b.headnotes.map(h => `<blockquote>${esc(h)}</blockquote>`).join("")}
+    <div><h4>Formula at ${b.base} g flour${b.scale ? ` · ${esc(b.scale)}` : ""}</h4><table class="formula">${rows}</table></div>
+    <div><h4>Closest in the collection</h4><div class="neighbors">${b.near.map(n => `<button class="chip" data-open="${n}">${esc(byId[n].title)}</button>`).join("")}</div></div>
+    ${b.sources.length ? `<div><h4>Sources</h4>${b.sources.map(s => `<div><a href="${esc(s)}" target="_blank" rel="noopener">${esc(new URL(s).hostname.replace("www.", ""))}</a></div>`).join("")}</div>` : ""}
+    <div class="meta"><a href="https://www.underlay.org/gabestein/breadsheet" target="_blank" rel="noopener">Record: ${esc(b.id)}</a></div>`;
+  glyph(drawer.querySelector("#dglyph"), b, 50);
+  drawer.classList.add("open"); drawer.setAttribute("aria-hidden", "false"); scrim.hidden = false;
+  drawer.querySelector("#close").focus();
+}
+function closeRecipe() { drawer.classList.remove("open"); drawer.setAttribute("aria-hidden", "true"); scrim.hidden = true; }
+drawer.addEventListener("click", e => {
+  if (e.target.id === "close") closeRecipe();
+  const o = e.target.closest("[data-open]"); if (o) openRecipe(o.dataset.open);
+});
+scrim.addEventListener("click", closeRecipe);
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeRecipe(); });
+
+/* ---------- Idea A ---------- */
+function drawPortraits() {
+  const used = new Set(B.flatMap(b => b.ings.map(i => i.fam)));
+  document.getElementById("legend-a").innerHTML = FAMS.filter(([f]) => used.has(f)).map(([f, l]) => `<span><i style="background:${famColor(f)}"></i>${l}</span>`).join("");
+  const box = document.getElementById("portraits");
+  B.forEach((b, idx) => {
+    const el = document.createElement("div");
+    el.className = "portrait"; el.tabIndex = 0; el.dataset.id = b.id; el.dataset.idx = idx;
+    el.style.setProperty("--vt", "p-" + b.id);
+    el.innerHTML = `<svg viewBox="-74 -74 148 148"></svg><h3>${esc(b.title)}</h3>
+      <div class="stats">${b.hyd}% water · ${b.enrich}% rich</div><div class="tags">${b.tags.join(" · ")}</div>`;
+    glyph(el.querySelector("svg"), b, 72);
+    el.addEventListener("click", () => openRecipe(b.id));
+    el.addEventListener("keydown", e => { if (e.key === "Enter") openRecipe(b.id); });
+    box.appendChild(el);
+  });
+  document.getElementById("sort-controls").addEventListener("click", e => {
+    const btn = e.target.closest("[data-sort]"); if (!btn) return;
+    document.querySelectorAll("#sort-controls .chip").forEach(c => c.setAttribute("aria-pressed", c === btn ? "true" : "false"));
+    const key = btn.dataset.sort;
+    const els = [...box.children].sort((a, c) => key === "none" ? a.dataset.idx - c.dataset.idx : byId[a.dataset.id][key] - byId[c.dataset.id][key]);
+    const go = () => els.forEach(x => box.appendChild(x));
+    document.startViewTransition && !matchMedia("(prefers-reduced-motion: reduce)").matches ? document.startViewTransition(go) : go();
+  });
+}
+
+/* ---------- Idea B ---------- */
+function group(b) {
+  if (b.tags.includes("gluten-free")) return "Gluten-free";
+  if (b.tags.includes("rye")) return "Rye";
+  if (b.enrich >= 90) return "Cakes, cookies, batters";
+  if (b.enrich >= 15) return "Enriched";
+  return "Lean breads";
+}
+function drawMap() {
+  const W = 1180, H = 780, m = { l: 56, r: 90, t: 40, b: 50 };
+  const svg = d3.select("#map").attr("viewBox", `0 0 ${W} ${H}`).attr("width", W).attr("height", H).style("max-width", "100%").style("height", "auto").style("min-width", "720px");
+  const x = d3.scaleLinear([40, 100, 185], [m.l + 20, m.l + (W - m.l - m.r) * 0.7, W - m.r]);
+  const y = d3.scaleSymlog([0, 310], [H - m.b - 16, m.t]).constant(4);
+  const pts = B.map(b => ({ b, x: x(Math.max(b.hyd, 44)), y: y(b.enrich), g: group(b) }));
+  // gentle collision so labels breathe
+  const sim = d3.forceSimulation(pts).force("x", d3.forceX(d => x(Math.max(d.b.hyd, 44))).strength(0.25)).force("y", d3.forceY(d => y(d.b.enrich)).strength(0.25))
+    .force("c", d3.forceCollide(d => 32 + Math.sqrt(d.b.total) * 0.5).strength(1)).stop();
+  for (let i = 0; i < 400; i++) { sim.tick(); pts.forEach(p => { p.y = Math.min(p.y, H - m.b - 40); p.x = Math.max(p.x, m.l + 40); }); }
+
+  svg.append("g").attr("class", "axis").attr("transform", `translate(0,${H - m.b})`).call(d3.axisBottom(x).tickValues([50, 60, 70, 80, 90, 100, 125, 150, 175]).tickFormat(d => d + "%"));
+  svg.append("g").attr("class", "axis").attr("transform", `translate(${m.l},0)`).call(d3.axisLeft(y).tickValues([0, 5, 15, 30, 60, 100, 300]).tickFormat(d => d + "%"));
+  svg.append("text").attr("class", "muted mono").attr("x", W - m.r).attr("y", H - 12).attr("text-anchor", "end").attr("font-size", 11).text("WETTER →");
+  svg.append("text").attr("class", "muted mono").attr("x", 14).attr("y", m.t - 10).attr("font-size", 11).text("↑ RICHER");
+  svg.append("text").attr("class", "muted mono").attr("x", x(44) + 40).attr("y", y(100) - 30).attr("font-size", 10).attr("text-anchor", "middle").text("no water");
+
+  const bands = [[0, 5, "Lean"], [5, 20, "A little fat or sugar"], [20, 90, "Enriched"], [90, 310, "Cakes, cookies, batters"]];
+  const bandG = svg.append("g");
+  bands.forEach(([lo, hi, name], i) => {
+    if (i % 2 === 0) bandG.append("rect").attr("x", m.l).attr("width", W - m.l - m.r).attr("y", y(hi)).attr("height", y(lo) - y(hi) + (lo === 0 ? 16 : 0)).attr("fill", "var(--hull)");
+    bandG.append("text").attr("class", "hull-label").attr("x", W - m.r - 8).attr("y", (lo === 0 ? y(0) + 16 : y(lo)) - 8).attr("text-anchor", "end").text(name);
+  });
+  bandG.append("line").attr("x1", x(100)).attr("x2", x(100)).attr("y1", m.t).attr("y2", H - m.b).attr("stroke", "var(--rule)").attr("stroke-dasharray", "3 4");
+  bandG.append("text").attr("class", "hull-label").attr("x", x(100) + 6).attr("y", H - m.b - 8).text("as much water as flour");
+
+  const P = Object.fromEntries(pts.map(p => [p.b.id, p]));
+  const pairs = []; const seen = new Set();
+  pts.forEach(p => { const n = p.b.near[0]; const k = [p.b.id, n].sort().join("|"); if (!seen.has(k)) { seen.add(k); pairs.push([p, P[n]]); } });
+  const links = svg.append("g").selectAll("path").data(pairs).join("path").attr("class", "near")
+    .attr("d", ([a, c]) => { const mx = (a.x + c.x) / 2, my = (a.y + c.y) / 2 - Math.hypot(c.x - a.x, c.y - a.y) * 0.18; return `M${a.x},${a.y}Q${mx},${my} ${c.x},${c.y}`; });
+
+  const node = svg.append("g").selectAll("g").data(pts).join("g").attr("class", "node").attr("transform", d => `translate(${d.x},${d.y})`)
+    .attr("tabindex", 0).on("click", (e, d) => openRecipe(d.b.id)).on("keydown", (e, d) => { if (e.key === "Enter") openRecipe(d.b.id); });
+  node.each(function (d) { glyph(this, d.b, 28, 600); });
+  // flip a label above its dot when the next label to the left would collide
+  const placed = [];
+  pts.slice().sort((a, c) => a.x - c.x).forEach(p => {
+    const w = p.b.title.length * 6.6;
+    p.up = placed.some(o => !o.up && Math.abs(o.y - p.y) < 26 && p.x - w / 2 < o.x + o.w / 2 + 6)
+      || pts.some(o => o !== p && Math.abs(o.y - (p.y + 22)) < 14 && Math.abs(o.x - p.x) < w / 2 + 8);
+    p.w = w; placed.push(p);
+  });
+  node.append("text").attr("y", d => d.up ? -(28 * Math.sqrt(d.b.total / 600) + 6) : 28 * Math.sqrt(d.b.total / 600) + 13).attr("text-anchor", "middle").text(d => d.b.title);
+  node.on("mouseenter", (e, d) => {
+    const keep = new Set([d.b.id, ...d.b.near]);
+    node.classed("dim", o => !keep.has(o.b.id));
+    links.classed("on", ([a, c]) => a === d || c === d).classed("dim", ([a, c]) => !(a === d || c === d));
+  }).on("mouseleave", () => { node.classed("dim", false); links.classed("on", false).classed("dim", false); });
+}
+
+/* ---------- Idea C ---------- */
+function drawWeb() {
+  const CORE = new Set(["White flour", "Water", "Salt", "Starter"]);
+  const count = d3.rollup(B.flatMap(b => [...new Set(b.ings.map(i => i.c))].map(c => ({ c, id: b.id }))), v => v.length, d => d.c);
+  const famOf = Object.fromEntries(B.flatMap(b => b.ings.map(i => [i.c, i.fam])));
+  const ingr = [...count.keys()].filter(c => !CORE.has(c)).sort((a, c) => famOrder[famOf[a]] - famOrder[famOf[c]] || count.get(c) - count.get(a) || a.localeCompare(c));
+  const gOrder = ["Lean breads", "Rye", "Gluten-free", "Enriched", "Cakes, cookies, batters"];
+  const recs = B.slice().sort((a, c) => gOrder.indexOf(group(a)) - gOrder.indexOf(group(c)) || a.title.localeCompare(c.title));
+
+  const S = 940, R1 = 180, R2 = 300;
+  const svg = d3.select("#web").attr("viewBox", `${-S / 2} ${-S / 2} ${S} ${S}`).attr("width", S).attr("height", S).style("max-width", "100%").style("height", "auto").style("min-width", "600px").style("margin", "0 auto");
+  const ang = (i, n, off = 0) => (i / n) * 2 * Math.PI - Math.PI / 2 + off;
+  const pol = (a, r) => [r * Math.cos(a), r * Math.sin(a)];
+  const IP = Object.fromEntries(ingr.map((c, i) => [c, { c, a: ang(i, ingr.length, Math.PI / ingr.length) }]));
+  const RP = Object.fromEntries(recs.map((b, i) => [b.id, { b, a: ang(i, recs.length, Math.PI / recs.length) }]));
+
+  const edges = B.flatMap(b => [...new Set(b.ings.map(i => i.c))].filter(c => !CORE.has(c)).map(c => ({ id: b.id, c })));
+  const link = svg.append("g").selectAll("path").data(edges).join("path").attr("class", "link")
+    .attr("stroke", d => famColor(famOf[d.c]))
+    .attr("d", d => { const [x1, y1] = pol(RP[d.id].a, R2 - 10), [x2, y2] = pol(IP[d.c].a, R1 + 8), [cx, cy] = pol((RP[d.id].a + IP[d.c].a) / 2, (R1 + R2) / 2 - 40); return `M${x1},${y1}Q${cx},${cy} ${x2},${y2}`; });
+
+  // centre: the shared core
+  const core = svg.append("g");
+  core.append("circle").attr("r", 96).attr("fill", "var(--bg)").attr("stroke", "var(--rule)");
+  const coreList = [...CORE].map(c => [c, count.get(c)]);
+  core.append("text").attr("class", "muted mono").attr("y", -50).attr("text-anchor", "middle").attr("font-size", 10).text("IN NEARLY ALL 24");
+  coreList.forEach(([c, n], i) => {
+    core.append("text").attr("y", -20 + i * 22).attr("text-anchor", "middle").attr("font-size", 16).attr("font-weight", 600)
+      .text(c.replace("White flour", "Wheat flour")).append("tspan").attr("class", "muted mono").attr("font-size", 11).attr("font-weight", 400).text("  " + n);
+  });
+
+  const inode = svg.append("g").selectAll("g").data(ingr).join("g").attr("class", "inode");
+  inode.append("circle").attr("cx", d => pol(IP[d].a, R1)[0]).attr("cy", d => pol(IP[d].a, R1)[1]).attr("r", d => 3 + Math.sqrt(count.get(d)) * 2.4).attr("fill", d => famColor(famOf[d]));
+  inode.append("text").attr("transform", d => { const a = IP[d].a, [px, py] = pol(a, R1 - 14); const deg = a * 180 / Math.PI; const flip = Math.cos(a) < 0; return `translate(${px},${py}) rotate(${flip ? deg + 180 : deg})`; })
+    .attr("text-anchor", d => Math.cos(IP[d].a) < 0 ? "start" : "end").attr("dy", "0.35em").text(d => d);
+
+  const rnode = svg.append("g").selectAll("g").data(recs).join("g").attr("class", "rnode").attr("tabindex", 0)
+    .on("click", (e, b) => openRecipe(b.id)).on("keydown", (e, b) => { if (e.key === "Enter") openRecipe(b.id); });
+  rnode.each(function (b) { const [px, py] = pol(RP[b.id].a, R2); const g = glyph(this, b, 13, 600); g.attr("transform", `translate(${px},${py})`); });
+  rnode.append("text").attr("transform", b => { const a = RP[b.id].a, [px, py] = pol(a, R2 + 18); const deg = a * 180 / Math.PI; const flip = Math.cos(a) < 0; return `translate(${px},${py}) rotate(${flip ? deg + 180 : deg})`; })
+    .attr("text-anchor", b => Math.cos(RP[b.id].a) < 0 ? "end" : "start").attr("dy", "0.35em").attr("font-weight", 600).text(b => b.title);
+
+  const focus = (pred, keepI, keepR) => {
+    link.classed("on", pred).classed("off", d => !pred(d));
+    inode.select("text").style("opacity", d => keepI.has(d) ? 1 : 0.2);
+    rnode.select("text").style("opacity", b => keepR.has(b.id) ? 1 : 0.2);
+  };
+  const clear = () => { link.classed("on", false).classed("off", false); inode.select("text").style("opacity", 1); rnode.select("text").style("opacity", 1); };
+  inode.on("mouseenter", (e, c) => { const r = new Set(edges.filter(d => d.c === c).map(d => d.id)); focus(d => d.c === c, new Set([c]), r); }).on("mouseleave", clear);
+  rnode.on("mouseenter", (e, b) => { const i = new Set(edges.filter(d => d.id === b.id).map(d => d.c)); focus(d => d.id === b.id, i, new Set([b.id])); }).on("mouseleave", clear);
+
+  // side panel: computed facts
+  const singles = ingr.filter(c => count.get(c) === 1);
+  const recipeOf = c => B.find(b => b.ings.some(i => i.c === c)).title;
+  const shared = ingr.filter(c => count.get(c) > 1).sort((a, c) => count.get(c) - count.get(a)).slice(0, 7);
+  const unique = B.map(b => ({ b, n: [...new Set(b.ings.map(i => i.c))].filter(c => count.get(c) === 1).length })).filter(d => d.n).sort((a, c) => c.n - a.n).slice(0, 4);
+  document.getElementById("web-side").innerHTML = `
+    <div><h4>Most shared, after the core four</h4><ul>${shared.map(c => `<li><span>${c}</span><span>${count.get(c)} recipes</span></li>`).join("")}</ul></div>
+    <div><h4>Used once in the collection</h4><ul>${singles.slice(0, 9).map(c => `<li><span>${c}</span><span>${esc(recipeOf(c))}</span></li>`).join("")}</ul></div>
+    <div><h4>Most one-of-a-kind recipes</h4><ul>${unique.map(d => `<li><span>${esc(d.b.title)}</span><span>${d.n} unique</span></li>`).join("")}</ul></div>`;
+}
+
+/* ---------- Idea D ---------- */
+const ERAS = [
+  ["Antiquity", "before 500"], ["Middle Ages", "500 to 1500"], ["Early modern", "1500 to 1800"],
+  ["1800s", "industrial baking"], ["1900s", "city bakeries"], ["Since 2000", "home bakers"],
+];
+const HIST = {
+  "basic-white": [0, "Ancient Egypt onward", "Flour, water, salt, and a wild culture. Leavened bread of this kind goes back to ancient Egypt."],
+  "whole-wheat": [0, "Everywhere", "Whole grain was the norm until roller mills made white flour cheap in the late 1800s."],
+  "foccacia": [0, "Liguria, Italy", "From the Latin panis focacius, bread baked on the hearth. Liguria made the oily, dimpled version its own."],
+  "pretzel": [1, "Southern Germany", "The knotted shape became the sign of German bakers. The lye bath gives the dark, glossy crust."],
+  "gabes-fulkornbroyt": [1, "Eastern Europe", "Yiddish for whole-grain bread: the dense rye of the Ashkenazi kitchen. Gabe wrote it up as his own."],
+  "pumpernickel-complex": [1, "Westphalia, Germany", "Rye baked low and slow, up to a day, in a closed tin. The long bake, not molasses, makes it dark."],
+  "water-challah": [1, "Ashkenazi Europe", "The braided Sabbath loaf. Water challah leaves out the eggs."],
+  "bagel": [2, "Kraków, Poland", "Named in Kraków's community rules of 1610. Jewish immigrants carried it to New York around 1900."],
+  "scone": [2, "Scotland", "First recorded in Scotland in the early 1500s, as a griddled round cut into wedges."],
+  "vg-shortbread": [2, "Scotland", "Butter is what made it short. This version swaps in coconut oil."],
+  "pound-cake": [2, "England", "A pound each of flour, butter, sugar, and eggs. Gabe's uses olive oil, lemon, and starter."],
+  "dinner-rolls": [3, "United States", "Soft American table rolls; Boston's Parker House made the folded kind famous in the 1870s."],
+  "donut": [3, "New York", "Dutch olykoeks, oil cakes, came to New Amsterdam; the ring shape arrived in the mid-1800s."],
+  "pizza-dough": [3, "Naples, Italy", "Neapolitan street food: a hearth flatbread with toppings."],
+  "baguette": [4, "Paris, France", "The long, thin loaf became the everyday Paris bread in the early 1900s."],
+  "rye-sandwich": [4, "New York", "Close kin to deli rye, the sandwich loaf of Jewish New York."],
+  "wh-pizza-dough": [4, "A wetter pizza", "Same family as the pizza dough, pushed to 80% water."],
+  "buckwheat-baguette-r-s": [5, "Modern blend", "A baguette shape carrying buckwheat, rye, and whole wheat."],
+  "pumpernickel-simple": [5, "Shortcut", "The Westphalian loaf, simplified for a home oven."],
+  "gluten-free-dan-bread": [5, "Gluten-free", "Psyllium lets a dough with no gluten hold its gas and its shape."],
+  "gf-c-v-bread": [5, "Gluten-free", "Five flours and starches with psyllium and flax, at 128% water."],
+  "gf-pizza-dough": [5, "Gluten-free", "Pizza built on a 1:1 gluten-free blend."],
+  "crackers-for-discard": [5, "Zero waste", "Discard recipes spread with the home sourdough boom of 2020."],
+  "ricotta-pancakes-discard": [5, "Zero waste", "Breakfast from the starter you would otherwise pour off."],
+};
+const LINEAGE = [
+  ["foccacia", "pizza-dough"], ["pizza-dough", "wh-pizza-dough"], ["wh-pizza-dough", "gf-pizza-dough"],
+  ["basic-white", "baguette"], ["baguette", "buckwheat-baguette-r-s"],
+  ["pumpernickel-complex", "pumpernickel-simple"], ["gabes-fulkornbroyt", "rye-sandwich"],
+  ["basic-white", "gluten-free-dan-bread"], ["water-challah", "bagel"], ["scone", "vg-shortbread"],
+];
+function drawLineage() {
+  const box = document.getElementById("eras");
+  box.innerHTML = `<svg aria-hidden="true"></svg>` + ERAS.map(([n, s], i) => `<div class="era" data-era="${i}"><div class="era-head"><b>${n}</b><span>${s}</span></div></div>`).join("");
+  B.forEach(b => {
+    const [era, place, note] = HIST[b.id];
+    const q = b.headnotes[0];
+    const el = document.createElement("div");
+    el.className = "card"; el.tabIndex = 0; el.dataset.id = b.id;
+    el.innerHTML = `<div class="row"><svg viewBox="-20 -20 40 40"></svg><div><div class="place">${esc(place)}</div><h3>${esc(b.title)}</h3></div></div>
+      <p>${esc(note)}</p>${q ? `<blockquote>${esc(q.length > 150 ? q.slice(0, q.lastIndexOf(" ", 145)) + "…" : q)}</blockquote>` : ""}`;
+    glyph(el.querySelector("svg"), b, 20);
+    el.addEventListener("click", () => openRecipe(b.id));
+    el.addEventListener("keydown", e => { if (e.key === "Enter") openRecipe(b.id); });
+    box.querySelector(`[data-era="${era}"]`).appendChild(el);
+  });
+  window.addEventListener("resize", () => { if (!document.getElementById("v-lineage").hidden) linkLineage(); });
+}
+function linkLineage() {
+  const box = document.getElementById("eras"), svg = box.querySelector("svg"), o = box.getBoundingClientRect();
+  const pos = id => { const r = box.querySelector(`.card[data-id="${id}"] svg`).getBoundingClientRect(); return [r.left - o.left + r.width / 2, r.top - o.top + r.height / 2]; };
+  svg.innerHTML = LINEAGE.map(([a, c]) => {
+    const [x1, y1] = pos(a), [x2, y2] = pos(c);
+    if (Math.abs(x2 - x1) < 20) { const bx = x1 - 30; return `<path class="lineage-link" d="M${x1},${y1}C${bx},${y1} ${bx},${y2} ${x2},${y2}"/>`; }
+    const mx = (x1 + x2) / 2; return `<path class="lineage-link" d="M${x1},${y1}C${mx},${y1} ${mx},${y2} ${x2},${y2}"/>`;
+  }).join("");
+}
+
+route();
+</script>
