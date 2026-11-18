@@ -11,6 +11,8 @@ html = src.read_text()
 for name in ("breads.js", "schedule.js"):
     data = (src.parent / "data" / name).read_text()
     html = html.replace(f'<script src="data/{name}"></script>', f"<script>\n{data}\n</script>")
+# The deployed page is served on its own, so give it a full document start.
+html = '<!doctype html>\n<html lang="en">\n' + html
 out = pathlib.Path(sys.argv[2])
 out.parent.mkdir(parents=True, exist_ok=True)
 out.write_text(html)
