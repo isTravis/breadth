@@ -1,127 +1,168 @@
-<title>Breadsheet Mockups</title>
+<title>Proof Sheet</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=Newsreader:ital,opsz,wght@0,6..72,400;1,6..72,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: a baker's bench. Header + idea switcher, one full-width stage per idea, a recipe drawer that slides in from the right. */
+/* Layout: a photographer's proof sheet. Left rail (name, views, highlight filter), one view at a time on the right,
+   recipe drawer from the right edge. Light = contact paper and blue-black ink; dark = darkroom with a safelight red. */
 :root {
-  --bg: #f3f2ee;          /* bench: flour-dusted, cool */
-  --panel: #ffffff;
-  --ink: #241a14;         /* pumpernickel */
-  --ink-2: #6a5d54;
-  --rule: #dcd6cc;
-  --accent: #b5652a;      /* crust */
-  --accent-ink: #ffffff;
-  --hull: rgba(36, 26, 20, 0.045);
+  --bg: #e8eae6;        /* contact paper */
+  --panel: #f6f7f4;
+  --ink: #141a24;       /* blue-black */
+  --ink-2: #576070;
+  --rule: #cdd1cc;
+  --accent: #2747c4;    /* cobalt */
+  --mark: #cf3a2b;      /* grease pencil */
+  --hull: rgba(20, 26, 36, 0.05);
+  --night: rgba(20, 26, 36, 0.075);
 
-  --f-flour: #dcc796; --f-grain: #8c5b3d; --f-gf: #c9a83c; --f-starter: #3f8a68;
-  --f-liquid: #4f86b0; --f-dairy: #9fc3cc; --f-egg: #e7894f; --f-fat: #e5c04f;
-  --f-sweet: #b7443a; --f-salt: #8f8c95; --f-seed: #4e3d31; --f-flavor: #c8789f;
-  --f-leaven: #7479b5; --f-binder: #6e8b3d;
+  --f-flour: #d8c79c; --f-grain: #8a5c41; --f-gf: #c7a540; --f-starter: #3d8a68;
+  --f-liquid: #4a83b4; --f-dairy: #98bfca; --f-egg: #e3864f; --f-fat: #e2bf4c;
+  --f-sweet: #b5463d; --f-salt: #8b8d96; --f-seed: #4b3c31; --f-flavor: #c57a9e;
+  --f-leaven: #7177b3; --f-binder: #6b893c;
 
-  --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", sans-serif;
-  --body: "Bricolage Grotesque", "Avenir Next", "Segoe UI", sans-serif;
-  --voice: "Newsreader", Georgia, "Times New Roman", serif;
-  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  --p-levain: #3d8a68; --p-mix: #141a24; --p-bulk: #d29a32; --p-proof: #e6c574; --p-cold: #79b2dc;
+  --p-wait: #b4b9c1; --p-shape: #141a24; --p-bake: #b4532a; --p-cool: #9aa1ab;
+
+  --pencil: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 100' preserveAspectRatio='none'%3E%3Cpath d='M30 58C22 28 70 8 112 9c46 1 78 18 76 44-2 27-44 42-92 39C50 89 12 76 18 50c4-17 26-29 56-35' fill='none' stroke='black' stroke-width='3.4' stroke-linecap='round'/%3E%3C/svg%3E");
+
+  --display: "Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --body: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    --bg: #17120f; --panel: #211a16; --ink: #f1e9df; --ink-2: #b3a597; --rule: #3a302a;
-    --accent: #e08a46; --accent-ink: #17120f; --hull: rgba(241, 233, 223, 0.05);
-    --f-flour: #eadcb8; --f-grain: #b98563; --f-gf: #d9bd5c; --f-starter: #64b88f;
-    --f-liquid: #6fa6d1; --f-dairy: #b4d6de; --f-egg: #f09a64; --f-fat: #ecca62;
-    --f-sweet: #e06a5a; --f-salt: #aeabb5; --f-seed: #a3907e; --f-flavor: #de96ba;
-    --f-leaven: #9da2d6; --f-binder: #96b35f;
+    --bg: #0d0f12; --panel: #15181d; --ink: #e7e9ed; --ink-2: #8e96a2; --rule: #292e36;
+    --accent: #93a8ff; --mark: #ff5544; --hull: rgba(231, 233, 237, 0.05); --night: rgba(255, 255, 255, 0.045);
+    --f-flour: #e6d8b4; --f-grain: #b88664; --f-gf: #d6bb5a; --f-starter: #5fb48c;
+    --f-liquid: #6ea4d2; --f-dairy: #b0d4dd; --f-egg: #ee9a66; --f-fat: #e9c95f;
+    --f-sweet: #dd6a5c; --f-salt: #aeb0b9; --f-seed: #a08d7b; --f-flavor: #dc96b9;
+    --f-leaven: #9ca1d6; --f-binder: #93b05d;
+    --p-levain: #5fb48c; --p-mix: #e7e9ed; --p-bulk: #e0ac48; --p-proof: #ecd08d; --p-cold: #8ac0e8;
+    --p-wait: #6c727c; --p-shape: #e7e9ed; --p-bake: #e0774a; --p-cool: #6c727c;
     color-scheme: dark;
   }
 }
 :root[data-theme="dark"] {
-  --bg: #17120f; --panel: #211a16; --ink: #f1e9df; --ink-2: #b3a597; --rule: #3a302a;
-  --accent: #e08a46; --accent-ink: #17120f; --hull: rgba(241, 233, 223, 0.05);
-  --f-flour: #eadcb8; --f-grain: #b98563; --f-gf: #d9bd5c; --f-starter: #64b88f;
-  --f-liquid: #6fa6d1; --f-dairy: #b4d6de; --f-egg: #f09a64; --f-fat: #ecca62;
-  --f-sweet: #e06a5a; --f-salt: #aeabb5; --f-seed: #a3907e; --f-flavor: #de96ba;
-  --f-leaven: #9da2d6; --f-binder: #96b35f;
+  --bg: #0d0f12; --panel: #15181d; --ink: #e7e9ed; --ink-2: #8e96a2; --rule: #292e36;
+  --accent: #93a8ff; --mark: #ff5544; --hull: rgba(231, 233, 237, 0.05); --night: rgba(255, 255, 255, 0.045);
+  --f-flour: #e6d8b4; --f-grain: #b88664; --f-gf: #d6bb5a; --f-starter: #5fb48c;
+  --f-liquid: #6ea4d2; --f-dairy: #b0d4dd; --f-egg: #ee9a66; --f-fat: #e9c95f;
+  --f-sweet: #dd6a5c; --f-salt: #aeb0b9; --f-seed: #a08d7b; --f-flavor: #dc96b9;
+  --f-leaven: #9ca1d6; --f-binder: #93b05d;
+  --p-levain: #5fb48c; --p-mix: #e7e9ed; --p-bulk: #e0ac48; --p-proof: #ecd08d; --p-cold: #8ac0e8;
+  --p-wait: #6c727c; --p-shape: #e7e9ed; --p-bake: #e0774a; --p-cool: #6c727c;
   color-scheme: dark;
 }
 
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
 body {
-  background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 15px; line-height: 1.5;
+  background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 14.5px; line-height: 1.5;
   padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
-  padding-block: 0 48px;
+  padding-block: 0 40px;
 }
-.wrap { max-width: 1240px; margin: 0 auto; }
 a { color: var(--accent); }
-button { font: inherit; color: inherit; }
+button, select { font: inherit; color: inherit; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-header.top { padding-block: 36px 20px; display: grid; gap: 10px; }
-.eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-2); }
-h1 { font-family: var(--display); font-weight: 800; font-size: clamp(44px, 8vw, 96px); line-height: 0.9; letter-spacing: -0.035em; margin: 0; text-wrap: balance; }
-h1 .pct { color: var(--accent); font-weight: 400; font-family: var(--mono); font-size: 0.42em; letter-spacing: 0; vertical-align: 0.9em; margin-left: 0.15em; }
-.lede { max-width: 62ch; color: var(--ink-2); margin: 0; font-size: 16px; }
+.app { max-width: 1440px; margin: 0 auto; display: grid; grid-template-columns: 236px minmax(0, 1fr); gap: 36px; }
+@media (max-width: 900px) { .app { grid-template-columns: minmax(0, 1fr); gap: 8px; } }
 
-nav.ideas { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; margin-block: 8px 24px; }
-nav.ideas a {
-  display: grid; gap: 2px; padding: 12px 14px; border: 1px solid var(--rule); border-radius: 4px;
-  text-decoration: none; color: var(--ink); background: var(--panel); min-width: 0;
+/* rail */
+.rail { position: sticky; top: env(safe-area-inset-top, 0px); align-self: start; padding-block: 28px 20px; display: grid; gap: 26px; max-height: 100vh; overflow-y: auto; }
+@media (max-width: 900px) { .rail { position: static; max-height: none; padding-block: 20px 0; gap: 16px; } }
+.mark-word { display: grid; gap: 8px; }
+.mark-word h1 { font-family: var(--display); font-weight: 400; font-size: 50px; line-height: 0.9; margin: 0; letter-spacing: -0.01em; }
+.mark-word h1 em { position: relative; font-style: italic; }
+.mark-word h1 em::after {
+  content: ""; position: absolute; inset: -0.12em -0.3em -0.04em -0.22em; background: var(--mark); pointer-events: none;
+  -webkit-mask: var(--pencil) center / 100% 100% no-repeat; mask: var(--pencil) center / 100% 100% no-repeat;
 }
-nav.ideas a b { font-family: var(--display); font-size: 17px; font-weight: 600; }
-nav.ideas a span { font-size: 12.5px; color: var(--ink-2); line-height: 1.35; }
-nav.ideas a small { font-family: var(--mono); font-size: 10.5px; color: var(--accent); letter-spacing: 0.06em; }
-nav.ideas a[aria-current="page"] { border-color: var(--ink); box-shadow: inset 0 -3px 0 var(--accent); }
-@media (max-width: 760px) { nav.ideas { grid-template-columns: repeat(2, minmax(0, 1fr)); } nav.ideas a span { display: none; } }
+.mark-word p { margin: 0; font-size: 12.5px; color: var(--ink-2); line-height: 1.4; }
 
-section.stage { display: grid; gap: 18px; }
-.stage-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 12px 24px; }
-.stage-head h2 { font-family: var(--display); font-weight: 600; font-size: clamp(24px, 3.2vw, 34px); letter-spacing: -0.02em; margin: 0; line-height: 1.1; text-wrap: balance; }
-.stage-head p { margin: 4px 0 0; color: var(--ink-2); max-width: 64ch; }
-.controls { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
-.controls .lbl { font-family: var(--mono); font-size: 11px; color: var(--ink-2); text-transform: uppercase; letter-spacing: 0.06em; margin-right: 4px; }
-.chip { border: 1px solid var(--rule); background: var(--panel); border-radius: 999px; padding: 4px 11px; font-size: 13px; cursor: pointer; }
-.chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.rail h4 { margin: 0 0 8px; font-family: var(--mono); font-size: 10.5px; font-weight: 400; letter-spacing: 0.09em; text-transform: uppercase; color: var(--ink-2); }
+.views { display: grid; gap: 1px; }
+.views a { display: grid; grid-template-columns: 26px minmax(0, 1fr); align-items: center; gap: 8px; padding: 7px 8px; text-decoration: none; color: var(--ink); border-radius: 2px; }
+.views a svg { width: 26px; height: 26px; }
+.views a b { font-weight: 500; font-size: 14.5px; }
+.views a:hover { background: var(--panel); }
+.views a[aria-current="page"] { background: var(--ink); color: var(--bg); }
+.views svg * { stroke: var(--ink); fill: none; stroke-width: 1.4; }
+.views a[aria-current="page"] svg * { stroke: var(--bg); }
+@media (max-width: 900px) {
+  .views { grid-auto-flow: column; grid-auto-columns: max-content; overflow-x: auto; gap: 4px; padding-bottom: 4px; }
+  .views a { border: 1px solid var(--rule); }
+}
+.tags { display: grid; gap: 1px; }
+.tag { display: grid; grid-template-columns: 14px minmax(0, 1fr) auto; gap: 8px; align-items: center; padding: 4px 8px; border: 0; background: none; text-align: left; cursor: pointer; border-radius: 2px; font-size: 13.5px; }
+.tag:hover { background: var(--panel); }
+.tag i { width: 12px; height: 12px; border: 1.5px solid var(--ink-2); border-radius: 2px; display: block; }
+.tag[aria-pressed="true"] i { background: var(--mark); border-color: var(--mark); }
+.tag span:last-child { font-family: var(--mono); font-size: 11.5px; color: var(--ink-2); }
+.tag-clear { font-size: 12.5px; margin-top: 4px; border: 0; background: none; color: var(--accent); cursor: pointer; padding: 2px 8px; text-align: left; }
+@media (max-width: 900px) { .tags { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); } }
+.rail .src { font-size: 12px; color: var(--ink-2); line-height: 1.45; }
 
-.legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 12.5px; color: var(--ink-2); }
+/* main */
+main { padding-block: 32px 0; min-width: 0; display: grid; gap: 16px; align-content: start; }
+main > section { display: grid; gap: 16px; min-width: 0; }
+.vhead { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px 28px; border-bottom: 1px solid var(--ink); padding-bottom: 14px; }
+.vhead > div:first-child { min-width: 0; flex: 1 1 420px; }
+.vhead h2 { font-family: var(--display); font-weight: 400; font-size: clamp(34px, 4.4vw, 52px); line-height: 0.95; margin: 0; letter-spacing: -0.01em; }
+.vhead p { margin: 8px 0 0; color: var(--ink-2); max-width: 66ch; }
+.controls { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; }
+.seg { display: inline-flex; border: 1px solid var(--ink); border-radius: 2px; overflow: hidden; }
+.seg button { border: 0; background: var(--panel); padding: 5px 11px; cursor: pointer; font-size: 13px; border-left: 1px solid var(--rule); }
+.seg button:first-child { border-left: 0; }
+.seg button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
+.ctl { display: inline-flex; gap: 8px; align-items: center; }
+.ctl > span { font-family: var(--mono); font-size: 10.5px; color: var(--ink-2); text-transform: uppercase; letter-spacing: 0.08em; }
+select { background: var(--panel); border: 1px solid var(--ink); border-radius: 2px; padding: 4px 6px; font-size: 13px; }
+
+.legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 12px; color: var(--ink-2); }
 .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 5px; vertical-align: -1px; }
+.legend i.sq { border-radius: 1px; width: 14px; height: 8px; }
 
-.svgbox { background: var(--panel); border: 1px solid var(--rule); border-radius: 6px; overflow-x: auto; }
-.svgbox svg { display: block; }
+.box { background: var(--panel); border: 1px solid var(--rule); overflow-x: auto; position: relative; }
+.box svg { display: block; }
 svg text { fill: var(--ink); font-family: var(--body); }
 svg .muted { fill: var(--ink-2); }
 svg .mono { font-family: var(--mono); }
+.out { opacity: 0.13 !important; }
+[data-rid] { transition: opacity 0.2s; }
 
-/* Idea A: portraits */
-.grid-portraits { display: grid; grid-template-columns: repeat(auto-fill, minmax(168px, 1fr)); gap: 4px; }
-.portrait { background: var(--panel); border: 1px solid transparent; border-radius: 6px; padding: 10px 10px 12px; cursor: pointer; display: grid; justify-items: center; gap: 4px; text-align: center; view-transition-name: var(--vt); }
-.portrait:hover { border-color: var(--rule); }
-.portrait svg { width: 148px; height: 148px; overflow: visible; }
-.portrait h3 { font-family: var(--display); font-weight: 600; font-size: 15px; margin: 0; line-height: 1.2; }
-.portrait .stats { font-family: var(--mono); font-size: 11px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
-.portrait .tags { font-size: 11.5px; color: var(--ink-2); }
+/* portraits: a contact sheet */
+.sheet { display: grid; grid-template-columns: repeat(auto-fill, minmax(164px, 1fr)); background: var(--panel); border-top: 1px solid var(--rule); border-left: 1px solid var(--rule); }
+.frame { position: relative; padding: 16px 10px 12px; cursor: pointer; display: grid; justify-items: center; gap: 3px; text-align: center; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); view-transition-name: var(--vt); }
+.frame .no { position: absolute; top: 6px; left: 8px; font-family: var(--mono); font-size: 9.5px; color: var(--ink-2); }
+.frame svg { width: 140px; height: 140px; overflow: visible; }
+.frame h3 { font-weight: 600; font-size: 14px; margin: 4px 0 0; line-height: 1.2; }
+.frame .stats { font-family: var(--mono); font-size: 10.5px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+.frame::after { content: ""; position: absolute; left: 6%; right: 6%; top: 3%; height: 76%; background: var(--mark); opacity: 0; transition: opacity 0.15s;
+  -webkit-mask: var(--pencil) center / 100% 100% no-repeat; mask: var(--pencil) center / 100% 100% no-repeat; pointer-events: none; }
+.frame:hover::after, .frame:focus-visible::after { opacity: 1; }
 .ring { stroke: var(--panel); stroke-width: 1; }
 
-/* Idea B: map */
-.hull { fill: var(--hull); stroke: var(--rule); stroke-dasharray: 3 4; }
-.hull-label { font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.08em; text-transform: uppercase; fill: var(--ink-2); }
+/* map */
+.hull-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; fill: var(--ink-2); }
 .axis line, .axis path { stroke: var(--rule); }
 .axis text { fill: var(--ink-2); font-family: var(--mono); font-size: 10.5px; }
 .near { fill: none; stroke: var(--ink-2); stroke-width: 1; opacity: 0.35; }
-.near.on { opacity: 1; stroke: var(--accent); stroke-width: 1.6; }
+.near.on { opacity: 1; stroke: var(--mark); stroke-width: 1.6; }
 .node { cursor: pointer; }
 .node text { font-size: 12px; font-weight: 600; paint-order: stroke; stroke: var(--panel); stroke-width: 3px; }
-.dim { opacity: 0.18; transition: opacity 0.2s; }
+.dim { opacity: 0.18; }
 
-/* Idea C: web */
-.web-layout { display: grid; grid-template-columns: minmax(0, 1fr) 260px; gap: 16px; align-items: start; }
-@media (max-width: 900px) { .web-layout { grid-template-columns: minmax(0, 1fr); } }
-.web-side { display: grid; gap: 14px; font-size: 13.5px; }
-.web-side h4 { margin: 0 0 4px; font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--ink-2); font-weight: 400; }
-.web-side ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 3px; }
-.web-side li { display: flex; justify-content: space-between; gap: 8px; }
-.web-side li span:last-child { font-family: var(--mono); color: var(--ink-2); font-size: 12px; }
+/* web */
+.web-layout { display: grid; grid-template-columns: minmax(0, 1fr) 250px; gap: 18px; align-items: start; }
+@media (max-width: 1100px) { .web-layout { grid-template-columns: minmax(0, 1fr); } }
+.side { display: grid; gap: 16px; font-size: 13px; }
+.side h4 { margin: 0 0 4px; font-family: var(--mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-2); font-weight: 400; }
+.side ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 2px; }
+.side li { display: flex; justify-content: space-between; gap: 8px; border-bottom: 1px dotted var(--rule); padding-bottom: 2px; }
+.side li span:last-child { font-family: var(--mono); color: var(--ink-2); font-size: 11.5px; text-align: right; }
 .link { fill: none; stroke-width: 1.2; opacity: 0.4; transition: opacity 0.15s; }
 .link.on { opacity: 0.95; stroke-width: 2; }
 .link.off { opacity: 0.05; }
@@ -129,125 +170,159 @@ svg .mono { font-family: var(--mono); }
 .rnode text, .inode text { font-size: 11.5px; transition: opacity 0.15s; }
 .inode text { font-size: 11px; }
 
-/* Idea D: lineage */
+/* schedule */
+.insight { font-family: var(--display); font-size: clamp(21px, 2.4vw, 27px); line-height: 1.2; margin: 0; max-width: 62ch; text-wrap: balance; }
+.insight b { font-weight: 400; font-style: italic; color: var(--accent); }
+.lane .t { font-weight: 600; font-size: 13px; cursor: pointer; }
+.lane .t:hover { fill: var(--accent); }
+.lane .s { font-family: var(--mono); font-size: 10px; fill: var(--ink-2); }
+.lane .warn { fill: var(--mark); }
+.ph { cursor: pointer; }
+.ph:hover { stroke: var(--ink); stroke-width: 1.5; }
+.tip { position: absolute; pointer-events: none; background: var(--ink); color: var(--bg); padding: 8px 10px; font-size: 12.5px; line-height: 1.35; width: max-content; max-width: 270px; border-radius: 2px; z-index: 3; }
+.tip b { display: block; font-weight: 600; }
+.tip span { font-family: var(--mono); font-size: 11px; opacity: 0.85; display: block; }
+
+/* lineage */
 .eras { position: relative; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; }
 .eras > svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: visible; }
-.era { display: grid; align-content: start; gap: 10px; min-width: 0; position: relative; z-index: 1; }
-.era-head { border-bottom: 2px solid var(--ink); padding-bottom: 6px; }
-.era-head b { font-family: var(--display); font-size: 18px; font-weight: 600; display: block; }
-.era-head span { font-family: var(--mono); font-size: 10.5px; color: var(--ink-2); }
-.card { background: var(--panel); border: 1px solid var(--rule); border-radius: 6px; padding: 10px; display: grid; gap: 6px; cursor: pointer; min-width: 0; }
-.card:hover { border-color: var(--ink-2); }
+.era { display: grid; align-content: start; gap: 8px; min-width: 0; position: relative; z-index: 1; }
+.era-head { border-bottom: 1px solid var(--ink); padding-bottom: 5px; }
+.era-head b { font-family: var(--display); font-size: 25px; font-weight: 400; display: block; line-height: 1; }
+.era-head span { font-family: var(--mono); font-size: 10px; color: var(--ink-2); }
+.card { background: var(--panel); border: 1px solid var(--rule); padding: 10px; display: grid; gap: 6px; cursor: pointer; min-width: 0; }
+.card:hover { border-color: var(--ink); }
 .card .row { display: flex; gap: 8px; align-items: center; }
-.card svg { flex: none; width: 40px; height: 40px; overflow: visible; }
-.card h3 { margin: 0; font-family: var(--display); font-size: 14.5px; font-weight: 600; line-height: 1.15; }
-.card .place { font-family: var(--mono); font-size: 10px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em; }
+.card svg { flex: none; width: 38px; height: 38px; overflow: visible; }
+.card h3 { margin: 0; font-size: 13.5px; font-weight: 600; line-height: 1.15; }
+.card .place { font-family: var(--mono); font-size: 9.5px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em; }
 .card p { margin: 0; font-size: 12.5px; color: var(--ink-2); line-height: 1.4; }
-.card blockquote { margin: 0; font-family: var(--voice); font-style: italic; font-size: 13.5px; line-height: 1.35; border-left: 2px solid var(--accent); padding-left: 8px; }
-.lineage-link { fill: none; stroke: var(--accent); stroke-width: 1.4; opacity: 0.45; }
-@media (max-width: 1000px) { .eras { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.card blockquote { margin: 0; font-family: var(--display); font-style: italic; font-size: 15.5px; line-height: 1.25; }
+.lineage-link { fill: none; stroke: var(--mark); stroke-width: 1.3; opacity: 0.5; }
+@media (max-width: 1200px) { .eras { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (max-width: 620px) { .eras { grid-template-columns: minmax(0, 1fr); } .eras > svg { display: none; } }
-.note { font-size: 12.5px; color: var(--ink-2); margin: 0; }
+.note { font-size: 12.5px; color: var(--ink-2); margin: 0; max-width: 90ch; }
 
-/* Drawer */
+/* drawer */
 .drawer {
-  position: fixed; top: 0; right: 0; bottom: 0; width: min(440px, 100%); background: var(--panel); border-left: 1px solid var(--rule);
-  box-shadow: -18px 0 40px rgba(0,0,0,0.12); z-index: 20; overflow-y: auto; transform: translateX(105%); transition: transform 0.28s ease;
+  position: fixed; top: 0; right: 0; bottom: 0; width: min(450px, 100%); background: var(--panel); border-left: 1px solid var(--ink);
+  z-index: 20; overflow-y: auto; transform: translateX(105%); transition: transform 0.26s ease;
   padding: calc(22px + env(safe-area-inset-top, 0px)) max(22px, env(safe-area-inset-right, 0px)) calc(28px + env(safe-area-inset-bottom, 0px)) 22px;
-  display: grid; align-content: start; gap: 16px;
+  display: grid; align-content: start; gap: 18px;
 }
 .drawer.open { transform: none; }
-.drawer .close { justify-self: end; border: 1px solid var(--rule); background: var(--bg); border-radius: 999px; padding: 4px 12px; cursor: pointer; font-size: 13px; }
+.drawer .close { justify-self: end; border: 1px solid var(--ink); background: none; border-radius: 2px; padding: 3px 10px; cursor: pointer; font-size: 12.5px; }
 .drawer-top { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 14px; align-items: center; }
 .drawer-top svg { width: 96px; height: 96px; overflow: visible; }
-.drawer h2 { font-family: var(--display); font-size: 28px; line-height: 1.05; margin: 0; letter-spacing: -0.02em; }
-.drawer .meta { font-family: var(--mono); font-size: 11.5px; color: var(--ink-2); }
-.drawer blockquote { margin: 0; font-family: var(--voice); font-style: italic; font-size: 16px; line-height: 1.45; }
+.drawer h2 { font-family: var(--display); font-weight: 400; font-size: 38px; line-height: 0.95; margin: 0; }
+.drawer .meta { font-family: var(--mono); font-size: 11px; color: var(--ink-2); margin-top: 4px; }
+.drawer blockquote { margin: 0; font-family: var(--display); font-style: italic; font-size: 19px; line-height: 1.3; }
 table.formula { width: 100%; border-collapse: collapse; font-size: 13.5px; font-variant-numeric: tabular-nums; }
 table.formula td { padding: 5px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
-table.formula td.n { text-align: right; font-family: var(--mono); font-size: 12.5px; white-space: nowrap; padding-left: 10px; }
-table.formula .stage { font-family: var(--mono); font-size: 10px; color: var(--ink-2); text-transform: uppercase; margin-left: 6px; }
+table.formula td.n { text-align: right; font-family: var(--mono); font-size: 12px; white-space: nowrap; padding-left: 10px; }
+table.formula .stage { font-family: var(--mono); font-size: 9.5px; color: var(--ink-2); text-transform: uppercase; margin-left: 6px; }
 table.formula .sub { display: block; font-size: 12px; color: var(--ink-2); }
-.bar { height: 6px; border-radius: 3px; display: block; margin-top: 4px; }
-.drawer h4 { margin: 0 0 6px; font-family: var(--mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.07em; color: var(--ink-2); font-weight: 400; }
+.bar { height: 5px; display: block; margin-top: 4px; }
+.drawer h4 { margin: 0 0 6px; font-family: var(--mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-2); font-weight: 400; }
 .drawer .neighbors { display: flex; gap: 6px; flex-wrap: wrap; }
-.scrim { position: fixed; inset: 0; background: rgba(0,0,0,0.2); z-index: 19; }
-
-footer { margin-top: 36px; padding-top: 14px; border-top: 1px solid var(--rule); font-size: 12.5px; color: var(--ink-2); display: flex; flex-wrap: wrap; gap: 6px 20px; justify-content: space-between; }
+.drawer .neighbors button { border: 1px solid var(--ink); background: none; border-radius: 2px; padding: 3px 9px; cursor: pointer; font-size: 13px; }
+.mini { display: flex; height: 12px; width: 100%; }
+.mini span { display: block; height: 100%; border-right: 1px solid var(--panel); }
+.scrim { position: fixed; inset: 0; background: rgba(0,0,0,0.22); z-index: 19; }
 
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 </style>
 
-<div class="wrap">
-  <header class="top">
-    <div class="eyebrow">Four mockups · 24 recipes from underlay.org/gabestein/breadsheet</div>
-    <h1>Breadsheet<span class="pct">100%</span></h1>
-    <p class="lede">The recipes are already written as baker's percentages: everything measured against the flour. That makes them comparable, so each mockup below treats the collection as one body of work rather than 24 separate cards. Click any bread to open its formula.</p>
-  </header>
-
-  <nav class="ideas" aria-label="Mockup ideas">
-    <a href="#portraits"><small>IDEA A</small><b>Crumb portraits</b><span>Each formula drawn as a loaf cross-section, ring by ring.</span></a>
-    <a href="#map"><small>IDEA B</small><b>Dough map</b><span>Where each bread sits between lean and rich, stiff and wet.</span></a>
-    <a href="#web"><small>IDEA C</small><b>Pantry web</b><span>Which ingredients tie recipes together, and which stand alone.</span></a>
-    <a href="#lineage"><small>IDEA D</small><b>Bread lineage</b><span>The breads placed in history, with Gabe's own notes.</span></a>
-  </nav>
-
-  <section class="stage" id="v-portraits" hidden>
-    <div class="stage-head">
-      <div>
-        <h2>Crumb portraits</h2>
-        <p>Flour sits at the center. Each ring outward adds the next ingredient, with area matching its share of the dough, so a lean baguette stays small and pound cake grows to more than twice its size.</p>
-      </div>
-      <div class="controls" id="sort-controls">
-        <span class="lbl">Sort</span>
-        <button class="chip" data-sort="none" aria-pressed="true">Collection order</button>
-        <button class="chip" data-sort="hyd" aria-pressed="false">Hydration</button>
-        <button class="chip" data-sort="enrich" aria-pressed="false">Richness</button>
-        <button class="chip" data-sort="starter" aria-pressed="false">Starter</button>
-      </div>
+<div class="app">
+  <aside class="rail">
+    <div class="mark-word">
+      <h1><em>Proof</em><br>Sheet</h1>
+      <p>A bread explorer for Gabe's Breadsheet. A proof sheet shows every frame at once; proofing is the dough's last rise.</p>
     </div>
-    <div class="legend" id="legend-a"></div>
-    <div class="grid-portraits" id="portraits"></div>
-  </section>
+    <nav aria-label="Views">
+      <h4>Views</h4>
+      <div class="views">
+        <a href="#portraits"><svg viewBox="0 0 26 26"><circle cx="13" cy="13" r="10"/><circle cx="13" cy="13" r="6"/><circle cx="13" cy="13" r="2.5"/></svg><b>Crumb portraits</b></a>
+        <a href="#map"><svg viewBox="0 0 26 26"><path d="M4 22V4M4 22h18"/><circle cx="10" cy="16" r="2"/><circle cx="16" cy="11" r="2"/><circle cx="20" cy="6" r="2"/></svg><b>Dough map</b></a>
+        <a href="#web"><svg viewBox="0 0 26 26"><circle cx="13" cy="13" r="10"/><path d="M5 9Q13 13 21 17M5 17Q13 13 21 9M13 3V23"/></svg><b>Pantry web</b></a>
+        <a href="#schedule"><svg viewBox="0 0 26 26"><path d="M3 7h9M8 13h12M5 19h17"/><path d="M22 3v20" stroke-dasharray="2 2"/></svg><b>Bake schedule</b></a>
+        <a href="#lineage"><svg viewBox="0 0 26 26"><path d="M3 20C9 20 9 6 15 6s6 8 8 8"/><circle cx="3" cy="20" r="1.6"/><circle cx="15" cy="6" r="1.6"/><circle cx="23" cy="14" r="1.6"/></svg><b>Bread lineage</b></a>
+      </div>
+    </nav>
+    <div>
+      <h4>Highlight</h4>
+      <div class="tags" id="tags"></div>
+      <button class="tag-clear" id="tag-clear" hidden>Clear highlight</button>
+    </div>
+    <div class="src">24 recipes from <a href="https://www.underlay.org/gabestein/breadsheet" target="_blank" rel="noopener">gabestein/breadsheet</a> on Underlay, v1.3.0, read Nov 18, 2026. A sketch, not a product.</div>
+  </aside>
 
-  <section class="stage" id="v-map" hidden>
-    <div class="stage-head">
-      <div>
+  <main>
+    <section id="v-portraits" hidden>
+      <div class="vhead">
+        <div>
+          <h2>Crumb portraits</h2>
+          <p>Flour at the center, then each ingredient as a ring outward, with area matching its share of the dough. Holes in the crumb grow with the water. Lean loaves stay small; pound cake comes out more than twice the size of a baguette.</p>
+        </div>
+        <div class="controls"><div class="ctl"><span>Sort</span>
+          <div class="seg" id="sort-controls">
+            <button data-sort="none" aria-pressed="true">A to Z</button><button data-sort="hyd" aria-pressed="false">Water</button><button data-sort="enrich" aria-pressed="false">Richness</button><button data-sort="starter" aria-pressed="false">Starter</button>
+          </div></div></div>
+      </div>
+      <div class="legend" id="legend-a"></div>
+      <div class="sheet" id="portraits"></div>
+    </section>
+
+    <section id="v-map" hidden>
+      <div class="vhead"><div>
         <h2>Dough map</h2>
-        <p>Across: effective hydration, counting the water in starter, milk, and eggs. Up: richness, the fat, sugar, and egg added per 100 of flour. Shading marks the richness bands. Lines join each bread to its closest relative by overall formula.</p>
-      </div>
-    </div>
-    <div class="svgbox"><svg id="map"></svg></div>
-  </section>
+        <p>Across: effective hydration, counting the water in starter, milk, and eggs. Up: richness, the fat, sugar, and egg added per 100 of flour. Lines join each bread to its closest relative by overall formula.</p>
+      </div></div>
+      <div class="box"><svg id="map"></svg></div>
+    </section>
 
-  <section class="stage" id="v-web" hidden>
-    <div class="stage-head">
-      <div>
+    <section id="v-web" hidden>
+      <div class="vhead"><div>
         <h2>Pantry web</h2>
         <p>Flour, water, salt, and starter are in almost all of them, so they sit in the middle unlinked. The threads show what is left: the ingredients that give each bread its character. Hover an ingredient or a bread.</p>
+      </div></div>
+      <div class="web-layout">
+        <div class="box"><svg id="web"></svg></div>
+        <aside class="side" id="web-side"></aside>
       </div>
-    </div>
-    <div class="web-layout">
-      <div class="svgbox"><svg id="web"></svg></div>
-      <aside class="web-side" id="web-side"></aside>
-    </div>
-  </section>
+    </section>
 
-  <section class="stage" id="v-lineage" hidden>
-    <div class="stage-head">
-      <div>
+    <section id="v-schedule" hidden>
+      <div class="vhead">
+        <div>
+          <h2>Bake schedule</h2>
+          <p>Pick when you want to eat. Each recipe is planned backward from that moment, using the times in Gabe's method steps. Solid blocks need you at the bench; pale ones are waiting. Red circles mark hands-on steps that land between 11 pm and 7 am.</p>
+        </div>
+        <div class="controls">
+          <div class="ctl"><span>Ready</span>
+            <div class="seg" id="ready-day"><button data-d="4" aria-pressed="false">Fri</button><button data-d="5" aria-pressed="true">Sat</button><button data-d="6" aria-pressed="false">Sun</button></div>
+            <select id="ready-hour" aria-label="Ready time"></select>
+          </div>
+          <div class="ctl"><span>Plan</span>
+            <div class="seg" id="plan"><button data-p="day" aria-pressed="true">Same day</button><button data-p="fridge" aria-pressed="false">Use the fridge</button></div>
+          </div>
+        </div>
+      </div>
+      <p class="insight" id="insight"></p>
+      <div class="legend" id="legend-s"></div>
+      <div class="box" id="sched-box"><svg id="sched"></svg><div class="tip" id="tip" hidden></div></div>
+      <p class="note">Times come from the method text; where a recipe gives a range we use the middle. The tooltip flags blocks where the recipe gives no time and the length is our estimate. "Use the fridge" swaps in the overnight option where a recipe offers one. Gabe's Fulkornbroyt has no method steps in the collection yet.</p>
+    </section>
+
+    <section id="v-lineage" hidden>
+      <div class="vhead"><div>
         <h2>Bread lineage</h2>
-        <p>The same 24 recipes placed in the history of their breads, from hearth loaves to this decade's gluten-free and discard recipes. Quotes are Gabe's headnotes; lines trace one bread growing out of another.</p>
-      </div>
-    </div>
-    <div class="eras" id="eras"></div>
-    <p class="note">History notes and lineage lines are context written for this mockup. They are not part of the collection and would need Gabe's review.</p>
-  </section>
-
-  <footer>
-    <span>Data: gabestein/breadsheet v1.3.0 on Underlay, read Nov 18, 2026. Mockups only.</span>
-    <span>Hydration and richness are approximations computed from the formulas.</span>
-  </footer>
+        <p>The same 24 recipes placed in the history of their breads, from hearth loaves to this decade's gluten-free and discard recipes. Quotes are Gabe's headnotes; red lines trace one bread growing out of another.</p>
+      </div></div>
+      <div class="eras" id="eras"></div>
+      <p class="note">History notes and lineage lines are context written for this sketch. They are not part of the collection and would need Gabe's review.</p>
+    </section>
+  </main>
 </div>
 
 <div class="scrim" id="scrim" hidden></div>
@@ -255,8 +330,10 @@ footer { margin-top: 36px; padding-top: 14px; border-top: 1px solid var(--rule);
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
 <script src="data/breads.js"></script>
+<script src="data/schedule.js"></script>
 <script>
-const B = window.BREADS;
+const B = window.BREADS.slice().sort((a, c) => a.title.localeCompare(c.title));
+const SCH = window.SCHEDULE;
 const byId = Object.fromEntries(B.map(b => [b.id, b]));
 const FAMS = [
   ["flour", "White flour"], ["gf", "Gluten-free flours"], ["grain", "Rye, wheat, buckwheat"], ["starter", "Starter"],
@@ -265,11 +342,11 @@ const FAMS = [
 ];
 const famOrder = Object.fromEntries(FAMS.map(([f], i) => [f, i]));
 const famColor = f => `var(--f-${f})`;
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 
-/* ---------- shared glyph: concentric rings, area proportional to percent ---------- */
+/* ---------- glyph: concentric rings, area proportional to percent, crumb holes by hydration ---------- */
 function rings(b) {
-  const parts = b.ings.filter(i => i.pct && i.stage !== "bath" && !i.opt)
-    .slice().sort((a, c) => famOrder[a.fam] - famOrder[c.fam]);
+  const parts = b.ings.filter(i => i.pct && i.stage !== "bath" && !i.opt).slice().sort((a, c) => famOrder[a.fam] - famOrder[c.fam]);
   let s = 0;
   return parts.map(i => { const r0 = s; s += i.pct; return { ...i, s0: r0, s1: s }; });
 }
@@ -277,10 +354,8 @@ function glyph(svg, b, rMax, maxTotal = 600) {
   const k = rMax / Math.sqrt(maxTotal);
   const g = d3.select(svg).append("g");
   const rs = rings(b).reverse();
-  g.selectAll("circle").data(rs).join("circle")
-    .attr("class", "ring").attr("r", d => k * Math.sqrt(d.s1)).attr("fill", d => famColor(d.fam));
+  g.selectAll("circle").data(rs).join("circle").attr("class", "ring").attr("r", d => k * Math.sqrt(d.s1)).attr("fill", d => famColor(d.fam));
   if (rMax >= 40 && b.hyd > 0) {
-    // crumb: wetter doughs get more and bigger holes, drawn inside the flour core
     const core = k * Math.sqrt(rs[rs.length - 1].s1);
     let seed = [...b.id].reduce((a, c) => (a * 31 + c.charCodeAt(0)) >>> 0, 7);
     const rnd = () => (seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296;
@@ -288,28 +363,79 @@ function glyph(svg, b, rMax, maxTotal = 600) {
     const holes = d3.range(n).map(() => { const a = rnd() * 2 * Math.PI, d = Math.sqrt(rnd()) * core * 0.82; return [d * Math.cos(a), d * Math.sin(a), Math.max(0.5, big * (0.4 + rnd() * rnd() * 2.2))]; });
     g.append("g").selectAll("ellipse").data(holes).join("ellipse")
       .attr("cx", d => d[0]).attr("cy", d => d[1]).attr("rx", d => d[2] * 1.25).attr("ry", d => d[2] * 0.8)
-      .attr("transform", d => `rotate(${(d[0] * 37) % 60 - 30} ${d[0]} ${d[1]})`)
-      .attr("fill", "var(--panel)").attr("opacity", 0.55);
+      .attr("transform", d => `rotate(${(d[0] * 37) % 60 - 30} ${d[0]} ${d[1]})`).attr("fill", "var(--panel)").attr("opacity", 0.6);
   }
   return g;
 }
+function group(b) {
+  if (b.tags.includes("gluten-free")) return "Gluten-free";
+  if (b.tags.includes("rye")) return "Rye";
+  if (b.enrich >= 90) return "Cakes, cookies, batters";
+  if (b.enrich >= 15) return "Enriched";
+  return "Lean breads";
+}
+
+/* ---------- schedule model ---------- */
+const PH = { levain: "Starter or soaker", mix: "Mix", bulk: "Bulk rise", cold: "Fridge", shape: "Shape", proof: "Proof", wait: "Rest", bake: "Bake", cool: "Cool" };
+const HANDS = new Set(["mix", "shape", "bake"]);
+function plan(id, mode) {
+  const s = SCH[id]; if (!s) return null;
+  const ph = s.phases.map(([kind, h, label, range, o = {}]) => (mode === "fridge" && o.alt)
+    ? { kind: "cold", h: o.alt[0], label: o.alt[1], range: o.alt[2], est: false }
+    : { kind, h, label, range, est: !!o.est });
+  // a bake of several hours (pumpernickel) runs unattended, so it doesn't count as time at the bench
+  ph.forEach(p => { p.hands = HANDS.has(p.kind) && !(p.kind === "bake" && p.h > 3); });
+  return { ph, total: d3.sum(ph, p => p.h), hands: d3.sum(ph.filter(p => p.hands), p => p.h), preheat: s.preheat };
+}
+const DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+function clock(t) {
+  const m = Math.round(t * 12) * 5, d = Math.floor(m / 1440), mm = ((m % 1440) + 1440) % 1440;
+  const h = Math.floor(mm / 60), mi = mm % 60;
+  return `${DAYS[((d % 7) + 7) % 7]} ${h % 12 || 12}:${String(mi).padStart(2, "0")} ${h < 12 ? "am" : "pm"}`;
+}
+function dur(h) { const m = Math.round(h * 60); return m < 60 ? `${m} min` : (m % 60 ? `${Math.floor(m / 60)} h ${m % 60} min` : `${m / 60} h`); }
+function atNight(a, b) {
+  for (let t = Math.floor(a); t < b; t++) {
+    const lo = Math.max(a, t), hi = Math.min(b, t + 1), hr = ((t % 24) + 24) % 24;
+    if (hi - lo > 0.01 && (hr >= 23 || hr < 7)) return true;
+  }
+  return false;
+}
+
+/* ---------- highlight filter ---------- */
+const hl = new Set();
+function applyHighlight() {
+  const ids = hl.size ? new Set(B.filter(b => b.tags.some(t => hl.has(t))).map(b => b.id)) : null;
+  document.querySelectorAll("[data-rid]").forEach(el => el.classList.toggle("out", !!ids && !ids.has(el.dataset.rid)));
+  document.getElementById("tag-clear").hidden = !hl.size;
+}
+(function tags() {
+  const counts = d3.rollups(B.flatMap(b => b.tags), v => v.length, d => d).sort((a, c) => c[1] - a[1] || a[0].localeCompare(c[0]));
+  const box = document.getElementById("tags");
+  box.innerHTML = counts.map(([t, n]) => `<button class="tag" data-tag="${esc(t)}" aria-pressed="false"><i></i><span>${esc(t)}</span><span>${n}</span></button>`).join("");
+  box.addEventListener("click", e => {
+    const b = e.target.closest("[data-tag]"); if (!b) return;
+    const t = b.dataset.tag; hl.has(t) ? hl.delete(t) : hl.add(t);
+    b.setAttribute("aria-pressed", hl.has(t)); applyHighlight();
+  });
+  document.getElementById("tag-clear").addEventListener("click", () => { hl.clear(); box.querySelectorAll(".tag").forEach(x => x.setAttribute("aria-pressed", "false")); applyHighlight(); });
+})();
 
 /* ---------- routing ---------- */
-const VIEWS = ["portraits", "map", "web", "lineage"];
+const VIEWS = ["portraits", "map", "web", "schedule", "lineage"];
+const DRAW = { portraits: drawPortraits, map: drawMap, web: drawWeb, schedule: drawSchedule, lineage: drawLineage };
 const drawn = {};
 function route() {
-  let v = location.hash.slice(1);
-  if (!VIEWS.includes(v)) v = "portraits";
+  let v = location.hash.slice(1); if (!VIEWS.includes(v)) v = "portraits";
   VIEWS.forEach(x => { document.getElementById("v-" + x).hidden = x !== v; });
-  document.querySelectorAll("nav.ideas a").forEach(a => a.setAttribute("aria-current", a.getAttribute("href") === "#" + v ? "page" : "false"));
-  if (!drawn[v]) { drawn[v] = true; ({ portraits: drawPortraits, map: drawMap, web: drawWeb, lineage: drawLineage })[v](); }
+  document.querySelectorAll(".views a").forEach(a => a.setAttribute("aria-current", a.getAttribute("href") === "#" + v ? "page" : "false"));
+  if (!drawn[v]) { drawn[v] = true; DRAW[v](); applyHighlight(); }
   if (v === "lineage") requestAnimationFrame(linkLineage);
 }
 window.addEventListener("hashchange", route);
 
 /* ---------- drawer ---------- */
 const drawer = document.getElementById("drawer"), scrim = document.getElementById("scrim");
-function esc(s) { return String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]); }
 function openRecipe(id) {
   const b = byId[id];
   const maxPct = Math.max(...b.ings.map(i => i.pct || 0));
@@ -320,86 +446,78 @@ function openRecipe(id) {
       ${i.pct ? `<span class="bar" style="width:${Math.max(2, 100 * i.pct / maxPct)}%;background:${famColor(i.fam)}"></span>` : ""}</td>
       <td class="n">${i.pct != null ? i.pct + "%" : "to taste"}</td><td class="n">${g != null ? g + " g" : ""}</td></tr>`;
   }).join("");
+  const p = plan(id, "day");
+  const mini = p ? `<div><h4>Timeline · ${dur(p.total)}, ${dur(p.hands)} hands-on</h4><div class="mini">${p.ph.map(x => `<span title="${esc(x.label)}, ${dur(x.h)}" style="flex:${x.h};background:var(--p-${x.kind});opacity:${x.hands ? 1 : 0.6}"></span>`).join("")}</div></div>` : "";
   drawer.innerHTML = `
     <button class="close" id="close">Close</button>
     <div class="drawer-top"><svg viewBox="-50 -50 100 100" id="dglyph"></svg>
-      <div><h2>${esc(b.title)}</h2><div class="meta">${b.tags.map(esc).join(" · ")}<br>${b.hyd}% hydration · ${b.enrich}% richness · ${b.steps} steps</div></div></div>
+      <div><h2>${esc(b.title)}</h2><div class="meta">${b.tags.map(esc).join(" · ")}<br>${b.hyd}% water · ${b.enrich}% rich · ${b.steps} steps</div></div></div>
     ${b.headnotes.map(h => `<blockquote>${esc(h)}</blockquote>`).join("")}
     <div><h4>Formula at ${b.base} g flour${b.scale ? ` · ${esc(b.scale)}` : ""}</h4><table class="formula">${rows}</table></div>
-    <div><h4>Closest in the collection</h4><div class="neighbors">${b.near.map(n => `<button class="chip" data-open="${n}">${esc(byId[n].title)}</button>`).join("")}</div></div>
+    ${mini}
+    <div><h4>Closest in the collection</h4><div class="neighbors">${b.near.map(n => `<button data-open="${n}">${esc(byId[n].title)}</button>`).join("")}</div></div>
     ${b.sources.length ? `<div><h4>Sources</h4>${b.sources.map(s => `<div><a href="${esc(s)}" target="_blank" rel="noopener">${esc(new URL(s).hostname.replace("www.", ""))}</a></div>`).join("")}</div>` : ""}
-    <div class="meta"><a href="https://www.underlay.org/gabestein/breadsheet" target="_blank" rel="noopener">Record: ${esc(b.id)}</a></div>`;
+    <div class="meta"><a href="https://www.underlay.org/gabestein/breadsheet" target="_blank" rel="noopener">Underlay record: ${esc(b.id)}</a></div>`;
   glyph(drawer.querySelector("#dglyph"), b, 50);
   drawer.classList.add("open"); drawer.setAttribute("aria-hidden", "false"); scrim.hidden = false;
   drawer.querySelector("#close").focus();
 }
 function closeRecipe() { drawer.classList.remove("open"); drawer.setAttribute("aria-hidden", "true"); scrim.hidden = true; }
-drawer.addEventListener("click", e => {
-  if (e.target.id === "close") closeRecipe();
-  const o = e.target.closest("[data-open]"); if (o) openRecipe(o.dataset.open);
-});
+drawer.addEventListener("click", e => { if (e.target.id === "close") closeRecipe(); const o = e.target.closest("[data-open]"); if (o) openRecipe(o.dataset.open); });
 scrim.addEventListener("click", closeRecipe);
 document.addEventListener("keydown", e => { if (e.key === "Escape") closeRecipe(); });
+const clickable = (sel, id) => sel.attr("tabindex", 0).on("click", () => openRecipe(id)).on("keydown", e => { if (e.key === "Enter") openRecipe(id); });
 
-/* ---------- Idea A ---------- */
+/* ---------- Crumb portraits ---------- */
 function drawPortraits() {
   const used = new Set(B.flatMap(b => b.ings.map(i => i.fam)));
   document.getElementById("legend-a").innerHTML = FAMS.filter(([f]) => used.has(f)).map(([f, l]) => `<span><i style="background:${famColor(f)}"></i>${l}</span>`).join("");
   const box = document.getElementById("portraits");
   B.forEach((b, idx) => {
     const el = document.createElement("div");
-    el.className = "portrait"; el.tabIndex = 0; el.dataset.id = b.id; el.dataset.idx = idx;
+    el.className = "frame"; el.dataset.rid = b.id; el.dataset.idx = idx;
     el.style.setProperty("--vt", "p-" + b.id);
-    el.innerHTML = `<svg viewBox="-74 -74 148 148"></svg><h3>${esc(b.title)}</h3>
-      <div class="stats">${b.hyd}% water · ${b.enrich}% rich</div><div class="tags">${b.tags.join(" · ")}</div>`;
-    glyph(el.querySelector("svg"), b, 72);
-    el.addEventListener("click", () => openRecipe(b.id));
-    el.addEventListener("keydown", e => { if (e.key === "Enter") openRecipe(b.id); });
+    el.innerHTML = `<span class="no">${String(idx + 1).padStart(2, "0")}</span><svg viewBox="-72 -72 144 144"></svg><h3>${esc(b.title)}</h3>
+      <div class="stats">${b.hyd}% water · ${b.enrich}% rich</div>`;
+    glyph(el.querySelector("svg"), b, 70);
+    clickable(d3.select(el), b.id);
     box.appendChild(el);
   });
   document.getElementById("sort-controls").addEventListener("click", e => {
     const btn = e.target.closest("[data-sort]"); if (!btn) return;
-    document.querySelectorAll("#sort-controls .chip").forEach(c => c.setAttribute("aria-pressed", c === btn ? "true" : "false"));
+    document.querySelectorAll("#sort-controls button").forEach(c => c.setAttribute("aria-pressed", c === btn ? "true" : "false"));
     const key = btn.dataset.sort;
-    const els = [...box.children].sort((a, c) => key === "none" ? a.dataset.idx - c.dataset.idx : byId[a.dataset.id][key] - byId[c.dataset.id][key]);
+    const els = [...box.children].sort((a, c) => key === "none" ? a.dataset.idx - c.dataset.idx : byId[a.dataset.rid][key] - byId[c.dataset.rid][key]);
     const go = () => els.forEach(x => box.appendChild(x));
     document.startViewTransition && !matchMedia("(prefers-reduced-motion: reduce)").matches ? document.startViewTransition(go) : go();
   });
 }
 
-/* ---------- Idea B ---------- */
-function group(b) {
-  if (b.tags.includes("gluten-free")) return "Gluten-free";
-  if (b.tags.includes("rye")) return "Rye";
-  if (b.enrich >= 90) return "Cakes, cookies, batters";
-  if (b.enrich >= 15) return "Enriched";
-  return "Lean breads";
-}
+/* ---------- Dough map ---------- */
 function drawMap() {
-  const W = 1180, H = 780, m = { l: 56, r: 90, t: 40, b: 50 };
+  const W = 1120, H = 760, m = { l: 56, r: 90, t: 40, b: 50 };
   const svg = d3.select("#map").attr("viewBox", `0 0 ${W} ${H}`).attr("width", W).attr("height", H).style("max-width", "100%").style("height", "auto").style("min-width", "720px");
   const x = d3.scaleLinear([40, 100, 185], [m.l + 20, m.l + (W - m.l - m.r) * 0.7, W - m.r]);
   const y = d3.scaleSymlog([0, 310], [H - m.b - 16, m.t]).constant(4);
-  const pts = B.map(b => ({ b, x: x(Math.max(b.hyd, 44)), y: y(b.enrich), g: group(b) }));
-  // gentle collision so labels breathe
+  const pts = B.map(b => ({ b, x: x(Math.max(b.hyd, 44)), y: y(b.enrich) }));
   const sim = d3.forceSimulation(pts).force("x", d3.forceX(d => x(Math.max(d.b.hyd, 44))).strength(0.25)).force("y", d3.forceY(d => y(d.b.enrich)).strength(0.25))
     .force("c", d3.forceCollide(d => 32 + Math.sqrt(d.b.total) * 0.5).strength(1)).stop();
   for (let i = 0; i < 400; i++) { sim.tick(); pts.forEach(p => { p.y = Math.min(p.y, H - m.b - 40); p.x = Math.max(p.x, m.l + 40); }); }
-
-  svg.append("g").attr("class", "axis").attr("transform", `translate(0,${H - m.b})`).call(d3.axisBottom(x).tickValues([50, 60, 70, 80, 90, 100, 125, 150, 175]).tickFormat(d => d + "%"));
-  svg.append("g").attr("class", "axis").attr("transform", `translate(${m.l},0)`).call(d3.axisLeft(y).tickValues([0, 5, 15, 30, 60, 100, 300]).tickFormat(d => d + "%"));
-  svg.append("text").attr("class", "muted mono").attr("x", W - m.r).attr("y", H - 12).attr("text-anchor", "end").attr("font-size", 11).text("WETTER →");
-  svg.append("text").attr("class", "muted mono").attr("x", 14).attr("y", m.t - 10).attr("font-size", 11).text("↑ RICHER");
-  svg.append("text").attr("class", "muted mono").attr("x", x(44) + 40).attr("y", y(100) - 30).attr("font-size", 10).attr("text-anchor", "middle").text("no water");
 
   const bands = [[0, 5, "Lean"], [5, 20, "A little fat or sugar"], [20, 90, "Enriched"], [90, 310, "Cakes, cookies, batters"]];
   const bandG = svg.append("g");
   bands.forEach(([lo, hi, name], i) => {
     if (i % 2 === 0) bandG.append("rect").attr("x", m.l).attr("width", W - m.l - m.r).attr("y", y(hi)).attr("height", y(lo) - y(hi) + (lo === 0 ? 16 : 0)).attr("fill", "var(--hull)");
-    bandG.append("text").attr("class", "hull-label").attr("x", W - m.r - 8).attr("y", (lo === 0 ? y(0) + 16 : y(lo)) - 8).attr("text-anchor", "end").text(name);
+    const cy = (y(hi) + y(lo) + (lo === 0 ? 16 : 0)) / 2;
+    bandG.append("text").attr("class", "hull-label").attr("transform", `translate(${m.l + 14},${cy}) rotate(-90)`).attr("text-anchor", "middle").text(name);
   });
   bandG.append("line").attr("x1", x(100)).attr("x2", x(100)).attr("y1", m.t).attr("y2", H - m.b).attr("stroke", "var(--rule)").attr("stroke-dasharray", "3 4");
   bandG.append("text").attr("class", "hull-label").attr("x", x(100) + 6).attr("y", H - m.b - 8).text("as much water as flour");
+  svg.append("g").attr("class", "axis").attr("transform", `translate(0,${H - m.b})`).call(d3.axisBottom(x).tickValues([50, 60, 70, 80, 90, 100, 125, 150, 175]).tickFormat(d => d + "%"));
+  svg.append("g").attr("class", "axis").attr("transform", `translate(${m.l},0)`).call(d3.axisLeft(y).tickValues([0, 5, 15, 30, 60, 100, 300]).tickFormat(d => d + "%"));
+  svg.append("text").attr("class", "muted mono").attr("x", W - m.r).attr("y", H - 12).attr("text-anchor", "end").attr("font-size", 11).text("WETTER →");
+  svg.append("text").attr("class", "muted mono").attr("x", 14).attr("y", m.t - 14).attr("font-size", 11).text("↑ RICHER");
+  svg.append("text").attr("class", "muted mono").attr("x", x(44) + 40).attr("y", y(100) - 30).attr("font-size", 10).attr("text-anchor", "middle").text("no water");
 
   const P = Object.fromEntries(pts.map(p => [p.b.id, p]));
   const pairs = []; const seen = new Set();
@@ -407,16 +525,19 @@ function drawMap() {
   const links = svg.append("g").selectAll("path").data(pairs).join("path").attr("class", "near")
     .attr("d", ([a, c]) => { const mx = (a.x + c.x) / 2, my = (a.y + c.y) / 2 - Math.hypot(c.x - a.x, c.y - a.y) * 0.18; return `M${a.x},${a.y}Q${mx},${my} ${c.x},${c.y}`; });
 
-  const node = svg.append("g").selectAll("g").data(pts).join("g").attr("class", "node").attr("transform", d => `translate(${d.x},${d.y})`)
-    .attr("tabindex", 0).on("click", (e, d) => openRecipe(d.b.id)).on("keydown", (e, d) => { if (e.key === "Enter") openRecipe(d.b.id); });
-  node.each(function (d) { glyph(this, d.b, 28, 600); });
-  // flip a label above its dot when the next label to the left would collide
-  const placed = [];
-  pts.slice().sort((a, c) => a.x - c.x).forEach(p => {
-    const w = p.b.title.length * 6.6;
-    p.up = placed.some(o => !o.up && Math.abs(o.y - p.y) < 26 && p.x - w / 2 < o.x + o.w / 2 + 6)
-      || pts.some(o => o !== p && Math.abs(o.y - (p.y + 22)) < 14 && Math.abs(o.x - p.x) < w / 2 + 8);
-    p.w = w; placed.push(p);
+  const node = svg.append("g").selectAll("g").data(pts).join("g").attr("class", "node").attr("data-rid", d => d.b.id).attr("transform", d => `translate(${d.x},${d.y})`);
+  node.each(function (d) { glyph(this, d.b, 28, 600); clickable(d3.select(this), d.b.id); });
+  // place each label below its dot, or above if that box would hit a placed label or another dot
+  const rOf = p => 28 * Math.sqrt(p.b.total / 600);
+  const boxes = [];
+  const hit = (bx) => boxes.some(o => bx.x0 < o.x1 && bx.x1 > o.x0 && bx.y0 < o.y1 && bx.y1 > o.y0)
+    || pts.some(o => bx.x0 < o.x + rOf(o) && bx.x1 > o.x - rOf(o) && bx.y0 < o.y + rOf(o) && bx.y1 > o.y - rOf(o));
+  pts.slice().sort((a, c) => a.y - c.y).forEach(p => {
+    const w = p.b.title.length * 6.4, r = rOf(p);
+    const down = { x0: p.x - w / 2, x1: p.x + w / 2, y0: p.y + r + 2, y1: p.y + r + 16 };
+    const up = { x0: p.x - w / 2, x1: p.x + w / 2, y0: p.y - r - 16, y1: p.y - r - 2 };
+    p.up = hit(down) && !hit(up);
+    boxes.push(p.up ? up : down);
   });
   node.append("text").attr("y", d => d.up ? -(28 * Math.sqrt(d.b.total / 600) + 6) : 28 * Math.sqrt(d.b.total / 600) + 13).attr("text-anchor", "middle").text(d => d.b.title);
   node.on("mouseenter", (e, d) => {
@@ -426,7 +547,7 @@ function drawMap() {
   }).on("mouseleave", () => { node.classed("dim", false); links.classed("on", false).classed("dim", false); });
 }
 
-/* ---------- Idea C ---------- */
+/* ---------- Pantry web ---------- */
 function drawWeb() {
   const CORE = new Set(["White flour", "Water", "Salt", "Starter"]);
   const count = d3.rollup(B.flatMap(b => [...new Set(b.ings.map(i => i.c))].map(c => ({ c, id: b.id }))), v => v.length, d => d.c);
@@ -434,40 +555,31 @@ function drawWeb() {
   const ingr = [...count.keys()].filter(c => !CORE.has(c)).sort((a, c) => famOrder[famOf[a]] - famOrder[famOf[c]] || count.get(c) - count.get(a) || a.localeCompare(c));
   const gOrder = ["Lean breads", "Rye", "Gluten-free", "Enriched", "Cakes, cookies, batters"];
   const recs = B.slice().sort((a, c) => gOrder.indexOf(group(a)) - gOrder.indexOf(group(c)) || a.title.localeCompare(c.title));
-
   const S = 940, R1 = 180, R2 = 300;
   const svg = d3.select("#web").attr("viewBox", `${-S / 2} ${-S / 2} ${S} ${S}`).attr("width", S).attr("height", S).style("max-width", "100%").style("height", "auto").style("min-width", "600px").style("margin", "0 auto");
   const ang = (i, n, off = 0) => (i / n) * 2 * Math.PI - Math.PI / 2 + off;
   const pol = (a, r) => [r * Math.cos(a), r * Math.sin(a)];
   const IP = Object.fromEntries(ingr.map((c, i) => [c, { c, a: ang(i, ingr.length, Math.PI / ingr.length) }]));
   const RP = Object.fromEntries(recs.map((b, i) => [b.id, { b, a: ang(i, recs.length, Math.PI / recs.length) }]));
-
   const edges = B.flatMap(b => [...new Set(b.ings.map(i => i.c))].filter(c => !CORE.has(c)).map(c => ({ id: b.id, c })));
-  const link = svg.append("g").selectAll("path").data(edges).join("path").attr("class", "link")
+  const link = svg.append("g").selectAll("path").data(edges).join("path").attr("class", "link").attr("data-rid", d => d.id)
     .attr("stroke", d => famColor(famOf[d.c]))
     .attr("d", d => { const [x1, y1] = pol(RP[d.id].a, R2 - 10), [x2, y2] = pol(IP[d.c].a, R1 + 8), [cx, cy] = pol((RP[d.id].a + IP[d.c].a) / 2, (R1 + R2) / 2 - 40); return `M${x1},${y1}Q${cx},${cy} ${x2},${y2}`; });
-
-  // centre: the shared core
   const core = svg.append("g");
   core.append("circle").attr("r", 96).attr("fill", "var(--bg)").attr("stroke", "var(--rule)");
-  const coreList = [...CORE].map(c => [c, count.get(c)]);
   core.append("text").attr("class", "muted mono").attr("y", -50).attr("text-anchor", "middle").attr("font-size", 10).text("IN NEARLY ALL 24");
-  coreList.forEach(([c, n], i) => {
+  [...CORE].forEach((c, i) => {
     core.append("text").attr("y", -20 + i * 22).attr("text-anchor", "middle").attr("font-size", 16).attr("font-weight", 600)
-      .text(c.replace("White flour", "Wheat flour")).append("tspan").attr("class", "muted mono").attr("font-size", 11).attr("font-weight", 400).text("  " + n);
+      .text(c.replace("White flour", "Wheat flour")).append("tspan").attr("class", "muted mono").attr("font-size", 11).attr("font-weight", 400).text("  " + count.get(c));
   });
-
   const inode = svg.append("g").selectAll("g").data(ingr).join("g").attr("class", "inode");
   inode.append("circle").attr("cx", d => pol(IP[d].a, R1)[0]).attr("cy", d => pol(IP[d].a, R1)[1]).attr("r", d => 3 + Math.sqrt(count.get(d)) * 2.4).attr("fill", d => famColor(famOf[d]));
-  inode.append("text").attr("transform", d => { const a = IP[d].a, [px, py] = pol(a, R1 - 14); const deg = a * 180 / Math.PI; const flip = Math.cos(a) < 0; return `translate(${px},${py}) rotate(${flip ? deg + 180 : deg})`; })
+  inode.append("text").attr("transform", d => { const a = IP[d].a, [px, py] = pol(a, R1 - 14); const deg = a * 180 / Math.PI; return `translate(${px},${py}) rotate(${Math.cos(a) < 0 ? deg + 180 : deg})`; })
     .attr("text-anchor", d => Math.cos(IP[d].a) < 0 ? "start" : "end").attr("dy", "0.35em").text(d => d);
-
-  const rnode = svg.append("g").selectAll("g").data(recs).join("g").attr("class", "rnode").attr("tabindex", 0)
-    .on("click", (e, b) => openRecipe(b.id)).on("keydown", (e, b) => { if (e.key === "Enter") openRecipe(b.id); });
-  rnode.each(function (b) { const [px, py] = pol(RP[b.id].a, R2); const g = glyph(this, b, 13, 600); g.attr("transform", `translate(${px},${py})`); });
-  rnode.append("text").attr("transform", b => { const a = RP[b.id].a, [px, py] = pol(a, R2 + 18); const deg = a * 180 / Math.PI; const flip = Math.cos(a) < 0; return `translate(${px},${py}) rotate(${flip ? deg + 180 : deg})`; })
+  const rnode = svg.append("g").selectAll("g").data(recs).join("g").attr("class", "rnode").attr("data-rid", b => b.id);
+  rnode.each(function (b) { const [px, py] = pol(RP[b.id].a, R2); glyph(this, b, 13, 600).attr("transform", `translate(${px},${py})`); clickable(d3.select(this), b.id); });
+  rnode.append("text").attr("transform", b => { const a = RP[b.id].a, [px, py] = pol(a, R2 + 18); const deg = a * 180 / Math.PI; return `translate(${px},${py}) rotate(${Math.cos(a) < 0 ? deg + 180 : deg})`; })
     .attr("text-anchor", b => Math.cos(RP[b.id].a) < 0 ? "end" : "start").attr("dy", "0.35em").attr("font-weight", 600).text(b => b.title);
-
   const focus = (pred, keepI, keepR) => {
     link.classed("on", pred).classed("off", d => !pred(d));
     inode.select("text").style("opacity", d => keepI.has(d) ? 1 : 0.2);
@@ -476,8 +588,6 @@ function drawWeb() {
   const clear = () => { link.classed("on", false).classed("off", false); inode.select("text").style("opacity", 1); rnode.select("text").style("opacity", 1); };
   inode.on("mouseenter", (e, c) => { const r = new Set(edges.filter(d => d.c === c).map(d => d.id)); focus(d => d.c === c, new Set([c]), r); }).on("mouseleave", clear);
   rnode.on("mouseenter", (e, b) => { const i = new Set(edges.filter(d => d.id === b.id).map(d => d.c)); focus(d => d.id === b.id, i, new Set([b.id])); }).on("mouseleave", clear);
-
-  // side panel: computed facts
   const singles = ingr.filter(c => count.get(c) === 1);
   const recipeOf = c => B.find(b => b.ings.some(i => i.c === c)).title;
   const shared = ingr.filter(c => count.get(c) > 1).sort((a, c) => count.get(c) - count.get(a)).slice(0, 7);
@@ -488,11 +598,95 @@ function drawWeb() {
     <div><h4>Most one-of-a-kind recipes</h4><ul>${unique.map(d => `<li><span>${esc(d.b.title)}</span><span>${d.n} unique</span></li>`).join("")}</ul></div>`;
 }
 
-/* ---------- Idea D ---------- */
-const ERAS = [
-  ["Antiquity", "before 500"], ["Middle Ages", "500 to 1500"], ["Early modern", "1500 to 1800"],
-  ["1800s", "industrial baking"], ["1900s", "city bakeries"], ["Since 2000", "home bakers"],
-];
+/* ---------- Bake schedule ---------- */
+const sched = { day: 5, hour: 18, mode: "day" };
+function drawSchedule() {
+  const sel = document.getElementById("ready-hour");
+  sel.innerHTML = d3.range(6, 23).map(h => `<option value="${h}" ${h === sched.hour ? "selected" : ""}>${h % 12 || 12}:00 ${h < 12 ? "am" : "pm"}</option>`).join("");
+  sel.addEventListener("change", () => { sched.hour = +sel.value; renderSchedule(); });
+  const seg = (id, key, attr, cast) => document.getElementById(id).addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return;
+    sched[key] = cast(b.dataset[attr]);
+    e.currentTarget.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === b ? "true" : "false"));
+    renderSchedule();
+  });
+  seg("ready-day", "day", "d", Number); seg("plan", "mode", "p", String);
+  document.getElementById("legend-s").innerHTML = Object.entries(PH).map(([k, l]) => `<span><i class="sq" style="background:var(--p-${k});opacity:${HANDS.has(k) ? 1 : 0.6}"></i>${l}</span>`).join("")
+    + `<span><i class="sq" style="height:2px;background:var(--p-bake)"></i>Oven heating</span>`;
+  renderSchedule();
+}
+function renderSchedule() {
+  const ready = sched.day * 24 + sched.hour;
+  const rows = B.map(b => ({ b, p: plan(b.id, sched.mode) }));
+  rows.sort((a, c) => (c.p ? c.p.total : -1) - (a.p ? a.p.total : -1));
+  const maxT = d3.max(rows, r => r.p ? r.p.total + r.p.preheat : 0);
+  const LW = 210, PX = 19, RH = 36, top = 50;
+  const t0 = Math.floor(ready - maxT - 1.5), t1 = ready + 1;
+  const W = LW + (t1 - t0) * PX + 24, H = top + rows.length * RH + 6;
+  const x = t => LW + (t - t0) * PX;
+  const svg = d3.select("#sched").attr("width", W).attr("height", H).attr("viewBox", `0 0 ${W} ${H}`);
+  svg.selectAll("*").remove();
+  for (let d = Math.floor(t0 / 24) - 1; d <= Math.ceil(t1 / 24); d++) {
+    const a = Math.max(t0, d * 24 - 1), b = Math.min(t1, d * 24 + 7);
+    if (b > a) svg.append("rect").attr("x", x(a)).attr("y", 22).attr("width", (b - a) * PX).attr("height", H - 22).attr("fill", "var(--night)");
+  }
+  const ax = svg.append("g");
+  for (let t = Math.ceil(t0); t <= t1; t++) {
+    const hr = ((t % 24) + 24) % 24;
+    if (hr === 0) {
+      ax.append("line").attr("x1", x(t)).attr("x2", x(t)).attr("y1", 4).attr("y2", H).attr("stroke", "var(--ink-2)").attr("stroke-opacity", 0.5);
+      ax.append("text").attr("x", x(t) + 5).attr("y", 15).attr("font-size", 12.5).attr("font-weight", 600).text(DAYS[Math.floor(t / 24) % 7]);
+    } else if (hr % 6 === 0 && Math.abs(t - ready) > 1) {
+      ax.append("text").attr("class", "muted mono").attr("x", x(t)).attr("y", 38).attr("font-size", 9.5).attr("text-anchor", "middle").text(hr === 12 ? "noon" : `${hr % 12}${hr < 12 ? "am" : "pm"}`);
+      ax.append("line").attr("x1", x(t)).attr("x2", x(t)).attr("y1", 42).attr("y2", H).attr("stroke", "var(--rule)").attr("stroke-dasharray", "1 4");
+    }
+  }
+  svg.append("line").attr("x1", x(ready)).attr("x2", x(ready)).attr("y1", 22).attr("y2", H).attr("stroke", "var(--accent)").attr("stroke-width", 2);
+  svg.append("text").attr("x", x(ready) - 6).attr("y", 15).attr("text-anchor", "end").attr("font-size", 12).attr("fill", "var(--accent)").attr("font-weight", 600).text("Ready");
+  const tip = document.getElementById("tip"), boxEl = document.getElementById("sched-box");
+  rows.forEach((r, i) => {
+    const y = top + i * RH;
+    const g = svg.append("g").attr("class", "lane").attr("data-rid", r.b.id);
+    clickable(g.append("text").attr("class", "t").attr("x", 8).attr("y", y + 11).text(r.b.title), r.b.id);
+    if (!r.p) { g.append("text").attr("class", "s").attr("x", 8).attr("y", y + 25).text("no method steps yet"); return; }
+    let t = ready - r.p.total, nightHands = 0;
+    const start = t;
+    r.p.ph.forEach(ph => {
+      const a = t, b = t + ph.h; t = b;
+      const hands = ph.hands;
+      if (ph.kind === "bake" && r.p.preheat) g.append("rect").attr("x", x(a - r.p.preheat)).attr("y", y).attr("width", r.p.preheat * PX).attr("height", 2).attr("fill", "var(--p-bake)");
+      g.append("rect").attr("class", "ph").attr("x", x(a)).attr("y", y + 4).attr("width", Math.max(2, ph.h * PX - 1)).attr("height", 16)
+        .attr("fill", `var(--p-${ph.kind})`).attr("opacity", hands ? 1 : 0.6)
+        .on("mousemove", e => {
+          const rb = boxEl.getBoundingClientRect();
+          tip.hidden = false;
+          tip.innerHTML = `<b>${esc(ph.label)}</b><span>${clock(a)} to ${clock(b)}</span><span>${dur(ph.h)}${ph.range ? ` · recipe says ${esc(ph.range)}` : ""}${ph.est ? " · our estimate" : ""}</span>`;
+          let lx = e.clientX - rb.left + boxEl.scrollLeft + 14; if (lx + 280 > boxEl.scrollLeft + rb.width) lx -= 300;
+          tip.style.left = lx + "px"; tip.style.top = (e.clientY - rb.top + 14) + "px";
+        }).on("mouseleave", () => { tip.hidden = true; });
+      if (hands && atNight(a, b)) {
+        nightHands++;
+        const cx = x(a + ph.h / 2), w = Math.max(28, ph.h * PX + 18);
+        g.append("ellipse").attr("cx", cx).attr("cy", y + 12).attr("rx", w / 2).attr("ry", 14).attr("fill", "none").attr("stroke", "var(--mark)").attr("stroke-width", 2)
+          .attr("transform", `rotate(-4 ${cx} ${y + 12})`).attr("pointer-events", "none");
+      }
+    });
+    const s = g.append("text").attr("class", "s").attr("x", 8).attr("y", y + 25);
+    s.append("tspan").text(`${clock(start)} · ${dur(r.p.total)}`);
+    if (nightHands) s.append("tspan").attr("class", "warn").text(` · ${nightHands} at night`);
+  });
+  const live = rows.filter(r => r.p);
+  const longest = live[0], shortest = live[live.length - 1];
+  const easiest = live.filter(r => r.p.total >= 12).sort((a, c) => a.p.hands - c.p.hands)[0];
+  const nights = live.filter(r => { let t = ready - r.p.total; return r.p.ph.some(ph => { const a = t; t += ph.h; return ph.hands && atNight(a, t); }); }).length;
+  document.getElementById("insight").innerHTML = `For ${clock(ready)}, ${esc(longest.b.title)} starts <b>${clock(ready - longest.p.total)}</b>; ${esc(shortest.b.title)} can wait until <b>${clock(ready - shortest.p.total)}</b>.`
+    + (easiest ? ` Of the long ones, ${esc(easiest.b.title)} asks the least of you: ${dur(easiest.p.hands)} hands-on.` : "")
+    + (nights ? ` ${nights} ${nights === 1 ? "recipe has" : "recipes have"} you up at night.` : " Nobody bakes at night.");
+  applyHighlight();
+}
+
+/* ---------- Bread lineage ---------- */
+const ERAS = [["Antiquity", "before 500"], ["Middle Ages", "500 to 1500"], ["Early modern", "1500 to 1800"], ["1800s", "industrial baking"], ["1900s", "city bakeries"], ["Since 2000", "home bakers"]];
 const HIST = {
   "basic-white": [0, "Ancient Egypt onward", "Flour, water, salt, and a wild culture. Leavened bread of this kind goes back to ancient Egypt."],
   "whole-wheat": [0, "Everywhere", "Whole grain was the norm until roller mills made white flour cheap in the late 1800s."],
@@ -510,7 +704,7 @@ const HIST = {
   "pizza-dough": [3, "Naples, Italy", "Neapolitan street food: a hearth flatbread with toppings."],
   "baguette": [4, "Paris, France", "The long, thin loaf became the everyday Paris bread in the early 1900s."],
   "rye-sandwich": [4, "New York", "Close kin to deli rye, the sandwich loaf of Jewish New York."],
-  "wh-pizza-dough": [4, "A wetter pizza", "Same family as the pizza dough, pushed to 80% water."],
+  "wh-pizza-dough": [4, "A wetter dough", "Same family as the pizza dough, pushed to 80% water and shaped long."],
   "buckwheat-baguette-r-s": [5, "Modern blend", "A baguette shape carrying buckwheat, rye, and whole wheat."],
   "pumpernickel-simple": [5, "Shortcut", "The Westphalian loaf, simplified for a home oven."],
   "gluten-free-dan-bread": [5, "Gluten-free", "Psyllium lets a dough with no gluten hold its gas and its shape."],
@@ -519,12 +713,8 @@ const HIST = {
   "crackers-for-discard": [5, "Zero waste", "Discard recipes spread with the home sourdough boom of 2020."],
   "ricotta-pancakes-discard": [5, "Zero waste", "Breakfast from the starter you would otherwise pour off."],
 };
-const LINEAGE = [
-  ["foccacia", "pizza-dough"], ["pizza-dough", "wh-pizza-dough"], ["wh-pizza-dough", "gf-pizza-dough"],
-  ["basic-white", "baguette"], ["baguette", "buckwheat-baguette-r-s"],
-  ["pumpernickel-complex", "pumpernickel-simple"], ["gabes-fulkornbroyt", "rye-sandwich"],
-  ["basic-white", "gluten-free-dan-bread"], ["water-challah", "bagel"], ["scone", "vg-shortbread"],
-];
+const LINEAGE = [["foccacia", "pizza-dough"], ["pizza-dough", "wh-pizza-dough"], ["wh-pizza-dough", "gf-pizza-dough"], ["basic-white", "baguette"], ["baguette", "buckwheat-baguette-r-s"],
+  ["pumpernickel-complex", "pumpernickel-simple"], ["gabes-fulkornbroyt", "rye-sandwich"], ["basic-white", "gluten-free-dan-bread"], ["water-challah", "bagel"], ["scone", "vg-shortbread"]];
 function drawLineage() {
   const box = document.getElementById("eras");
   box.innerHTML = `<svg aria-hidden="true"></svg>` + ERAS.map(([n, s], i) => `<div class="era" data-era="${i}"><div class="era-head"><b>${n}</b><span>${s}</span></div></div>`).join("");
@@ -532,19 +722,18 @@ function drawLineage() {
     const [era, place, note] = HIST[b.id];
     const q = b.headnotes[0];
     const el = document.createElement("div");
-    el.className = "card"; el.tabIndex = 0; el.dataset.id = b.id;
+    el.className = "card"; el.dataset.rid = b.id;
     el.innerHTML = `<div class="row"><svg viewBox="-20 -20 40 40"></svg><div><div class="place">${esc(place)}</div><h3>${esc(b.title)}</h3></div></div>
       <p>${esc(note)}</p>${q ? `<blockquote>${esc(q.length > 150 ? q.slice(0, q.lastIndexOf(" ", 145)) + "…" : q)}</blockquote>` : ""}`;
     glyph(el.querySelector("svg"), b, 20);
-    el.addEventListener("click", () => openRecipe(b.id));
-    el.addEventListener("keydown", e => { if (e.key === "Enter") openRecipe(b.id); });
+    clickable(d3.select(el), b.id);
     box.querySelector(`[data-era="${era}"]`).appendChild(el);
   });
   window.addEventListener("resize", () => { if (!document.getElementById("v-lineage").hidden) linkLineage(); });
 }
 function linkLineage() {
   const box = document.getElementById("eras"), svg = box.querySelector("svg"), o = box.getBoundingClientRect();
-  const pos = id => { const r = box.querySelector(`.card[data-id="${id}"] svg`).getBoundingClientRect(); return [r.left - o.left + r.width / 2, r.top - o.top + r.height / 2]; };
+  const pos = id => { const r = box.querySelector(`.card[data-rid="${id}"] svg`).getBoundingClientRect(); return [r.left - o.left + r.width / 2, r.top - o.top + r.height / 2]; };
   svg.innerHTML = LINEAGE.map(([a, c]) => {
     const [x1, y1] = pos(a), [x2, y2] = pos(c);
     if (Math.abs(x2 - x1) < 20) { const bx = x1 - 30; return `<path class="lineage-link" d="M${x1},${y1}C${bx},${y1} ${bx},${y2} ${x2},${y2}"/>`; }
