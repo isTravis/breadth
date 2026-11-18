@@ -1,0 +1,8 @@
+{
+  // Static site on the Knowledge Futures Cloudflare account, deployed with wrangler (not the KF Console).
+  "name": "breadth",
+  "account_id": "b66a542ad5e0af992703a2ce8d1d8747",
+  "compatibility_date": "2026-11-01",
+  "assets": { "directory": "./dist" },
+  "workers_dev": true
+}

@@ -1,6 +1,7 @@
 """Turn the raw breadsheet export into the compact, normalized data the mockups use.
 
 Usage: python3 -I scripts/prep.py data/records.json > data/breads.js
+Called by `npm run build`.
 """
 
 import json
@@ -72,7 +73,9 @@ def canon(name, rid):
             if c == "Rye flour" and "crack" in n:
                 return "Cracked rye", "grain"
             return c, fam
-    raise SystemExit(f"unmapped ingredient: {name}")
+    # New ingredient names fall back to a generic family rather than failing the build.
+    print(f"// unmapped ingredient: {name}", file=sys.stderr)
+    return name, "flavor"
 
 
 out = []

@@ -1,0 +1,14 @@
+{
+  "name": "breadth",
+  "private": true,
+  "description": "A bread explorer for Gabe's Breadsheet collection on Underlay",
+  "scripts": {
+    "fetch": "curl -fsSL 'https://www.underlay.org/api/collections/gabestein/breadsheet/versions/latest/records?limit=2000' -o data/records.json",
+    "build": "python3 -I scripts/prep.py data/records.json > data/breads.js && python3 -I scripts/bundle.py index.html dist/index.html",
+    "dev": "npm run build && wrangler dev",
+    "deploy": "npm run build && wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "4.151.1"
+  }
+}

@@ -68,7 +68,6 @@ nav.views svg * { stroke: currentColor; fill: none; stroke-width: 1.5; }
 @media (max-width: 980px) { nav.views a span { display: none; } nav.views a { padding: 6px 7px; } }
 
 .caption { flex: 1 1 460px; min-width: 0; max-width: 88ch; display: grid; gap: 3px; }
-.caption h2 { margin: 0; font-family: var(--wide); font-weight: 400; font-size: clamp(20px, 2.2vw, 28px); letter-spacing: 0.01em; line-height: 1.1; }
 .caption p { margin: 0; color: var(--fg-2); font-size: 13px; line-height: 1.45; }
 @media (max-width: 700px) {
   .caption p { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; cursor: pointer; }
@@ -223,7 +222,7 @@ table.formula .sub { display: block; font-size: 12px; color: var(--fg-2); }
   </nav>
   </div>
   <div class="row2">
-    <div class="caption"><h2 id="cap-title"></h2><p id="cap-text"></p></div>
+    <div class="caption"><p id="cap-text"></p></div>
     <div class="dock">
       <div class="group" data-for="portraits"><span>Sort</span>
         <span id="sort-controls" style="display:contents"><button data-sort="none" aria-pressed="true">A to Z</button><button data-sort="hyd" aria-pressed="false">Water</button><button data-sort="enrich" aria-pressed="false">Richness</button><button data-sort="starter" aria-pressed="false">Starter</button></span></div>
@@ -385,7 +384,6 @@ function route() {
   VIEWS.forEach(x => { document.getElementById("v-" + x).hidden = x !== v; });
   document.querySelectorAll("nav.views a").forEach(a => a.setAttribute("aria-current", a.getAttribute("href") === "#" + v ? "page" : "false"));
   document.querySelectorAll(".dock [data-for]").forEach(g => { g.hidden = g.dataset.for !== v; });
-  document.getElementById("cap-title").textContent = CAPS[v][0];
   document.getElementById("cap-text").textContent = CAPS[v][1];
   setHdr();
   if (!drawn[v]) { drawn[v] = true; DRAW[v](); } else if (RESIZE[v]) RESIZE[v]();
@@ -693,7 +691,7 @@ function drawLineage() {
   const box = document.getElementById("eras");
   box.innerHTML = `<svg aria-hidden="true"></svg>` + ERAS.map(([n, s], i) => `<div class="era" data-era="${i}"><div class="era-head"><b>${n}</b><span>${s}</span></div></div>`).join("");
   B.forEach(b => {
-    const [era, place, note] = HIST[b.id];
+    const [era, place, note] = HIST[b.id] || [5, "Not yet placed", "Added to the collection after these notes were written."];
     const q = b.headnotes[0];
     const el = document.createElement("div");
     el.className = "card"; el.dataset.rid = b.id;
