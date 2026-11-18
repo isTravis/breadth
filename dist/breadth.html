@@ -1,329 +1,264 @@
-<title>Proof Sheet</title>
+<title>Breadth</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Instrument+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;500;600&family=Manrope:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: a photographer's proof sheet. Left rail (name, views, highlight filter), one view at a time on the right,
-   recipe drawer from the right edge. Light = contact paper and blue-black ink; dark = darkroom with a safelight red. */
+/* Layout: full-bleed canvas. Each view fills the screen on its own deep color; a thin floating top bar (wordmark + views)
+   and a floating bottom bar (caption + view controls + highlight). Deliberately single-look (always dark). */
 :root {
-  --bg: #e8eae6;        /* contact paper */
-  --panel: #f6f7f4;
-  --ink: #141a24;       /* blue-black */
-  --ink-2: #576070;
-  --rule: #cdd1cc;
-  --accent: #2747c4;    /* cobalt */
-  --mark: #cf3a2b;      /* grease pencil */
-  --hull: rgba(20, 26, 36, 0.05);
-  --night: rgba(20, 26, 36, 0.075);
-
-  --f-flour: #d8c79c; --f-grain: #8a5c41; --f-gf: #c7a540; --f-starter: #3d8a68;
-  --f-liquid: #4a83b4; --f-dairy: #98bfca; --f-egg: #e3864f; --f-fat: #e2bf4c;
-  --f-sweet: #b5463d; --f-salt: #8b8d96; --f-seed: #4b3c31; --f-flavor: #c57a9e;
-  --f-leaven: #7177b3; --f-binder: #6b893c;
-
-  --p-levain: #3d8a68; --p-mix: #141a24; --p-bulk: #d29a32; --p-proof: #e6c574; --p-cold: #79b2dc;
-  --p-wait: #b4b9c1; --p-shape: #141a24; --p-bake: #b4532a; --p-cool: #9aa1ab;
-
-  --pencil: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 100' preserveAspectRatio='none'%3E%3Cpath d='M30 58C22 28 70 8 112 9c46 1 78 18 76 44-2 27-44 42-92 39C50 89 12 76 18 50c4-17 26-29 56-35' fill='none' stroke='black' stroke-width='3.4' stroke-linecap='round'/%3E%3C/svg%3E");
-
-  --display: "Instrument Serif", "Iowan Old Style", Georgia, serif;
-  --body: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
-  --mono: "IBM Plex Mono", ui-monospace, Menlo, monospace;
-}
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #0d0f12; --panel: #15181d; --ink: #e7e9ed; --ink-2: #8e96a2; --rule: #292e36;
-    --accent: #93a8ff; --mark: #ff5544; --hull: rgba(231, 233, 237, 0.05); --night: rgba(255, 255, 255, 0.045);
-    --f-flour: #e6d8b4; --f-grain: #b88664; --f-gf: #d6bb5a; --f-starter: #5fb48c;
-    --f-liquid: #6ea4d2; --f-dairy: #b0d4dd; --f-egg: #ee9a66; --f-fat: #e9c95f;
-    --f-sweet: #dd6a5c; --f-salt: #aeb0b9; --f-seed: #a08d7b; --f-flavor: #dc96b9;
-    --f-leaven: #9ca1d6; --f-binder: #93b05d;
-    --p-levain: #5fb48c; --p-mix: #e7e9ed; --p-bulk: #e0ac48; --p-proof: #ecd08d; --p-cold: #8ac0e8;
-    --p-wait: #6c727c; --p-shape: #e7e9ed; --p-bake: #e0774a; --p-cool: #6c727c;
-    color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #0d0f12; --panel: #15181d; --ink: #e7e9ed; --ink-2: #8e96a2; --rule: #292e36;
-  --accent: #93a8ff; --mark: #ff5544; --hull: rgba(231, 233, 237, 0.05); --night: rgba(255, 255, 255, 0.045);
-  --f-flour: #e6d8b4; --f-grain: #b88664; --f-gf: #d6bb5a; --f-starter: #5fb48c;
-  --f-liquid: #6ea4d2; --f-dairy: #b0d4dd; --f-egg: #ee9a66; --f-fat: #e9c95f;
-  --f-sweet: #dd6a5c; --f-salt: #aeb0b9; --f-seed: #a08d7b; --f-flavor: #dc96b9;
-  --f-leaven: #9ca1d6; --f-binder: #93b05d;
-  --p-levain: #5fb48c; --p-mix: #e7e9ed; --p-bulk: #e0ac48; --p-proof: #ecd08d; --p-cold: #8ac0e8;
-  --p-wait: #6c727c; --p-shape: #e7e9ed; --p-bake: #e0774a; --p-cool: #6c727c;
   color-scheme: dark;
+  --canvas: #10243a;
+  --fg: #f3eee4;
+  --fg-2: rgba(243, 238, 228, 0.62);
+  --line: rgba(243, 238, 228, 0.16);
+  --glass: rgba(255, 255, 255, 0.07);
+  --glass-2: rgba(255, 255, 255, 0.14);
+  --accent: #ffd27a;      /* butter */
+  --mark: #ff7a6b;        /* night warning */
+  --night: rgba(0, 0, 0, 0.28);
+
+  --f-flour: #eadcb8; --f-grain: #c08d69; --f-gf: #dcc15e; --f-starter: #63bb92;
+  --f-liquid: #72a9d8; --f-dairy: #b4d8e0; --f-egg: #f09c66; --f-fat: #f0d066;
+  --f-sweet: #e26d5f; --f-salt: #b3b5be; --f-seed: #a99581; --f-flavor: #e19abd;
+  --f-leaven: #a3a8dc; --f-binder: #9ab862;
+
+  --p-levain: #63bb92; --p-mix: #f3eee4; --p-bulk: #e2ae4a; --p-proof: #eed291; --p-cold: #8cc2ea;
+  --p-wait: #7f889a; --p-shape: #f3eee4; --p-bake: #f07f50; --p-cool: #7f889a;
+
+  --wide: "Unbounded", "Avenir Next", "Segoe UI", sans-serif;
+  --body: "Manrope", "Avenir Next", "Segoe UI", sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, Menlo, monospace;
+  --gx: max(18px, env(safe-area-inset-left, 0px));
+  --gr: max(18px, env(safe-area-inset-right, 0px));
 }
+body[data-view="portraits"] { --canvas: #10243a; }
+body[data-view="map"] { --canvas: #1b1d42; }
+body[data-view="web"] { --canvas: #26162f; }
+body[data-view="schedule"] { --canvas: #0a1529; }
+body[data-view="lineage"] { --canvas: #10291f; }
 
 * { box-sizing: border-box; }
 [hidden] { display: none !important; }
+html, body { min-height: 100%; }
 body {
-  background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 14.5px; line-height: 1.5;
-  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px));
-  padding-block: 0 40px;
+  margin: 0; background: var(--canvas); color: var(--fg); font-family: var(--body); font-size: 14px; line-height: 1.5;
+  transition: background-color 0.6s ease; overflow-x: hidden;
 }
 a { color: var(--accent); }
 button, select { font: inherit; color: inherit; }
 :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
-.app { max-width: 1440px; margin: 0 auto; display: grid; grid-template-columns: 236px minmax(0, 1fr); gap: 36px; }
-@media (max-width: 900px) { .app { grid-template-columns: minmax(0, 1fr); gap: 8px; } }
+/* header: row 1 = wordmark + views; row 2 = what this view shows + its controls */
+.topbar { position: fixed; left: 0; right: 0; top: 0; z-index: 10; padding: calc(14px + env(safe-area-inset-top, 0px)) var(--gr) 16px var(--gx);
+  display: grid; gap: 12px; background: linear-gradient(var(--canvas) 78%, transparent); transition: background 0.6s; }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 11; background: var(--canvas); }
+.row1, .row2 { display: flex; justify-content: space-between; gap: 12px 20px; }
+.row1 { align-items: center; }
+.row2 { align-items: flex-end; flex-wrap: wrap; }
+.word { display: grid; gap: 1px; }
+.word b { font-family: var(--wide); font-weight: 500; font-size: 22px; letter-spacing: 0.04em; line-height: 1; }
+.word span { font-size: 11.5px; color: var(--fg-2); }
+nav.views { display: flex; gap: 2px; background: var(--glass); border: 1px solid var(--line); border-radius: 12px; padding: 3px; }
+nav.views a { display: flex; align-items: center; gap: 7px; padding: 6px 11px 6px 8px; border-radius: 9px; color: var(--fg-2); text-decoration: none; font-weight: 600; font-size: 13px; }
+nav.views a:hover { color: var(--fg); }
+nav.views a[aria-current="page"] { background: var(--fg); color: var(--canvas); }
+nav.views svg { width: 20px; height: 20px; flex: none; }
+nav.views svg * { stroke: currentColor; fill: none; stroke-width: 1.5; }
+@media (max-width: 980px) { nav.views a span { display: none; } nav.views a { padding: 6px 7px; } }
 
-/* rail */
-.rail { position: sticky; top: env(safe-area-inset-top, 0px); align-self: start; padding-block: 28px 20px; display: grid; gap: 26px; max-height: 100vh; overflow-y: auto; }
-@media (max-width: 900px) { .rail { position: static; max-height: none; padding-block: 20px 0; gap: 16px; } }
-.mark-word { display: grid; gap: 8px; }
-.mark-word h1 { font-family: var(--display); font-weight: 400; font-size: 50px; line-height: 0.9; margin: 0; letter-spacing: -0.01em; }
-.mark-word h1 em { position: relative; font-style: italic; }
-.mark-word h1 em::after {
-  content: ""; position: absolute; inset: -0.12em -0.3em -0.04em -0.22em; background: var(--mark); pointer-events: none;
-  -webkit-mask: var(--pencil) center / 100% 100% no-repeat; mask: var(--pencil) center / 100% 100% no-repeat;
+.caption { flex: 1 1 460px; min-width: 0; max-width: 88ch; display: grid; gap: 3px; }
+.caption h2 { margin: 0; font-family: var(--wide); font-weight: 400; font-size: clamp(20px, 2.2vw, 28px); letter-spacing: 0.01em; line-height: 1.1; }
+.caption p { margin: 0; color: var(--fg-2); font-size: 13px; line-height: 1.45; }
+@media (max-width: 700px) {
+  .caption p { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; cursor: pointer; }
+  .caption p.open { -webkit-line-clamp: unset; }
 }
-.mark-word p { margin: 0; font-size: 12.5px; color: var(--ink-2); line-height: 1.4; }
+.icon-btn { border: 0; background: none; color: var(--fg-2); cursor: pointer; font-size: 12px; padding: 2px 4px; }
+.icon-btn:hover { color: var(--fg); }
 
-.rail h4 { margin: 0 0 8px; font-family: var(--mono); font-size: 10.5px; font-weight: 400; letter-spacing: 0.09em; text-transform: uppercase; color: var(--ink-2); }
-.views { display: grid; gap: 1px; }
-.views a { display: grid; grid-template-columns: 26px minmax(0, 1fr); align-items: center; gap: 8px; padding: 7px 8px; text-decoration: none; color: var(--ink); border-radius: 2px; }
-.views a svg { width: 26px; height: 26px; }
-.views a b { font-weight: 500; font-size: 14.5px; }
-.views a:hover { background: var(--panel); }
-.views a[aria-current="page"] { background: var(--ink); color: var(--bg); }
-.views svg * { stroke: var(--ink); fill: none; stroke-width: 1.4; }
-.views a[aria-current="page"] svg * { stroke: var(--bg); }
-@media (max-width: 900px) {
-  .views { grid-auto-flow: column; grid-auto-columns: max-content; overflow-x: auto; gap: 4px; padding-bottom: 4px; }
-  .views a { border: 1px solid var(--rule); }
-}
-.tags { display: grid; gap: 1px; }
-.tag { display: grid; grid-template-columns: 14px minmax(0, 1fr) auto; gap: 8px; align-items: center; padding: 4px 8px; border: 0; background: none; text-align: left; cursor: pointer; border-radius: 2px; font-size: 13.5px; }
-.tag:hover { background: var(--panel); }
-.tag i { width: 12px; height: 12px; border: 1.5px solid var(--ink-2); border-radius: 2px; display: block; }
-.tag[aria-pressed="true"] i { background: var(--mark); border-color: var(--mark); }
-.tag span:last-child { font-family: var(--mono); font-size: 11.5px; color: var(--ink-2); }
-.tag-clear { font-size: 12.5px; margin-top: 4px; border: 0; background: none; color: var(--accent); cursor: pointer; padding: 2px 8px; text-align: left; }
-@media (max-width: 900px) { .tags { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); } }
-.rail .src { font-size: 12px; color: var(--ink-2); line-height: 1.45; }
+.dock { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; justify-content: flex-end; }
+.group { display: inline-flex; align-items: center; gap: 2px; background: var(--glass); border: 1px solid var(--line); border-radius: 12px; padding: 3px; }
+.group > span { font-family: var(--mono); font-size: 10px; color: var(--fg-2); text-transform: uppercase; letter-spacing: 0.08em; padding: 0 6px 0 8px; }
+.group button { border: 0; background: none; padding: 5px 10px; border-radius: 9px; cursor: pointer; font-size: 12.5px; font-weight: 600; color: var(--fg-2); }
+.group button:hover { color: var(--fg); }
+.group button[aria-pressed="true"] { background: var(--fg); color: var(--canvas); }
+.group select { background: transparent; border: 0; padding: 4px 6px; font-size: 12.5px; font-weight: 600; }
+.group select option { background: #1b1d2a; }
+.hl { position: relative; }
+.pop { position: absolute; right: 0; top: calc(100% + 8px); width: 220px; background: #161b28; border: 1px solid var(--line); border-radius: 12px; padding: 8px; display: grid; gap: 1px; box-shadow: 0 18px 40px rgba(0,0,0,0.4); z-index: 12; }
+.tag { display: grid; grid-template-columns: 12px minmax(0, 1fr) auto; gap: 9px; align-items: center; padding: 5px 8px; border: 0; background: none; text-align: left; cursor: pointer; border-radius: 7px; font-size: 13px; width: 100%; }
+.tag:hover { background: var(--glass); }
+.tag i { width: 10px; height: 10px; border-radius: 50%; border: 1.5px solid var(--fg-2); }
+.tag[aria-pressed="true"] i { background: var(--accent); border-color: var(--accent); }
+.tag span:last-child { font-family: var(--mono); font-size: 11px; color: var(--fg-2); }
+.count-dot { display: inline-block; min-width: 18px; padding: 0 5px; margin-left: 6px; border-radius: 9px; background: var(--accent); color: #1a1a1a; font-size: 11px; text-align: center; }
 
-/* main */
-main { padding-block: 32px 0; min-width: 0; display: grid; gap: 16px; align-content: start; }
-main > section { display: grid; gap: 16px; min-width: 0; }
-.vhead { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px 28px; border-bottom: 1px solid var(--ink); padding-bottom: 14px; }
-.vhead > div:first-child { min-width: 0; flex: 1 1 420px; }
-.vhead h2 { font-family: var(--display); font-weight: 400; font-size: clamp(34px, 4.4vw, 52px); line-height: 0.95; margin: 0; letter-spacing: -0.01em; }
-.vhead p { margin: 8px 0 0; color: var(--ink-2); max-width: 66ch; }
-.controls { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; }
-.seg { display: inline-flex; border: 1px solid var(--ink); border-radius: 2px; overflow: hidden; }
-.seg button { border: 0; background: var(--panel); padding: 5px 11px; cursor: pointer; font-size: 13px; border-left: 1px solid var(--rule); }
-.seg button:first-child { border-left: 0; }
-.seg button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
-.ctl { display: inline-flex; gap: 8px; align-items: center; }
-.ctl > span { font-family: var(--mono); font-size: 10.5px; color: var(--ink-2); text-transform: uppercase; letter-spacing: 0.08em; }
-select { background: var(--panel); border: 1px solid var(--ink); border-radius: 2px; padding: 4px 6px; font-size: 13px; }
-
-.legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 12px; color: var(--ink-2); }
-.legend i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 5px; vertical-align: -1px; }
-.legend i.sq { border-radius: 1px; width: 14px; height: 8px; }
-
-.box { background: var(--panel); border: 1px solid var(--rule); overflow-x: auto; position: relative; }
-.box svg { display: block; }
-svg text { fill: var(--ink); font-family: var(--body); }
-svg .muted { fill: var(--ink-2); }
+/* views */
+.view { padding: calc(var(--hdr, 150px) + 4px) var(--gr) calc(18px + env(safe-area-inset-bottom, 0px)) var(--gx); }
+.view.fit { height: 100vh; height: 100dvh; display: flex; flex-direction: column; gap: 10px; }
+.stage { flex: 1; min-height: 0; position: relative; }
+.stage svg { display: block; }
+svg text { fill: var(--fg); font-family: var(--body); }
+svg .muted { fill: var(--fg-2); }
 svg .mono { font-family: var(--mono); }
-.out { opacity: 0.13 !important; }
-[data-rid] { transition: opacity 0.2s; }
+.out { opacity: 0.12 !important; }
+[data-rid] { transition: opacity 0.25s; }
+.ring { stroke: var(--canvas); stroke-width: 1; transition: stroke 0.6s; }
+.hole { fill: var(--canvas); transition: fill 0.6s; }
+.legend { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 11.5px; color: var(--fg-2); }
+.legend i { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 5px; vertical-align: -1px; }
+.legend i.sq { border-radius: 2px; width: 14px; height: 8px; }
 
-/* portraits: a contact sheet */
-.sheet { display: grid; grid-template-columns: repeat(auto-fill, minmax(164px, 1fr)); background: var(--panel); border-top: 1px solid var(--rule); border-left: 1px solid var(--rule); }
-.frame { position: relative; padding: 16px 10px 12px; cursor: pointer; display: grid; justify-items: center; gap: 3px; text-align: center; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); view-transition-name: var(--vt); }
-.frame .no { position: absolute; top: 6px; left: 8px; font-family: var(--mono); font-size: 9.5px; color: var(--ink-2); }
-.frame svg { width: 140px; height: 140px; overflow: visible; }
-.frame h3 { font-weight: 600; font-size: 14px; margin: 4px 0 0; line-height: 1.2; }
-.frame .stats { font-family: var(--mono); font-size: 10.5px; color: var(--ink-2); font-variant-numeric: tabular-nums; }
-.frame::after { content: ""; position: absolute; left: 6%; right: 6%; top: 3%; height: 76%; background: var(--mark); opacity: 0; transition: opacity 0.15s;
-  -webkit-mask: var(--pencil) center / 100% 100% no-repeat; mask: var(--pencil) center / 100% 100% no-repeat; pointer-events: none; }
-.frame:hover::after, .frame:focus-visible::after { opacity: 1; }
-.ring { stroke: var(--panel); stroke-width: 1; }
+/* portraits */
+.sheet { flex: 1; min-height: 0; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); grid-template-rows: repeat(4, minmax(0, 1fr)); gap: 4px 10px; }
+.frame { min-height: 0; display: flex; flex-direction: column; align-items: center; gap: 2px; cursor: pointer; text-align: center; border-radius: 12px; padding: 4px; view-transition-name: var(--vt); }
+.frame svg { flex: 1; min-height: 0; width: 100%; overflow: visible; transition: transform 0.25s ease; }
+.frame:hover svg, .frame:focus-visible svg { transform: scale(1.06); }
+.frame h3 { margin: 0; font-size: 13px; font-weight: 700; line-height: 1.2; }
+.frame .stats { font-family: var(--mono); font-size: 10px; color: var(--fg-2); }
+@media (max-width: 980px) {
+  .view.fit.flow { height: auto; }
+  .sheet { grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: none; gap: 14px 8px; }
+  .frame svg { flex: none; height: 110px; }
+}
 
 /* map */
-.hull-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; fill: var(--ink-2); }
-.axis line, .axis path { stroke: var(--rule); }
-.axis text { fill: var(--ink-2); font-family: var(--mono); font-size: 10.5px; }
-.near { fill: none; stroke: var(--ink-2); stroke-width: 1; opacity: 0.35; }
-.near.on { opacity: 1; stroke: var(--mark); stroke-width: 1.6; }
+.axis line, .axis path { stroke: var(--line); }
+.axis text { fill: var(--fg-2); font-family: var(--mono); font-size: 10.5px; }
+.band-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; fill: var(--fg-2); }
+.near { fill: none; stroke: var(--fg); stroke-width: 1; opacity: 0.22; }
+.near.on { opacity: 1; stroke: var(--accent); stroke-width: 1.6; }
 .node { cursor: pointer; }
-.node text { font-size: 12px; font-weight: 600; paint-order: stroke; stroke: var(--panel); stroke-width: 3px; }
-.dim { opacity: 0.18; }
+.node text { font-size: 12px; font-weight: 700; paint-order: stroke; stroke: var(--canvas); stroke-width: 4px; stroke-linejoin: round; }
+.dim { opacity: 0.16; }
 
 /* web */
-.web-layout { display: grid; grid-template-columns: minmax(0, 1fr) 250px; gap: 18px; align-items: start; }
-@media (max-width: 1100px) { .web-layout { grid-template-columns: minmax(0, 1fr); } }
-.side { display: grid; gap: 16px; font-size: 13px; }
-.side h4 { margin: 0 0 4px; font-family: var(--mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-2); font-weight: 400; }
-.side ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 2px; }
-.side li { display: flex; justify-content: space-between; gap: 8px; border-bottom: 1px dotted var(--rule); padding-bottom: 2px; }
-.side li span:last-child { font-family: var(--mono); color: var(--ink-2); font-size: 11.5px; text-align: right; }
-.link { fill: none; stroke-width: 1.2; opacity: 0.4; transition: opacity 0.15s; }
-.link.on { opacity: 0.95; stroke-width: 2; }
-.link.off { opacity: 0.05; }
+.facts { position: absolute; left: 0; top: 0; width: 230px; display: grid; gap: 16px; font-size: 12.5px; }
+.facts h4 { margin: 0 0 4px; font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.09em; color: var(--fg-2); font-weight: 400; }
+.facts ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 2px; }
+.facts li { display: flex; justify-content: space-between; gap: 8px; }
+.facts li span:last-child { font-family: var(--mono); color: var(--fg-2); font-size: 11px; text-align: right; }
+@media (max-width: 1250px) { .facts { display: none; } }
+.link { fill: none; stroke-width: 1.2; opacity: 0.38; transition: opacity 0.15s; }
+.link.on { opacity: 1; stroke-width: 2; }
+.link.off { opacity: 0.04; }
 .inode, .rnode { cursor: pointer; }
 .rnode text, .inode text { font-size: 11.5px; transition: opacity 0.15s; }
-.inode text { font-size: 11px; }
+.inode text { font-size: 11px; fill: var(--fg-2); }
 
 /* schedule */
-.insight { font-family: var(--display); font-size: clamp(21px, 2.4vw, 27px); line-height: 1.2; margin: 0; max-width: 62ch; text-wrap: balance; }
-.insight b { font-weight: 400; font-style: italic; color: var(--accent); }
-.lane .t { font-weight: 600; font-size: 13px; cursor: pointer; }
+.insight { margin: 0; font-family: var(--wide); font-weight: 400; font-size: clamp(14px, 1.5vw, 18px); line-height: 1.4; max-width: 80ch; letter-spacing: 0.01em; }
+.insight b { font-weight: 500; color: var(--accent); }
+.sched-wrap { flex: 1; min-height: 0; overflow: auto; position: relative; }
+.lane .t { font-weight: 700; cursor: pointer; }
 .lane .t:hover { fill: var(--accent); }
-.lane .s { font-family: var(--mono); font-size: 10px; fill: var(--ink-2); }
-.lane .warn { fill: var(--mark); }
+.lane .s { font-family: var(--mono); fill: var(--fg-2); }
 .ph { cursor: pointer; }
-.ph:hover { stroke: var(--ink); stroke-width: 1.5; }
-.tip { position: absolute; pointer-events: none; background: var(--ink); color: var(--bg); padding: 8px 10px; font-size: 12.5px; line-height: 1.35; width: max-content; max-width: 270px; border-radius: 2px; z-index: 3; }
-.tip b { display: block; font-weight: 600; }
-.tip span { font-family: var(--mono); font-size: 11px; opacity: 0.85; display: block; }
+.ph:hover { stroke: var(--fg); stroke-width: 1.5; }
+.tip { position: absolute; pointer-events: none; background: #0c0f18; border: 1px solid var(--line); color: var(--fg); padding: 8px 10px; font-size: 12.5px; line-height: 1.35; width: max-content; max-width: 270px; border-radius: 10px; z-index: 3; }
+.tip b { display: block; }
+.tip span { font-family: var(--mono); font-size: 11px; color: var(--fg-2); display: block; }
 
 /* lineage */
-.eras { position: relative; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 10px; }
+.eras { position: relative; display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 12px; }
 .eras > svg { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; overflow: visible; }
-.era { display: grid; align-content: start; gap: 8px; min-width: 0; position: relative; z-index: 1; }
-.era-head { border-bottom: 1px solid var(--ink); padding-bottom: 5px; }
-.era-head b { font-family: var(--display); font-size: 25px; font-weight: 400; display: block; line-height: 1; }
-.era-head span { font-family: var(--mono); font-size: 10px; color: var(--ink-2); }
-.card { background: var(--panel); border: 1px solid var(--rule); padding: 10px; display: grid; gap: 6px; cursor: pointer; min-width: 0; }
-.card:hover { border-color: var(--ink); }
-.card .row { display: flex; gap: 8px; align-items: center; }
+.era { display: grid; align-content: start; gap: 10px; min-width: 0; position: relative; z-index: 1; }
+.era-head { padding-bottom: 6px; border-bottom: 1px solid var(--line); }
+.era-head b { font-family: var(--wide); font-weight: 500; font-size: 15px; display: block; letter-spacing: 0.02em; }
+.era-head span { font-family: var(--mono); font-size: 10px; color: var(--fg-2); }
+.card { background: color-mix(in srgb, var(--canvas), white 6%); border: 1px solid var(--line); border-radius: 12px; padding: 11px; display: grid; gap: 6px; cursor: pointer; min-width: 0; }
+.card:hover { background: color-mix(in srgb, var(--canvas), white 11%); }
+.card .row { display: flex; gap: 9px; align-items: center; }
 .card svg { flex: none; width: 38px; height: 38px; overflow: visible; }
-.card h3 { margin: 0; font-size: 13.5px; font-weight: 600; line-height: 1.15; }
-.card .place { font-family: var(--mono); font-size: 9.5px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em; }
-.card p { margin: 0; font-size: 12.5px; color: var(--ink-2); line-height: 1.4; }
-.card blockquote { margin: 0; font-family: var(--display); font-style: italic; font-size: 15.5px; line-height: 1.25; }
-.lineage-link { fill: none; stroke: var(--mark); stroke-width: 1.3; opacity: 0.5; }
+.card h3 { margin: 0; font-size: 13.5px; font-weight: 700; line-height: 1.15; }
+.card .place { font-family: var(--mono); font-size: 9.5px; color: var(--accent); text-transform: uppercase; letter-spacing: 0.06em; }
+.card p { margin: 0; font-size: 12.5px; color: var(--fg-2); line-height: 1.4; }
+.card blockquote { margin: 0; font-size: 12.5px; line-height: 1.4; font-style: italic; color: var(--fg); padding-left: 9px; border-left: 2px solid var(--accent); }
+.lineage-link { fill: none; stroke: var(--accent); stroke-width: 1.3; opacity: 0.45; }
+.note { font-size: 12px; color: var(--fg-2); margin: 14px 0 0; }
 @media (max-width: 1200px) { .eras { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-@media (max-width: 620px) { .eras { grid-template-columns: minmax(0, 1fr); } .eras > svg { display: none; } }
-.note { font-size: 12.5px; color: var(--ink-2); margin: 0; max-width: 90ch; }
+@media (max-width: 640px) { .eras { grid-template-columns: minmax(0, 1fr); } .eras > svg { display: none; } }
 
 /* drawer */
 .drawer {
-  position: fixed; top: 0; right: 0; bottom: 0; width: min(450px, 100%); background: var(--panel); border-left: 1px solid var(--ink);
-  z-index: 20; overflow-y: auto; transform: translateX(105%); transition: transform 0.26s ease;
+  position: fixed; top: 0; right: 0; bottom: 0; width: min(450px, 100%); background: #10141e; border-left: 1px solid var(--line);
+  z-index: 20; overflow-y: auto; transform: translateX(105%); transition: transform 0.28s ease; box-shadow: -30px 0 60px rgba(0,0,0,0.35);
   padding: calc(22px + env(safe-area-inset-top, 0px)) max(22px, env(safe-area-inset-right, 0px)) calc(28px + env(safe-area-inset-bottom, 0px)) 22px;
-  display: grid; align-content: start; gap: 18px;
+  display: grid; align-content: start; gap: 18px; --canvas: #10141e;
 }
 .drawer.open { transform: none; }
-.drawer .close { justify-self: end; border: 1px solid var(--ink); background: none; border-radius: 2px; padding: 3px 10px; cursor: pointer; font-size: 12.5px; }
-.drawer-top { display: grid; grid-template-columns: 96px minmax(0, 1fr); gap: 14px; align-items: center; }
-.drawer-top svg { width: 96px; height: 96px; overflow: visible; }
-.drawer h2 { font-family: var(--display); font-weight: 400; font-size: 38px; line-height: 0.95; margin: 0; }
-.drawer .meta { font-family: var(--mono); font-size: 11px; color: var(--ink-2); margin-top: 4px; }
-.drawer blockquote { margin: 0; font-family: var(--display); font-style: italic; font-size: 19px; line-height: 1.3; }
+.drawer .close { justify-self: end; }
+.drawer-top { display: grid; grid-template-columns: 100px minmax(0, 1fr); gap: 16px; align-items: center; }
+.drawer-top svg { width: 100px; height: 100px; overflow: visible; }
+.drawer h2 { font-family: var(--wide); font-weight: 500; font-size: 24px; line-height: 1.1; margin: 0; letter-spacing: 0.01em; }
+.drawer .meta { font-family: var(--mono); font-size: 11px; color: var(--fg-2); margin-top: 6px; }
+.drawer blockquote { margin: 0; font-size: 15px; line-height: 1.5; font-style: italic; padding-left: 12px; border-left: 2px solid var(--accent); }
 table.formula { width: 100%; border-collapse: collapse; font-size: 13.5px; font-variant-numeric: tabular-nums; }
-table.formula td { padding: 5px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+table.formula td { padding: 6px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
 table.formula td.n { text-align: right; font-family: var(--mono); font-size: 12px; white-space: nowrap; padding-left: 10px; }
-table.formula .stage { font-family: var(--mono); font-size: 9.5px; color: var(--ink-2); text-transform: uppercase; margin-left: 6px; }
-table.formula .sub { display: block; font-size: 12px; color: var(--ink-2); }
-.bar { height: 5px; display: block; margin-top: 4px; }
-.drawer h4 { margin: 0 0 6px; font-family: var(--mono); font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-2); font-weight: 400; }
+table.formula .stage { font-family: var(--mono); font-size: 9.5px; color: var(--fg-2); text-transform: uppercase; margin-left: 6px; }
+table.formula .sub { display: block; font-size: 12px; color: var(--fg-2); }
+.bar { height: 4px; display: block; margin-top: 5px; border-radius: 2px; }
+.drawer h4 { margin: 0 0 8px; font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: 0.09em; color: var(--fg-2); font-weight: 400; }
 .drawer .neighbors { display: flex; gap: 6px; flex-wrap: wrap; }
-.drawer .neighbors button { border: 1px solid var(--ink); background: none; border-radius: 2px; padding: 3px 9px; cursor: pointer; font-size: 13px; }
-.mini { display: flex; height: 12px; width: 100%; }
-.mini span { display: block; height: 100%; border-right: 1px solid var(--panel); }
-.scrim { position: fixed; inset: 0; background: rgba(0,0,0,0.22); z-index: 19; }
+.drawer .neighbors button { border: 1px solid var(--line); background: var(--glass); border-radius: 9px; padding: 4px 10px; cursor: pointer; font-size: 13px; font-weight: 600; }
+.mini { display: flex; height: 10px; width: 100%; border-radius: 3px; overflow: hidden; }
+.mini span { display: block; height: 100%; border-right: 1px solid #10141e; }
+.scrim { position: fixed; inset: 0; background: rgba(0,0,0,0.35); z-index: 19; }
 
+@media (max-width: 700px) { .dock { justify-content: flex-start; } .group > span { display: none; } }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 </style>
 
-<div class="app">
-  <aside class="rail">
-    <div class="mark-word">
-      <h1><em>Proof</em><br>Sheet</h1>
-      <p>A bread explorer for Gabe's Breadsheet. A proof sheet shows every frame at once; proofing is the dough's last rise.</p>
+<header class="topbar" id="topbar">
+  <div class="row1">
+    <div class="word"><b>Breadth</b><span>24 breads from Gabe's Breadsheet</span></div>
+  <nav class="views" aria-label="Views">
+    <a href="#portraits"><svg viewBox="0 0 26 26"><circle cx="13" cy="13" r="10"/><circle cx="13" cy="13" r="6"/><circle cx="13" cy="13" r="2.5"/></svg><span>Portraits</span></a>
+    <a href="#map"><svg viewBox="0 0 26 26"><path d="M4 22V4M4 22h18"/><circle cx="10" cy="16" r="2"/><circle cx="16" cy="11" r="2"/><circle cx="20" cy="6" r="2"/></svg><span>Map</span></a>
+    <a href="#web"><svg viewBox="0 0 26 26"><circle cx="13" cy="13" r="10"/><path d="M5 9Q13 13 21 17M5 17Q13 13 21 9M13 3V23"/></svg><span>Pantry</span></a>
+    <a href="#schedule"><svg viewBox="0 0 26 26"><path d="M3 7h9M8 13h12M5 19h17"/><path d="M22 3v20" stroke-dasharray="2 2"/></svg><span>Schedule</span></a>
+    <a href="#lineage"><svg viewBox="0 0 26 26"><path d="M3 20C9 20 9 6 15 6s6 8 8 8"/><circle cx="3" cy="20" r="1.6"/><circle cx="15" cy="6" r="1.6"/><circle cx="23" cy="14" r="1.6"/></svg><span>Lineage</span></a>
+  </nav>
+  </div>
+  <div class="row2">
+    <div class="caption"><h2 id="cap-title"></h2><p id="cap-text"></p></div>
+    <div class="dock">
+      <div class="group" data-for="portraits"><span>Sort</span>
+        <span id="sort-controls" style="display:contents"><button data-sort="none" aria-pressed="true">A to Z</button><button data-sort="hyd" aria-pressed="false">Water</button><button data-sort="enrich" aria-pressed="false">Richness</button><button data-sort="starter" aria-pressed="false">Starter</button></span></div>
+      <div class="group" data-for="schedule"><span>Ready</span>
+        <span id="ready-day" style="display:contents"><button data-d="4" aria-pressed="false">Fri</button><button data-d="5" aria-pressed="true">Sat</button><button data-d="6" aria-pressed="false">Sun</button></span>
+        <select id="ready-hour" aria-label="Ready time"></select></div>
+      <div class="group" data-for="schedule"><span>Plan</span>
+        <span id="plan" style="display:contents"><button data-p="day" aria-pressed="true">Same day</button><button data-p="fridge" aria-pressed="false">Use the fridge</button></span></div>
+      <div class="hl group">
+        <button id="hl-btn" aria-expanded="false">Highlight<span class="count-dot" id="hl-count" hidden></span></button>
+        <div class="pop" id="pop" hidden><div id="tags"></div><button class="icon-btn" id="tag-clear" hidden>Clear highlight</button></div>
+      </div>
     </div>
-    <nav aria-label="Views">
-      <h4>Views</h4>
-      <div class="views">
-        <a href="#portraits"><svg viewBox="0 0 26 26"><circle cx="13" cy="13" r="10"/><circle cx="13" cy="13" r="6"/><circle cx="13" cy="13" r="2.5"/></svg><b>Crumb portraits</b></a>
-        <a href="#map"><svg viewBox="0 0 26 26"><path d="M4 22V4M4 22h18"/><circle cx="10" cy="16" r="2"/><circle cx="16" cy="11" r="2"/><circle cx="20" cy="6" r="2"/></svg><b>Dough map</b></a>
-        <a href="#web"><svg viewBox="0 0 26 26"><circle cx="13" cy="13" r="10"/><path d="M5 9Q13 13 21 17M5 17Q13 13 21 9M13 3V23"/></svg><b>Pantry web</b></a>
-        <a href="#schedule"><svg viewBox="0 0 26 26"><path d="M3 7h9M8 13h12M5 19h17"/><path d="M22 3v20" stroke-dasharray="2 2"/></svg><b>Bake schedule</b></a>
-        <a href="#lineage"><svg viewBox="0 0 26 26"><path d="M3 20C9 20 9 6 15 6s6 8 8 8"/><circle cx="3" cy="20" r="1.6"/><circle cx="15" cy="6" r="1.6"/><circle cx="23" cy="14" r="1.6"/></svg><b>Bread lineage</b></a>
-      </div>
-    </nav>
-    <div>
-      <h4>Highlight</h4>
-      <div class="tags" id="tags"></div>
-      <button class="tag-clear" id="tag-clear" hidden>Clear highlight</button>
-    </div>
-    <div class="src">24 recipes from <a href="https://www.underlay.org/gabestein/breadsheet" target="_blank" rel="noopener">gabestein/breadsheet</a> on Underlay, v1.3.0, read Nov 18, 2026. A sketch, not a product.</div>
-  </aside>
+  </div>
+</header>
 
-  <main>
-    <section id="v-portraits" hidden>
-      <div class="vhead">
-        <div>
-          <h2>Crumb portraits</h2>
-          <p>Flour at the center, then each ingredient as a ring outward, with area matching its share of the dough. Holes in the crumb grow with the water. Lean loaves stay small; pound cake comes out more than twice the size of a baguette.</p>
-        </div>
-        <div class="controls"><div class="ctl"><span>Sort</span>
-          <div class="seg" id="sort-controls">
-            <button data-sort="none" aria-pressed="true">A to Z</button><button data-sort="hyd" aria-pressed="false">Water</button><button data-sort="enrich" aria-pressed="false">Richness</button><button data-sort="starter" aria-pressed="false">Starter</button>
-          </div></div></div>
-      </div>
-      <div class="legend" id="legend-a"></div>
-      <div class="sheet" id="portraits"></div>
-    </section>
+<main>
+  <section class="view fit flow" id="v-portraits" hidden>
+    <div class="legend" id="legend-a"></div>
+    <div class="sheet" id="portraits"></div>
+  </section>
+  <section class="view fit" id="v-map" hidden><div class="stage" id="map-stage"><svg id="map"></svg></div></section>
+  <section class="view fit" id="v-web" hidden><div class="stage" id="web-stage"><div class="facts" id="facts"></div><svg id="web"></svg></div></section>
+  <section class="view fit" id="v-schedule" hidden>
+    <p class="insight" id="insight"></p>
+    <div class="legend" id="legend-s"></div>
+    <div class="sched-wrap" id="sched-wrap"><svg id="sched"></svg><div class="tip" id="tip" hidden></div></div>
+  </section>
+  <section class="view" id="v-lineage" hidden>
+    <div class="eras" id="eras"></div>
+    <p class="note">History notes and lineage lines are context written for this sketch. They are not part of the collection and would need Gabe's review.</p>
+  </section>
+</main>
 
-    <section id="v-map" hidden>
-      <div class="vhead"><div>
-        <h2>Dough map</h2>
-        <p>Across: effective hydration, counting the water in starter, milk, and eggs. Up: richness, the fat, sugar, and egg added per 100 of flour. Lines join each bread to its closest relative by overall formula.</p>
-      </div></div>
-      <div class="box"><svg id="map"></svg></div>
-    </section>
 
-    <section id="v-web" hidden>
-      <div class="vhead"><div>
-        <h2>Pantry web</h2>
-        <p>Flour, water, salt, and starter are in almost all of them, so they sit in the middle unlinked. The threads show what is left: the ingredients that give each bread its character. Hover an ingredient or a bread.</p>
-      </div></div>
-      <div class="web-layout">
-        <div class="box"><svg id="web"></svg></div>
-        <aside class="side" id="web-side"></aside>
-      </div>
-    </section>
-
-    <section id="v-schedule" hidden>
-      <div class="vhead">
-        <div>
-          <h2>Bake schedule</h2>
-          <p>Pick when you want to eat. Each recipe is planned backward from that moment, using the times in Gabe's method steps. Solid blocks need you at the bench; pale ones are waiting. Red circles mark hands-on steps that land between 11 pm and 7 am.</p>
-        </div>
-        <div class="controls">
-          <div class="ctl"><span>Ready</span>
-            <div class="seg" id="ready-day"><button data-d="4" aria-pressed="false">Fri</button><button data-d="5" aria-pressed="true">Sat</button><button data-d="6" aria-pressed="false">Sun</button></div>
-            <select id="ready-hour" aria-label="Ready time"></select>
-          </div>
-          <div class="ctl"><span>Plan</span>
-            <div class="seg" id="plan"><button data-p="day" aria-pressed="true">Same day</button><button data-p="fridge" aria-pressed="false">Use the fridge</button></div>
-          </div>
-        </div>
-      </div>
-      <p class="insight" id="insight"></p>
-      <div class="legend" id="legend-s"></div>
-      <div class="box" id="sched-box"><svg id="sched"></svg><div class="tip" id="tip" hidden></div></div>
-      <p class="note">Times come from the method text; where a recipe gives a range we use the middle. The tooltip flags blocks where the recipe gives no time and the length is our estimate. "Use the fridge" swaps in the overnight option where a recipe offers one. Gabe's Fulkornbroyt has no method steps in the collection yet.</p>
-    </section>
-
-    <section id="v-lineage" hidden>
-      <div class="vhead"><div>
-        <h2>Bread lineage</h2>
-        <p>The same 24 recipes placed in the history of their breads, from hearth loaves to this decade's gluten-free and discard recipes. Quotes are Gabe's headnotes; red lines trace one bread growing out of another.</p>
-      </div></div>
-      <div class="eras" id="eras"></div>
-      <p class="note">History notes and lineage lines are context written for this sketch. They are not part of the collection and would need Gabe's review.</p>
-    </section>
-  </main>
-</div>
 
 <div class="scrim" id="scrim" hidden></div>
 <aside class="drawer" id="drawer" aria-hidden="true"></aside>
@@ -566,7 +501,15 @@ const famOrder = Object.fromEntries(FAMS.map(([f], i) => [f, i]));
 const famColor = f => `var(--f-${f})`;
 const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" })[c]);
 
-/* ---------- glyph: concentric rings, area proportional to percent, crumb holes by hydration ---------- */
+const CAPS = {
+  portraits: ["Crumb portraits", "Each recipe as a cross-section. Flour at the center, then each ingredient as a ring outward, with area matching its share of the dough. Holes in the crumb grow with the water. Lean loaves stay small; pound cake comes out more than twice the size of a baguette."],
+  map: ["Dough map", "Across: effective hydration, counting the water in starter, milk, and eggs. Up: richness, the fat, sugar, and egg per 100 of flour. Lines join each bread to its closest relative by overall formula. Hover to trace a family."],
+  web: ["Pantry web", "Flour, water, salt, and starter sit in the middle; nearly every recipe has them. The threads show the rest: the ingredients that give each bread its character. Hover a dot to name the rarer ingredients, or a bread to see what goes in it."],
+  schedule: ["Bake schedule", "Pick when you want to eat; each recipe is planned backward from then, using the times in Gabe's method steps. Solid blocks need you at the bench, pale ones are waiting, and red circles mark hands-on steps between 11 pm and 7 am. Where a recipe gives a range we use the middle; the tooltip flags our estimates. Fulkornbroyt has no method yet."],
+  lineage: ["Bread lineage", "The 24 recipes placed in the history of their breads, from hearth loaves to this decade's gluten-free and discard recipes. Quotes are Gabe's headnotes; lines trace one bread growing out of another."],
+};
+
+/* ---------- glyph ---------- */
 function rings(b) {
   const parts = b.ings.filter(i => i.pct && i.stage !== "bath" && !i.opt).slice().sort((a, c) => famOrder[a.fam] - famOrder[c.fam]);
   let s = 0;
@@ -583,9 +526,9 @@ function glyph(svg, b, rMax, maxTotal = 600) {
     const rnd = () => (seed = (seed * 1664525 + 1013904223) >>> 0) / 4294967296;
     const h = Math.min(b.hyd, 130), n = Math.round(10 + h / 4), big = 0.4 + (h - 50) / 40;
     const holes = d3.range(n).map(() => { const a = rnd() * 2 * Math.PI, d = Math.sqrt(rnd()) * core * 0.82; return [d * Math.cos(a), d * Math.sin(a), Math.max(0.5, big * (0.4 + rnd() * rnd() * 2.2))]; });
-    g.append("g").selectAll("ellipse").data(holes).join("ellipse")
+    g.append("g").selectAll("ellipse").data(holes).join("ellipse").attr("class", "hole")
       .attr("cx", d => d[0]).attr("cy", d => d[1]).attr("rx", d => d[2] * 1.25).attr("ry", d => d[2] * 0.8)
-      .attr("transform", d => `rotate(${(d[0] * 37) % 60 - 30} ${d[0]} ${d[1]})`).attr("fill", "var(--panel)").attr("opacity", 0.6);
+      .attr("transform", d => `rotate(${(d[0] * 37) % 60 - 30} ${d[0]} ${d[1]})`).attr("opacity", 0.75);
   }
   return g;
 }
@@ -624,17 +567,20 @@ function atNight(a, b) {
   return false;
 }
 
-/* ---------- highlight filter ---------- */
+/* ---------- highlight ---------- */
 const hl = new Set();
 function applyHighlight() {
   const ids = hl.size ? new Set(B.filter(b => b.tags.some(t => hl.has(t))).map(b => b.id)) : null;
   document.querySelectorAll("[data-rid]").forEach(el => el.classList.toggle("out", !!ids && !ids.has(el.dataset.rid)));
   document.getElementById("tag-clear").hidden = !hl.size;
+  const c = document.getElementById("hl-count"); c.hidden = !hl.size; c.textContent = hl.size;
 }
 (function tags() {
   const counts = d3.rollups(B.flatMap(b => b.tags), v => v.length, d => d).sort((a, c) => c[1] - a[1] || a[0].localeCompare(c[0]));
-  const box = document.getElementById("tags");
+  const box = document.getElementById("tags"), pop = document.getElementById("pop"), btn = document.getElementById("hl-btn");
   box.innerHTML = counts.map(([t, n]) => `<button class="tag" data-tag="${esc(t)}" aria-pressed="false"><i></i><span>${esc(t)}</span><span>${n}</span></button>`).join("");
+  btn.addEventListener("click", () => { pop.hidden = !pop.hidden; btn.setAttribute("aria-expanded", !pop.hidden); });
+  document.addEventListener("click", e => { if (!e.target.closest(".hl")) { pop.hidden = true; btn.setAttribute("aria-expanded", "false"); } });
   box.addEventListener("click", e => {
     const b = e.target.closest("[data-tag]"); if (!b) return;
     const t = b.dataset.tag; hl.has(t) ? hl.delete(t) : hl.add(t);
@@ -643,18 +589,33 @@ function applyHighlight() {
   document.getElementById("tag-clear").addEventListener("click", () => { hl.clear(); box.querySelectorAll(".tag").forEach(x => x.setAttribute("aria-pressed", "false")); applyHighlight(); });
 })();
 
+/* ---------- header height ---------- */
+const topbar = document.getElementById("topbar");
+const setHdr = () => document.documentElement.style.setProperty("--hdr", topbar.offsetHeight + "px");
+document.getElementById("cap-text").addEventListener("click", e => { e.currentTarget.classList.toggle("open"); setHdr(); if (RESIZE[current]) RESIZE[current](); });
+
 /* ---------- routing ---------- */
 const VIEWS = ["portraits", "map", "web", "schedule", "lineage"];
 const DRAW = { portraits: drawPortraits, map: drawMap, web: drawWeb, schedule: drawSchedule, lineage: drawLineage };
+const RESIZE = { map: drawMap, web: drawWeb, schedule: renderSchedule, lineage: linkLineage };
 const drawn = {};
+let current = null;
 function route() {
   let v = location.hash.slice(1); if (!VIEWS.includes(v)) v = "portraits";
+  current = v;
+  document.body.dataset.view = v;
   VIEWS.forEach(x => { document.getElementById("v-" + x).hidden = x !== v; });
-  document.querySelectorAll(".views a").forEach(a => a.setAttribute("aria-current", a.getAttribute("href") === "#" + v ? "page" : "false"));
-  if (!drawn[v]) { drawn[v] = true; DRAW[v](); applyHighlight(); }
-  if (v === "lineage") requestAnimationFrame(linkLineage);
+  document.querySelectorAll("nav.views a").forEach(a => a.setAttribute("aria-current", a.getAttribute("href") === "#" + v ? "page" : "false"));
+  document.querySelectorAll(".dock [data-for]").forEach(g => { g.hidden = g.dataset.for !== v; });
+  document.getElementById("cap-title").textContent = CAPS[v][0];
+  document.getElementById("cap-text").textContent = CAPS[v][1];
+  setHdr();
+  if (!drawn[v]) { drawn[v] = true; DRAW[v](); } else if (RESIZE[v]) RESIZE[v]();
+  applyHighlight();
+  window.scrollTo(0, 0);
 }
 window.addEventListener("hashchange", route);
+let rz; window.addEventListener("resize", () => { clearTimeout(rz); rz = setTimeout(() => { setHdr(); if (RESIZE[current] && drawn[current]) { RESIZE[current](); applyHighlight(); } }, 150); });
 
 /* ---------- drawer ---------- */
 const drawer = document.getElementById("drawer"), scrim = document.getElementById("scrim");
@@ -671,7 +632,7 @@ function openRecipe(id) {
   const p = plan(id, "day");
   const mini = p ? `<div><h4>Timeline · ${dur(p.total)}, ${dur(p.hands)} hands-on</h4><div class="mini">${p.ph.map(x => `<span title="${esc(x.label)}, ${dur(x.h)}" style="flex:${x.h};background:var(--p-${x.kind});opacity:${x.hands ? 1 : 0.6}"></span>`).join("")}</div></div>` : "";
   drawer.innerHTML = `
-    <button class="close" id="close">Close</button>
+    <button class="icon-btn close" id="close">Close</button>
     <div class="drawer-top"><svg viewBox="-50 -50 100 100" id="dglyph"></svg>
       <div><h2>${esc(b.title)}</h2><div class="meta">${b.tags.map(esc).join(" · ")}<br>${b.hyd}% water · ${b.enrich}% rich · ${b.steps} steps</div></div></div>
     ${b.headnotes.map(h => `<blockquote>${esc(h)}</blockquote>`).join("")}
@@ -689,6 +650,7 @@ drawer.addEventListener("click", e => { if (e.target.id === "close") closeRecipe
 scrim.addEventListener("click", closeRecipe);
 document.addEventListener("keydown", e => { if (e.key === "Escape") closeRecipe(); });
 const clickable = (sel, id) => sel.attr("tabindex", 0).on("click", () => openRecipe(id)).on("keydown", e => { if (e.key === "Enter") openRecipe(id); });
+const size = el => { const r = el.getBoundingClientRect(); return [Math.max(300, r.width), Math.max(300, r.height)]; };
 
 /* ---------- Crumb portraits ---------- */
 function drawPortraits() {
@@ -699,8 +661,7 @@ function drawPortraits() {
     const el = document.createElement("div");
     el.className = "frame"; el.dataset.rid = b.id; el.dataset.idx = idx;
     el.style.setProperty("--vt", "p-" + b.id);
-    el.innerHTML = `<span class="no">${String(idx + 1).padStart(2, "0")}</span><svg viewBox="-72 -72 144 144"></svg><h3>${esc(b.title)}</h3>
-      <div class="stats">${b.hyd}% water · ${b.enrich}% rich</div>`;
+    el.innerHTML = `<svg viewBox="-72 -72 144 144"></svg><h3>${esc(b.title)}</h3><div class="stats">${b.hyd}% water · ${b.enrich}% rich</div>`;
     glyph(el.querySelector("svg"), b, 70);
     clickable(d3.select(el), b.id);
     box.appendChild(el);
@@ -717,51 +678,56 @@ function drawPortraits() {
 
 /* ---------- Dough map ---------- */
 function drawMap() {
-  const W = 1120, H = 760, m = { l: 56, r: 90, t: 40, b: 50 };
-  const svg = d3.select("#map").attr("viewBox", `0 0 ${W} ${H}`).attr("width", W).attr("height", H).style("max-width", "100%").style("height", "auto").style("min-width", "720px");
-  const x = d3.scaleLinear([40, 100, 185], [m.l + 20, m.l + (W - m.l - m.r) * 0.7, W - m.r]);
-  const y = d3.scaleSymlog([0, 310], [H - m.b - 16, m.t]).constant(4);
+  const [W, H] = size(document.getElementById("map-stage"));
+  const m = { l: 52, r: 24, t: 24, b: 40 };
+  const svg = d3.select("#map").attr("width", W).attr("height", H).attr("viewBox", `0 0 ${W} ${H}`);
+  svg.selectAll("*").remove();
+  const k = Math.max(0.7, Math.min(1.25, Math.min(W / 1200, H / 720)));
+  const R = 28 * k;
+  const x = d3.scaleLinear([40, 60, 100, 185], [m.l + 30, m.l + (W - m.l - m.r) * 0.16, m.l + (W - m.l - m.r) * 0.76, W - m.r - 60]);
+  const y = d3.scaleSymlog([0, 310], [H - m.b - 20, m.t + 20]).constant(4);
   const pts = B.map(b => ({ b, x: x(Math.max(b.hyd, 44)), y: y(b.enrich) }));
   const sim = d3.forceSimulation(pts).force("x", d3.forceX(d => x(Math.max(d.b.hyd, 44))).strength(0.25)).force("y", d3.forceY(d => y(d.b.enrich)).strength(0.25))
-    .force("c", d3.forceCollide(d => 32 + Math.sqrt(d.b.total) * 0.5).strength(1)).stop();
-  for (let i = 0; i < 400; i++) { sim.tick(); pts.forEach(p => { p.y = Math.min(p.y, H - m.b - 40); p.x = Math.max(p.x, m.l + 40); }); }
+    .force("c", d3.forceCollide(d => (30 + Math.sqrt(d.b.total) * 0.5) * k).strength(1)).stop();
+  for (let i = 0; i < 400; i++) { sim.tick(); pts.forEach(p => { p.y = Math.max(m.t + 30, Math.min(p.y, H - m.b - 34)); p.x = Math.max(p.x, m.l + 40); }); }
 
   const bands = [[0, 5, "Lean"], [5, 20, "A little fat or sugar"], [20, 90, "Enriched"], [90, 310, "Cakes, cookies, batters"]];
   const bandG = svg.append("g");
   bands.forEach(([lo, hi, name], i) => {
-    if (i % 2 === 0) bandG.append("rect").attr("x", m.l).attr("width", W - m.l - m.r).attr("y", y(hi)).attr("height", y(lo) - y(hi) + (lo === 0 ? 16 : 0)).attr("fill", "var(--hull)");
-    const cy = (y(hi) + y(lo) + (lo === 0 ? 16 : 0)) / 2;
-    bandG.append("text").attr("class", "hull-label").attr("transform", `translate(${m.l + 14},${cy}) rotate(-90)`).attr("text-anchor", "middle").text(name);
+    const y0 = hi === 310 ? m.t : y(hi), y1 = lo === 0 ? H - m.b : y(lo);
+    if (i % 2 === 0) bandG.append("rect").attr("x", m.l).attr("width", W - m.l - m.r).attr("y", y0).attr("height", y1 - y0).attr("fill", "rgba(255,255,255,0.035)");
+    bandG.append("text").attr("class", "band-label").attr("transform", `translate(${m.l + 14},${(y0 + y1) / 2}) rotate(-90)`).attr("text-anchor", "middle").text(name);
   });
-  bandG.append("line").attr("x1", x(100)).attr("x2", x(100)).attr("y1", m.t).attr("y2", H - m.b).attr("stroke", "var(--rule)").attr("stroke-dasharray", "3 4");
-  bandG.append("text").attr("class", "hull-label").attr("x", x(100) + 6).attr("y", H - m.b - 8).text("as much water as flour");
+  bandG.append("line").attr("x1", x(100)).attr("x2", x(100)).attr("y1", m.t).attr("y2", H - m.b).attr("stroke", "var(--line)").attr("stroke-dasharray", "3 4");
+  bandG.append("text").attr("class", "band-label").attr("x", x(100) + 6).attr("y", H - m.b - 8).text("as much water as flour");
   svg.append("g").attr("class", "axis").attr("transform", `translate(0,${H - m.b})`).call(d3.axisBottom(x).tickValues([50, 60, 70, 80, 90, 100, 125, 150, 175]).tickFormat(d => d + "%"));
   svg.append("g").attr("class", "axis").attr("transform", `translate(${m.l},0)`).call(d3.axisLeft(y).tickValues([0, 5, 15, 30, 60, 100, 300]).tickFormat(d => d + "%"));
-  svg.append("text").attr("class", "muted mono").attr("x", W - m.r).attr("y", H - 12).attr("text-anchor", "end").attr("font-size", 11).text("WETTER →");
-  svg.append("text").attr("class", "muted mono").attr("x", 14).attr("y", m.t - 14).attr("font-size", 11).text("↑ RICHER");
-  svg.append("text").attr("class", "muted mono").attr("x", x(44) + 40).attr("y", y(100) - 30).attr("font-size", 10).attr("text-anchor", "middle").text("no water");
+  svg.append("text").attr("class", "muted mono").attr("x", W - m.r).attr("y", H - m.b - 8).attr("text-anchor", "end").attr("font-size", 10.5).text("WETTER →");
+  svg.append("text").attr("class", "muted mono").attr("x", m.l + 8).attr("y", m.t + 2).attr("font-size", 10.5).text("↑ RICHER");
 
   const P = Object.fromEntries(pts.map(p => [p.b.id, p]));
   const pairs = []; const seen = new Set();
-  pts.forEach(p => { const n = p.b.near[0]; const k = [p.b.id, n].sort().join("|"); if (!seen.has(k)) { seen.add(k); pairs.push([p, P[n]]); } });
+  pts.forEach(p => { const n = p.b.near[0]; const kk = [p.b.id, n].sort().join("|"); if (!seen.has(kk)) { seen.add(kk); pairs.push([p, P[n]]); } });
   const links = svg.append("g").selectAll("path").data(pairs).join("path").attr("class", "near")
     .attr("d", ([a, c]) => { const mx = (a.x + c.x) / 2, my = (a.y + c.y) / 2 - Math.hypot(c.x - a.x, c.y - a.y) * 0.18; return `M${a.x},${a.y}Q${mx},${my} ${c.x},${c.y}`; });
 
   const node = svg.append("g").selectAll("g").data(pts).join("g").attr("class", "node").attr("data-rid", d => d.b.id).attr("transform", d => `translate(${d.x},${d.y})`);
-  node.each(function (d) { glyph(this, d.b, 28, 600); clickable(d3.select(this), d.b.id); });
+  node.each(function (d) { glyph(this, d.b, R, 600); clickable(d3.select(this), d.b.id); });
   // place each label below its dot, or above if that box would hit a placed label or another dot
-  const rOf = p => 28 * Math.sqrt(p.b.total / 600);
+  const rOf = p => R * Math.sqrt(p.b.total / 600);
   const boxes = [];
-  const hit = (bx) => boxes.some(o => bx.x0 < o.x1 && bx.x1 > o.x0 && bx.y0 < o.y1 && bx.y1 > o.y0)
+  const hit = bx => boxes.some(o => bx.x0 < o.x1 && bx.x1 > o.x0 && bx.y0 < o.y1 && bx.y1 > o.y0)
     || pts.some(o => bx.x0 < o.x + rOf(o) && bx.x1 > o.x - rOf(o) && bx.y0 < o.y + rOf(o) && bx.y1 > o.y - rOf(o));
   pts.slice().sort((a, c) => a.y - c.y).forEach(p => {
-    const w = p.b.title.length * 6.4, r = rOf(p);
+    const w = p.b.title.length * 6.6, r = rOf(p);
     const down = { x0: p.x - w / 2, x1: p.x + w / 2, y0: p.y + r + 2, y1: p.y + r + 16 };
     const up = { x0: p.x - w / 2, x1: p.x + w / 2, y0: p.y - r - 16, y1: p.y - r - 2 };
-    p.up = hit(down) && !hit(up);
-    boxes.push(p.up ? up : down);
+    const shift = (bx, dy) => ({ ...bx, y0: bx.y0 + dy, y1: bx.y1 + dy });
+    const opts = [[down, rOf(p) + 14], [up, -(rOf(p) + 6)], [shift(down, 13), rOf(p) + 27], [shift(up, -13), -(rOf(p) + 19)], [shift(down, 26), rOf(p) + 40], [shift(up, -26), -(rOf(p) + 32)]];
+    const pick = opts.find(([bx]) => !hit(bx)) || opts[0];
+    p.ly = pick[1]; boxes.push(pick[0]);
   });
-  node.append("text").attr("y", d => d.up ? -(28 * Math.sqrt(d.b.total / 600) + 6) : 28 * Math.sqrt(d.b.total / 600) + 13).attr("text-anchor", "middle").text(d => d.b.title);
+  node.append("text").attr("y", d => d.ly).attr("text-anchor", "middle").text(d => d.b.title);
   node.on("mouseenter", (e, d) => {
     const keep = new Set([d.b.id, ...d.b.near]);
     node.classed("dim", o => !keep.has(o.b.id));
@@ -771,14 +737,18 @@ function drawMap() {
 
 /* ---------- Pantry web ---------- */
 function drawWeb() {
+  const [W, H] = size(document.getElementById("web-stage"));
+  const svg = d3.select("#web").attr("width", W).attr("height", H).attr("viewBox", `${-W / 2} ${-H / 2} ${W} ${H}`);
+  svg.selectAll("*").remove();
+  const S = Math.min(W, H);
+  const R2 = Math.max(130, S / 2 - 150), R1 = R2 * 0.74, RC = Math.max(46, R1 - 104);
+  const short = t => t.replace(/ \((discard|for discard|R&S)\)$/, "");
   const CORE = new Set(["White flour", "Water", "Salt", "Starter"]);
   const count = d3.rollup(B.flatMap(b => [...new Set(b.ings.map(i => i.c))].map(c => ({ c, id: b.id }))), v => v.length, d => d.c);
   const famOf = Object.fromEntries(B.flatMap(b => b.ings.map(i => [i.c, i.fam])));
   const ingr = [...count.keys()].filter(c => !CORE.has(c)).sort((a, c) => famOrder[famOf[a]] - famOrder[famOf[c]] || count.get(c) - count.get(a) || a.localeCompare(c));
   const gOrder = ["Lean breads", "Rye", "Gluten-free", "Enriched", "Cakes, cookies, batters"];
   const recs = B.slice().sort((a, c) => gOrder.indexOf(group(a)) - gOrder.indexOf(group(c)) || a.title.localeCompare(c.title));
-  const S = 940, R1 = 180, R2 = 300;
-  const svg = d3.select("#web").attr("viewBox", `${-S / 2} ${-S / 2} ${S} ${S}`).attr("width", S).attr("height", S).style("max-width", "100%").style("height", "auto").style("min-width", "600px").style("margin", "0 auto");
   const ang = (i, n, off = 0) => (i / n) * 2 * Math.PI - Math.PI / 2 + off;
   const pol = (a, r) => [r * Math.cos(a), r * Math.sin(a)];
   const IP = Object.fromEntries(ingr.map((c, i) => [c, { c, a: ang(i, ingr.length, Math.PI / ingr.length) }]));
@@ -788,36 +758,37 @@ function drawWeb() {
     .attr("stroke", d => famColor(famOf[d.c]))
     .attr("d", d => { const [x1, y1] = pol(RP[d.id].a, R2 - 10), [x2, y2] = pol(IP[d.c].a, R1 + 8), [cx, cy] = pol((RP[d.id].a + IP[d.c].a) / 2, (R1 + R2) / 2 - 40); return `M${x1},${y1}Q${cx},${cy} ${x2},${y2}`; });
   const core = svg.append("g");
-  core.append("circle").attr("r", 96).attr("fill", "var(--bg)").attr("stroke", "var(--rule)");
-  core.append("text").attr("class", "muted mono").attr("y", -50).attr("text-anchor", "middle").attr("font-size", 10).text("IN NEARLY ALL 24");
+  core.append("circle").attr("r", RC).attr("fill", "rgba(255,255,255,0.05)").attr("stroke", "var(--line)");
+  core.append("text").attr("class", "muted mono").attr("y", -36).attr("text-anchor", "middle").attr("font-size", 8.5).text("IN NEARLY ALL");
   [...CORE].forEach((c, i) => {
-    core.append("text").attr("y", -20 + i * 22).attr("text-anchor", "middle").attr("font-size", 16).attr("font-weight", 600)
-      .text(c.replace("White flour", "Wheat flour")).append("tspan").attr("class", "muted mono").attr("font-size", 11).attr("font-weight", 400).text("  " + count.get(c));
+    core.append("text").attr("y", -18 + i * 16).attr("dy", "0.35em").attr("text-anchor", "middle").attr("font-size", 12.5).attr("font-weight", 700)
+      .text(c.replace("White flour", "Wheat flour")).append("tspan").attr("class", "muted mono").attr("font-size", 10.5).attr("font-weight", 400).text("  " + count.get(c));
   });
   const inode = svg.append("g").selectAll("g").data(ingr).join("g").attr("class", "inode");
   inode.append("circle").attr("cx", d => pol(IP[d].a, R1)[0]).attr("cy", d => pol(IP[d].a, R1)[1]).attr("r", d => 3 + Math.sqrt(count.get(d)) * 2.4).attr("fill", d => famColor(famOf[d]));
-  inode.append("text").attr("transform", d => { const a = IP[d].a, [px, py] = pol(a, R1 - 14); const deg = a * 180 / Math.PI; return `translate(${px},${py}) rotate(${Math.cos(a) < 0 ? deg + 180 : deg})`; })
-    .attr("text-anchor", d => Math.cos(IP[d].a) < 0 ? "start" : "end").attr("dy", "0.35em").text(d => d);
+  inode.append("text").attr("transform", d => { const a = IP[d].a, [px, py] = pol(a, R1 - 13); const deg = a * 180 / Math.PI; return `translate(${px},${py}) rotate(${Math.cos(a) < 0 ? deg + 180 : deg})`; })
+    .attr("text-anchor", d => Math.cos(IP[d].a) < 0 ? "start" : "end").attr("dy", "0.35em").text(d => d)
+    .style("opacity", d => count.get(d) >= 3 ? 1 : 0);
   const rnode = svg.append("g").selectAll("g").data(recs).join("g").attr("class", "rnode").attr("data-rid", b => b.id);
-  rnode.each(function (b) { const [px, py] = pol(RP[b.id].a, R2); glyph(this, b, 13, 600).attr("transform", `translate(${px},${py})`); clickable(d3.select(this), b.id); });
+  rnode.each(function (b) { const [px, py] = pol(RP[b.id].a, R2); glyph(this, b, 14, 600).attr("transform", `translate(${px},${py})`); clickable(d3.select(this), b.id); });
   rnode.append("text").attr("transform", b => { const a = RP[b.id].a, [px, py] = pol(a, R2 + 18); const deg = a * 180 / Math.PI; return `translate(${px},${py}) rotate(${Math.cos(a) < 0 ? deg + 180 : deg})`; })
-    .attr("text-anchor", b => Math.cos(RP[b.id].a) < 0 ? "end" : "start").attr("dy", "0.35em").attr("font-weight", 600).text(b => b.title);
+    .attr("text-anchor", b => Math.cos(RP[b.id].a) < 0 ? "end" : "start").attr("dy", "0.35em").attr("font-weight", 700).text(b => short(b.title));
   const focus = (pred, keepI, keepR) => {
     link.classed("on", pred).classed("off", d => !pred(d));
-    inode.select("text").style("opacity", d => keepI.has(d) ? 1 : 0.2);
+    inode.select("text").style("opacity", d => keepI.has(d) ? 1 : 0);
     rnode.select("text").style("opacity", b => keepR.has(b.id) ? 1 : 0.2);
   };
-  const clear = () => { link.classed("on", false).classed("off", false); inode.select("text").style("opacity", 1); rnode.select("text").style("opacity", 1); };
+  const clear = () => { link.classed("on", false).classed("off", false); inode.select("text").style("opacity", d => count.get(d) >= 3 ? 1 : 0); rnode.select("text").style("opacity", 1); };
   inode.on("mouseenter", (e, c) => { const r = new Set(edges.filter(d => d.c === c).map(d => d.id)); focus(d => d.c === c, new Set([c]), r); }).on("mouseleave", clear);
   rnode.on("mouseenter", (e, b) => { const i = new Set(edges.filter(d => d.id === b.id).map(d => d.c)); focus(d => d.id === b.id, i, new Set([b.id])); }).on("mouseleave", clear);
   const singles = ingr.filter(c => count.get(c) === 1);
   const recipeOf = c => B.find(b => b.ings.some(i => i.c === c)).title;
   const shared = ingr.filter(c => count.get(c) > 1).sort((a, c) => count.get(c) - count.get(a)).slice(0, 7);
   const unique = B.map(b => ({ b, n: [...new Set(b.ings.map(i => i.c))].filter(c => count.get(c) === 1).length })).filter(d => d.n).sort((a, c) => c.n - a.n).slice(0, 4);
-  document.getElementById("web-side").innerHTML = `
-    <div><h4>Most shared, after the core four</h4><ul>${shared.map(c => `<li><span>${c}</span><span>${count.get(c)} recipes</span></li>`).join("")}</ul></div>
+  document.getElementById("facts").innerHTML = `
+    <div><h4>Most shared, after the core four</h4><ul>${shared.map(c => `<li><span>${c}</span><span>${count.get(c)}</span></li>`).join("")}</ul></div>
     <div><h4>Used once in the collection</h4><ul>${singles.slice(0, 9).map(c => `<li><span>${c}</span><span>${esc(recipeOf(c))}</span></li>`).join("")}</ul></div>
-    <div><h4>Most one-of-a-kind recipes</h4><ul>${unique.map(d => `<li><span>${esc(d.b.title)}</span><span>${d.n} unique</span></li>`).join("")}</ul></div>`;
+    <div><h4>Most one-of-a-kind</h4><ul>${unique.map(d => `<li><span>${esc(d.b.title)}</span><span>${d.n} unique</span></li>`).join("")}</ul></div>`;
 }
 
 /* ---------- Bake schedule ---------- */
@@ -825,12 +796,12 @@ const sched = { day: 5, hour: 18, mode: "day" };
 function drawSchedule() {
   const sel = document.getElementById("ready-hour");
   sel.innerHTML = d3.range(6, 23).map(h => `<option value="${h}" ${h === sched.hour ? "selected" : ""}>${h % 12 || 12}:00 ${h < 12 ? "am" : "pm"}</option>`).join("");
-  sel.addEventListener("change", () => { sched.hour = +sel.value; renderSchedule(); });
+  sel.addEventListener("change", () => { sched.hour = +sel.value; renderSchedule(); applyHighlight(); });
   const seg = (id, key, attr, cast) => document.getElementById(id).addEventListener("click", e => {
     const b = e.target.closest("button"); if (!b) return;
     sched[key] = cast(b.dataset[attr]);
-    e.currentTarget.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === b ? "true" : "false"));
-    renderSchedule();
+    document.getElementById(id).querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x === b ? "true" : "false"));
+    renderSchedule(); applyHighlight();
   });
   seg("ready-day", "day", "d", Number); seg("plan", "mode", "p", String);
   document.getElementById("legend-s").innerHTML = Object.entries(PH).map(([k, l]) => `<span><i class="sq" style="background:var(--p-${k});opacity:${HANDS.has(k) ? 1 : 0.6}"></i>${l}</span>`).join("")
@@ -838,73 +809,76 @@ function drawSchedule() {
   renderSchedule();
 }
 function renderSchedule() {
+  const wrap = document.getElementById("sched-wrap");
+  const [VW, VH] = size(wrap);
   const ready = sched.day * 24 + sched.hour;
   const rows = B.map(b => ({ b, p: plan(b.id, sched.mode) }));
   rows.sort((a, c) => (c.p ? c.p.total : -1) - (a.p ? a.p.total : -1));
   const maxT = d3.max(rows, r => r.p ? r.p.total + r.p.preheat : 0);
-  const LW = 210, PX = 19, RH = 36, top = 50;
-  const t0 = Math.floor(ready - maxT - 1.5), t1 = ready + 1;
-  const W = LW + (t1 - t0) * PX + 24, H = top + rows.length * RH + 6;
+  const top = 40;
+  const RH = Math.max(22, Math.min(34, (VH - top - 6) / rows.length));
+  const LW = 168;
+  const t0 = Math.floor(ready - maxT - 6), t1 = ready + 1;
+  const PX = Math.max(10, (VW - LW - 16) / (t1 - t0));
+  const W = LW + (t1 - t0) * PX + 16, H = top + rows.length * RH + 6;
   const x = t => LW + (t - t0) * PX;
+  const fs = Math.min(12.5, RH * 0.48);
   const svg = d3.select("#sched").attr("width", W).attr("height", H).attr("viewBox", `0 0 ${W} ${H}`);
   svg.selectAll("*").remove();
   for (let d = Math.floor(t0 / 24) - 1; d <= Math.ceil(t1 / 24); d++) {
     const a = Math.max(t0, d * 24 - 1), b = Math.min(t1, d * 24 + 7);
-    if (b > a) svg.append("rect").attr("x", x(a)).attr("y", 22).attr("width", (b - a) * PX).attr("height", H - 22).attr("fill", "var(--night)");
+    if (b > a) {
+      svg.append("rect").attr("x", x(a)).attr("y", 20).attr("width", (b - a) * PX).attr("height", H - 20).attr("fill", "var(--night)");
+      if ((b - a) * PX > 40) svg.append("text").attr("class", "muted mono").attr("x", x(a) + 5).attr("y", 33).attr("font-size", 9).text("NIGHT");
+    }
   }
   const ax = svg.append("g");
   for (let t = Math.ceil(t0); t <= t1; t++) {
     const hr = ((t % 24) + 24) % 24;
     if (hr === 0) {
-      ax.append("line").attr("x1", x(t)).attr("x2", x(t)).attr("y1", 4).attr("y2", H).attr("stroke", "var(--ink-2)").attr("stroke-opacity", 0.5);
-      ax.append("text").attr("x", x(t) + 5).attr("y", 15).attr("font-size", 12.5).attr("font-weight", 600).text(DAYS[Math.floor(t / 24) % 7]);
-    } else if (hr % 6 === 0 && Math.abs(t - ready) > 1) {
-      ax.append("text").attr("class", "muted mono").attr("x", x(t)).attr("y", 38).attr("font-size", 9.5).attr("text-anchor", "middle").text(hr === 12 ? "noon" : `${hr % 12}${hr < 12 ? "am" : "pm"}`);
-      ax.append("line").attr("x1", x(t)).attr("x2", x(t)).attr("y1", 42).attr("y2", H).attr("stroke", "var(--rule)").attr("stroke-dasharray", "1 4");
+      ax.append("line").attr("x1", x(t)).attr("x2", x(t)).attr("y1", 2).attr("y2", H).attr("stroke", "var(--line)");
+      ax.append("text").attr("x", x(t) + 5).attr("y", 13).attr("font-size", 12).attr("font-weight", 700).text(DAYS[Math.floor(t / 24) % 7]);
+    } else if (hr % 6 === 0 && Math.abs(t - ready) > 1.5) {
+      ax.append("text").attr("class", "muted mono").attr("x", x(t)).attr("y", 13).attr("font-size", 9.5).attr("text-anchor", "middle").text(hr === 12 ? "noon" : `${hr % 12}${hr < 12 ? "am" : "pm"}`);
     }
   }
-  svg.append("line").attr("x1", x(ready)).attr("x2", x(ready)).attr("y1", 22).attr("y2", H).attr("stroke", "var(--accent)").attr("stroke-width", 2);
-  svg.append("text").attr("x", x(ready) - 6).attr("y", 15).attr("text-anchor", "end").attr("font-size", 12).attr("fill", "var(--accent)").attr("font-weight", 600).text("Ready");
-  const tip = document.getElementById("tip"), boxEl = document.getElementById("sched-box");
+  svg.append("line").attr("x1", x(ready)).attr("x2", x(ready)).attr("y1", 18).attr("y2", H).attr("stroke", "var(--accent)").attr("stroke-width", 2);
+  svg.append("text").attr("x", x(ready) - 6).attr("y", 13).attr("text-anchor", "end").attr("font-size", 12).attr("fill", "var(--accent)").attr("font-weight", 700).text("Ready");
+  const tip = document.getElementById("tip");
   rows.forEach((r, i) => {
-    const y = top + i * RH;
+    const y = top + i * RH, bh = Math.max(10, RH * 0.5), by = y + (RH - bh) / 2 - 2;
     const g = svg.append("g").attr("class", "lane").attr("data-rid", r.b.id);
-    clickable(g.append("text").attr("class", "t").attr("x", 8).attr("y", y + 11).text(r.b.title), r.b.id);
-    if (!r.p) { g.append("text").attr("class", "s").attr("x", 8).attr("y", y + 25).text("no method steps yet"); return; }
-    let t = ready - r.p.total, nightHands = 0;
+    clickable(g.append("text").attr("class", "t").attr("x", 0).attr("y", by + bh / 2).attr("dy", "0.35em").attr("font-size", fs).text(r.b.title), r.b.id);
+    if (!r.p) { g.append("text").attr("class", "s").attr("x", x(ready) - 8).attr("y", by + bh / 2).attr("dy", "0.35em").attr("text-anchor", "end").attr("font-size", 10).text("no method steps yet"); return; }
+    let t = ready - r.p.total;
     const start = t;
+    g.append("text").attr("class", "s").attr("x", x(start) - 7).attr("y", by + bh / 2).attr("dy", "0.35em").attr("text-anchor", "end").attr("font-size", 10).text(clock(start));
     r.p.ph.forEach(ph => {
       const a = t, b = t + ph.h; t = b;
-      const hands = ph.hands;
-      if (ph.kind === "bake" && r.p.preheat) g.append("rect").attr("x", x(a - r.p.preheat)).attr("y", y).attr("width", r.p.preheat * PX).attr("height", 2).attr("fill", "var(--p-bake)");
-      g.append("rect").attr("class", "ph").attr("x", x(a)).attr("y", y + 4).attr("width", Math.max(2, ph.h * PX - 1)).attr("height", 16)
-        .attr("fill", `var(--p-${ph.kind})`).attr("opacity", hands ? 1 : 0.6)
+      if (ph.kind === "bake" && r.p.preheat) g.append("rect").attr("x", x(a - r.p.preheat)).attr("y", by - 4).attr("width", r.p.preheat * PX).attr("height", 2).attr("fill", "var(--p-bake)");
+      g.append("rect").attr("class", "ph").attr("x", x(a)).attr("y", by).attr("width", Math.max(2, ph.h * PX - 1)).attr("height", bh).attr("rx", 2)
+        .attr("fill", `var(--p-${ph.kind})`).attr("opacity", ph.hands ? 1 : 0.55)
         .on("mousemove", e => {
-          const rb = boxEl.getBoundingClientRect();
+          const rb = wrap.getBoundingClientRect();
           tip.hidden = false;
-          tip.innerHTML = `<b>${esc(ph.label)}</b><span>${clock(a)} to ${clock(b)}</span><span>${dur(ph.h)}${ph.range ? ` · recipe says ${esc(ph.range)}` : ""}${ph.est ? " · our estimate" : ""}</span>`;
-          let lx = e.clientX - rb.left + boxEl.scrollLeft + 14; if (lx + 280 > boxEl.scrollLeft + rb.width) lx -= 300;
-          tip.style.left = lx + "px"; tip.style.top = (e.clientY - rb.top + 14) + "px";
+          tip.innerHTML = `<b>${esc(r.b.title)}: ${esc(ph.label)}</b><span>${clock(a)} to ${clock(b)}</span><span>${dur(ph.h)}${ph.range ? ` · recipe says ${esc(ph.range)}` : ""}${ph.est ? " · our estimate" : ""}</span>`;
+          let lx = e.clientX - rb.left + wrap.scrollLeft + 14; if (lx + 280 > wrap.scrollLeft + rb.width) lx -= 300;
+          let ly = e.clientY - rb.top + wrap.scrollTop + 14; if (ly + 80 > wrap.scrollTop + rb.height) ly -= 100;
+          tip.style.left = lx + "px"; tip.style.top = ly + "px";
         }).on("mouseleave", () => { tip.hidden = true; });
-      if (hands && atNight(a, b)) {
-        nightHands++;
-        const cx = x(a + ph.h / 2), w = Math.max(28, ph.h * PX + 18);
-        g.append("ellipse").attr("cx", cx).attr("cy", y + 12).attr("rx", w / 2).attr("ry", 14).attr("fill", "none").attr("stroke", "var(--mark)").attr("stroke-width", 2)
-          .attr("transform", `rotate(-4 ${cx} ${y + 12})`).attr("pointer-events", "none");
+      if (ph.hands && atNight(a, b)) {
+        const cx = x(a + ph.h / 2), w = Math.max(24, ph.h * PX + 16);
+        g.append("ellipse").attr("cx", cx).attr("cy", by + bh / 2).attr("rx", w / 2).attr("ry", bh * 0.95).attr("fill", "none").attr("stroke", "var(--mark)").attr("stroke-width", 1.8).attr("pointer-events", "none");
       }
     });
-    const s = g.append("text").attr("class", "s").attr("x", 8).attr("y", y + 25);
-    s.append("tspan").text(`${clock(start)} · ${dur(r.p.total)}`);
-    if (nightHands) s.append("tspan").attr("class", "warn").text(` · ${nightHands} at night`);
   });
   const live = rows.filter(r => r.p);
   const longest = live[0], shortest = live[live.length - 1];
   const easiest = live.filter(r => r.p.total >= 12).sort((a, c) => a.p.hands - c.p.hands)[0];
   const nights = live.filter(r => { let t = ready - r.p.total; return r.p.ph.some(ph => { const a = t; t += ph.h; return ph.hands && atNight(a, t); }); }).length;
-  document.getElementById("insight").innerHTML = `For ${clock(ready)}, ${esc(longest.b.title)} starts <b>${clock(ready - longest.p.total)}</b>; ${esc(shortest.b.title)} can wait until <b>${clock(ready - shortest.p.total)}</b>.`
-    + (easiest ? ` Of the long ones, ${esc(easiest.b.title)} asks the least of you: ${dur(easiest.p.hands)} hands-on.` : "")
-    + (nights ? ` ${nights} ${nights === 1 ? "recipe has" : "recipes have"} you up at night.` : " Nobody bakes at night.");
-  applyHighlight();
+  document.getElementById("insight").innerHTML = `For ${clock(ready)}: ${esc(longest.b.title)} starts <b>${clock(ready - longest.p.total)}</b>, ${esc(shortest.b.title)} can wait until <b>${clock(ready - shortest.p.total)}</b>.`
+    + (easiest ? ` Of the long ones, ${esc(easiest.b.title)} needs you least, ${dur(easiest.p.hands)} hands-on.` : "")
+    + (nights ? ` <b>${nights}</b> ${nights === 1 ? "recipe has" : "recipes have"} you up at night.` : " Nothing needs you at night.");
 }
 
 /* ---------- Bread lineage ---------- */
@@ -951,10 +925,11 @@ function drawLineage() {
     clickable(d3.select(el), b.id);
     box.querySelector(`[data-era="${era}"]`).appendChild(el);
   });
-  window.addEventListener("resize", () => { if (!document.getElementById("v-lineage").hidden) linkLineage(); });
+  requestAnimationFrame(linkLineage);
 }
 function linkLineage() {
-  const box = document.getElementById("eras"), svg = box.querySelector("svg"), o = box.getBoundingClientRect();
+  const box = document.getElementById("eras"), svg = box.querySelector("svg"); if (!svg) return;
+  const o = box.getBoundingClientRect();
   const pos = id => { const r = box.querySelector(`.card[data-rid="${id}"] svg`).getBoundingClientRect(); return [r.left - o.left + r.width / 2, r.top - o.top + r.height / 2]; };
   svg.innerHTML = LINEAGE.map(([a, c]) => {
     const [x1, y1] = pos(a), [x2, y2] = pos(c);
@@ -964,4 +939,5 @@ function linkLineage() {
 }
 
 route();
+document.fonts && document.fonts.ready.then(() => { setHdr(); if (RESIZE[current]) { RESIZE[current](); applyHighlight(); } });
 </script>
